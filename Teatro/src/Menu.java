@@ -32,6 +32,31 @@ public final class Menu {
         return this.nextMenu;
     }
 
+    public void menuErro() {
+        newMenu();
+        System.out.println("Menu de Erro: Você não deveria estar aqui.\n");
+
+        System.out.println("[0] Voltar;");
+        System.out.println("[1] Voltar para o início;");
+        System.out.println("[2] Ir para o Menu Principal;");
+        System.out.println("[3] Encerrar a execução.");
+
+        switch (getOption(3)) {
+            case 0:
+                back();
+                break;
+            case 1:
+                startOver();
+                break;
+            case 2:
+                goToMenuPrincipal();
+                break;
+            case 3:
+                shouldStop = true;
+                break;
+        }
+    }
+
     public void menuInicial() {
         newMenu();
         System.out.println("Menu Inicial\n\n");
@@ -206,7 +231,13 @@ public final class Menu {
         currentMenu = "!";
         lastMenu = "";
         nextMenu = "!";
-        shouldStop = false;
+    }
+
+    public void goToMenuPrincipal() {
+        pathMenu = "0";
+        currentMenu = "0";
+        lastMenu = "!";
+        nextMenu = "0";
     }
 
     public static void clrscr() {
