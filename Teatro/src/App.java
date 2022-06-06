@@ -1,12 +1,34 @@
-import java.util.Scanner;
-
-import Enums.Tema;
-
 public class App {
-    public static void main(String[] args) throws Exception {
-        Tema novoTema = Tema.COMEDIA;
-        novoTema = Tema.ACAO;
+    private static Menu menu = new Menu();
 
-        novoTema.setTema("ação");
+    public static void next() {
+        switch (menu.getNextMenu()) {
+            case "!":
+                menu.menuInicial();
+                break;
+            case "0":
+                menu.menuPrincipal();
+                break;
+            case "0-1":
+                menu.menuCadastro();
+                break;
+            case "0-2":
+                menu.menuConsulta();
+                break;
+            case "0-3":
+                menu.menuRemocao();
+                break;
+            default:
+                menu.menuErro();
+                break;
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        // MenuControl menc = new MenuControl();
+
+        // while (!menc.shouldStop()) {
+        //     menc.next();
+        // }
     }
 }
