@@ -25,6 +25,9 @@ public class App {
     }
 
     public static void main(String[] args) throws Exception {
+        // TODO integrar o controller e o menu pela main e fazer tudo rodar
+        // TODO testar tuuuudo
+
         // MenuControl menc = new MenuControl();
 
         // while (!menc.shouldStop()) {
