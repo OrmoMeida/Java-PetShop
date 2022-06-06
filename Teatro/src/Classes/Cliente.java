@@ -53,9 +53,7 @@ public class Cliente extends Pessoa implements IPessoa {
             throw new IllegalArgumentException("O telefone deve conter exatamente 11 dígitos.");
         }
 
-        String formattedTelefone;
-        formattedTelefone = "(" + telefone.substring(0, 1) + ") " + telefone.substring(1, 6) + "-"
-                + telefone.substring(6, 10);
+        String formattedTelefone = "(" + telefone.substring(0, 2) + ") " + telefone.substring(1, 6) + "-" + telefone.substring(6, 10);
 
         if (!checkTelefone.matcher(formattedTelefone).matches())
             throw new IllegalArgumentException("A formatação do telefone está incorreta.");
