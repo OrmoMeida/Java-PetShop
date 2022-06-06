@@ -49,9 +49,8 @@ public class Cliente extends Pessoa implements IPessoa {
     public void setTelefone(String telefone) {
         telefone = telefone.replaceAll("\\D", "");
 
-        if (telefone.length() != 11) {
+        if (telefone.length() != 11)
             throw new IllegalArgumentException("O telefone deve conter exatamente 11 dígitos.");
-        }
 
         String formattedTelefone = "(" + telefone.substring(0, 2) + ") " + telefone.substring(1, 6) + "-" + telefone.substring(6, 10);
 

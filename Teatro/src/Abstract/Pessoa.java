@@ -7,7 +7,7 @@ import java.util.Scanner;
 import Classes.CPF;
 
 public abstract class Pessoa {
-    private Scanner input;
+    private static Scanner input = new Scanner(System.in);
     private String nome;
     private int idade;
     private String email;
@@ -18,7 +18,7 @@ public abstract class Pessoa {
     // private static Matcher match = checkCPF.matcher("input");
 
     protected Pessoa() {
-        input = new Scanner(System.in);
+        System.out.println("Cadastro:  ");
         setNome();
         setIdade();
         setCpf();
@@ -26,7 +26,6 @@ public abstract class Pessoa {
     }
 
     protected Pessoa(int idade, String nome, String cpf, String email) {
-        input = new Scanner(System.in);
         setNome(nome);
         setIdade(idade);
         setCpf(cpf);
@@ -112,7 +111,7 @@ public abstract class Pessoa {
                 validInput = false;
             }
         } while (!validInput);
-}
+    }
     
     public void setCpf() {
         String cpf;
@@ -176,6 +175,4 @@ public abstract class Pessoa {
             }
         } while (!validInput);
     }
-
-    // TODO Tem que ser cinco atributos
 }
