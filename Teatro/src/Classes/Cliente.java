@@ -1,23 +1,86 @@
 package Classes;
+import java.util.InputMismatchException;
+import java.util.regex.Pattern;
+
 import Abstract.Pessoa;
 import Interfaces.IPessoa;
 
 public class Cliente extends Pessoa implements IPessoa {
-    private int codCliente;
+    private String telefone;
+    private int codCadastro;
     private static int qntClientes = 0;
+    private static Pattern checkTelefone = Pattern.compile("\\(\\d{2}\\)\\s\\d{5}-\\d{4}");
 
 
     public Cliente() {
-        codCliente = ++qntClientes;
+        super();
+        setTelefone();
+        codCadastro = ++qntClientes;
+    }
+
+    public Cliente(int idade, String nome, String cpf, String email, String telefone) {
+        super(idade, nome, cpf, email);
+        setTelefone(telefone);
+        codCadastro = ++qntClientes;
     }
 
     @Override
     public void exibir() {
-        // TODO Auto-generated method stub
-        
+        System.out.println("Cliente nº " + this.getCodCliente());
+        System.out.println("Nome do cliente  :  " + this.getNome());
+        System.out.println("Idade do cliente :  " + this.getIdade());
+        System.out.println("CPF do cliente   :  " + this.getCpf());
+        System.out.println("Email do cliente :  " + this.getEmail());
+    }
+
+    // Getters e setters
+    public static int getQntClientes() {
+        return qntClientes;
     }
 
     public int getCodCliente() {
-        return codCliente;
+        return codCadastro;
+    }
+
+    public String getTelefone() {
+        return this.telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        telefone = telefone.replaceAll("\\D", "");
+
+        if (telefone.length() != 11) {
+            throw new IllegalArgumentException("O telefone deve conter exatamente 11 dígitos.");
+        }
+
+        String formattedTelefone;
+        formattedTelefone = "(" + telefone.substring(0, 1) + ") " + telefone.substring(1, 6) + "-"
+                + telefone.substring(6, 10);
+
+        if (!checkTelefone.matcher(formattedTelefone).matches())
+            throw new IllegalArgumentException("A formatação do telefone está incorreta.");
+
+        this.telefone = formattedTelefone;
+    }
+    
+    public void setTelefone() {
+        String telefone;
+        boolean validInput = true;
+    
+        do {
+            validInput = true;
+            System.out.print("\tTelefone:  ");
+    
+            try {
+                telefone = getInput().nextLine();
+                setTelefone(telefone);
+            } catch (InputMismatchException e) {
+                System.out.println("Valor inválido.\n");
+                validInput = false;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage() + "\n");
+                validInput = false;
+            }
+        } while (!validInput);
     }
 }

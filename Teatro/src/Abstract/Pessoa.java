@@ -1,25 +1,32 @@
 package Abstract;
 
 import java.util.regex.Pattern;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+import Classes.CPF;
+
 public abstract class Pessoa {
+    private Scanner input;
     private String nome;
     private int idade;
-    private String cpf;
     private String email;
-
-    private static Pattern checkNome = Pattern.compile("/D{2,50}");
-    private static Pattern checkCPF = Pattern.compile("/d{3}//./d{3}//./d{3}-/d{2}");
+    private CPF cpf;
+    
+    private static Pattern checkNome = Pattern.compile("^[a-záàâãéèêíïóôõöúçñ]{3,}(//s[a-záàâãéèêíïóôõöúçñ]{2,})+$");
     // private static Pattern checkEmail = Pattern.compile("[/w/d//.//-]+@[/w/d//-]+//./w{2,4}");
     // private static Matcher match = checkCPF.matcher("input");
 
     protected Pessoa() {
-        this.nome = "";
-        this.idade = 0;
-        this.cpf = "";
-        this.email = "";
+        input = new Scanner(System.in);
+        setNome();
+        setIdade();
+        setCpf();
+        setEmail();
     }
 
     protected Pessoa(int idade, String nome, String cpf, String email) {
+        input = new Scanner(System.in);
         setNome(nome);
         setIdade(idade);
         setCpf(cpf);
@@ -28,57 +35,6 @@ public abstract class Pessoa {
 
 
     // Métodos da classe
-    public static String formatCPF(int cpf) {
-        String cpfs = Integer.toString(cpf);
-
-        if (cpfs.length() != 11) {
-            throw new IllegalArgumentException("Quantidade de números do CPF incorreta");
-        }
-
-        int verificador = Integer.parseInt(cpfs.charAt(10)+ "" + cpfs.charAt(11));
-
-        int SomaDig = 0;
-        int digito;
-
-        for (int i = 0; i <= 9; i++) {
-            for (int d = 10; d <= 2; d--) {
-                SomaDig += cpfs.charAt(i) * d;
-            }
-        }
-
-        if (SomaDig % 11 >= 2) {
-            digito = SomaDig / 11 - SomaDig % 11;
-        } else {
-            digito = 0;
-        }
-
-        SomaDig = 0;
-
-        for (int i = 0; i <= 10; i++) {
-            for (int d = 11; d <= 2; d--) {
-                SomaDig += cpfs.charAt(i) * d;
-            }
-        }
-
-        if (SomaDig % 11 >= 2) {
-            digito = Integer.parseInt(Integer.toString(digito) + Integer.toString(SomaDig / 11 - SomaDig % 11));
-        } else {
-            digito *= 10;
-        }
-
-        if (!(digito == verificador)) {
-            throw new IllegalArgumentException("O CPF inserido é inválido.");
-        }
-
-        String cpfFormatted;
-        cpfFormatted = cpfs.substring(0, 2) + "." + cpfs.substring(3, 5) + "." + cpfs.substring(6, 8) + "-" + cpfs.substring(9, 10);
-
-        if (!checkCPF.matcher(cpfFormatted).matches()) {
-            throw new IllegalArgumentException("O CPF não foi formatado corretamente.");
-        } 
-
-        return cpfFormatted;
-    }
 
 
     // Getters e setters
@@ -88,7 +44,7 @@ public abstract class Pessoa {
 
     public void setIdade(int idade) {
         if (idade <= 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("A idade deve ser maior que 0.");
         } else {
             this.idade = idade;
         }
@@ -99,31 +55,126 @@ public abstract class Pessoa {
     }
 
     public void setNome(String nome) {
+        if (nome.isEmpty())
+            throw new IllegalArgumentException("O nome não deve estar vazio.");
+
         if (checkNome.matcher(nome).find()) {
             this.nome = nome;
         } else {
-            throw new IllegalArgumentException("Este nome é inválido!");
+            throw new IllegalArgumentException("O nome deve conter ao menos 3 letras, e ao menos um sobrenome é obrigatório.");
         }
     }
 
     public String getCpf() {
-        return this.cpf;
+        return this.cpf.get();
     }
 
     public void setCpf(String cpf) {
-        this.cpf = cpf;
+        this.cpf.set(cpf);
     }
 
     public String getEmail() {
         return this.email;
     }
 
+    protected Scanner getInput() {
+        return input;
+    }
+
     public void setEmail(String email) {
-        if (email.contains("@") && email.endsWith(".com")) {
+        if (email.isEmpty())
+            throw new IllegalArgumentException("O email não deve estar vazio.");
+
+        if (!email.startsWith("@") && email.contains("@") && email.endsWith(".com")) {
             this.email = email;
         } else {
             throw new IllegalArgumentException("O email inserido é inválido.");
         }
+    }
+
+    // Sets personalizados
+    public void setNome() {
+        String nome;
+        boolean validInput = true;
+    
+        do {
+            validInput = true;
+            System.out.print("\tNome:  ");
+    
+            try {
+                nome = input.nextLine();
+                setNome(nome);
+            } catch (InputMismatchException e) {
+                System.out.println("Valor inválido.\n");
+                validInput = false;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage() + "\n");
+                validInput = false;
+            }
+        } while (!validInput);
+}
+    
+    public void setCpf() {
+        String cpf;
+        boolean validInput = true;
+
+        do {
+            validInput = true;
+            System.out.print("\tCPF:  ");
+
+            try {
+                cpf = input.nextLine();
+                setCpf(cpf);
+            } catch (InputMismatchException e) {
+                System.out.println("Valor inválido.\n");
+                validInput = false;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage() + "\n");
+                validInput = false;
+            }
+        } while (!validInput);
+    }
+
+    public void setIdade() {
+        int idade;
+        boolean validInput = true;
+
+        do {
+            validInput = true;
+            System.out.print("\tIdade:  ");
+
+            try {
+                idade = input.nextInt();
+                setIdade(idade);
+            } catch (InputMismatchException e) {
+                System.out.println("Por favor, digite apenas números.\n");
+                validInput = false;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage() + "\n");
+                validInput = false;
+            }
+        } while (!validInput);
+    }
+
+    public void setEmail() {
+        String email;
+        boolean validInput = true;
+
+        do {
+            validInput = true;
+            System.out.print("\tEmail:  ");
+
+            try {
+                email = input.nextLine();
+                setEmail(email);
+            } catch (InputMismatchException e) {
+                System.out.println("Valor inválido.\n");
+                validInput = false;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage() + "\n");
+                validInput = false;
+            }
+        } while (!validInput);
     }
 
     // TODO Tem que ser cinco atributos
