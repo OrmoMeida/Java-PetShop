@@ -17,7 +17,11 @@ public abstract class Pessoa {
     // private static Pattern checkEmail = Pattern.compile("[/w/d//.//-]+@[/w/d//-]+//./w{2,4}");
     // private static Matcher match = checkCPF.matcher("input");
 
+    // TODO regex para o Email
+    // TODO setEmail usando o regex
+
     protected Pessoa() {
+        this.cpf = new CPF();
         System.out.println("Cadastro:  ");
         setNome();
         setIdade();
@@ -26,6 +30,7 @@ public abstract class Pessoa {
     }
 
     protected Pessoa(int idade, String nome, String cpf, String email) {
+        this.cpf = new CPF();
         setNome(nome);
         setIdade(idade);
         setCpf(cpf);
@@ -57,7 +62,7 @@ public abstract class Pessoa {
         if (nome.isEmpty())
             throw new IllegalArgumentException("O nome não deve estar vazio.");
 
-        if (checkNome.matcher(nome).find()) {
+        if (!checkNome.matcher(nome).matches()) {
             this.nome = nome;
         } else {
             throw new IllegalArgumentException("O nome deve conter ao menos 3 letras, e ao menos um sobrenome é obrigatório.");
@@ -122,7 +127,7 @@ public abstract class Pessoa {
             System.out.print("\tCPF:  ");
 
             try {
-                cpf = input.nextLine();
+                cpf = input.next();
                 setCpf(cpf);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");

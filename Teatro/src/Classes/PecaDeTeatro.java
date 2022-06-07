@@ -34,6 +34,18 @@ public class PecaDeTeatro extends Produto {
     }
 
 
+    // Métodos da classe
+    public void exibir() {
+        System.out.println("Nome          :  " + getNome());
+        System.out.println("Descrição     :  " + getDesc());
+        System.out.println("Preço         :  " + getPreco());
+        System.out.println("Duração       :  " + getDuracao());
+        System.out.println("Data          :  " + getData());
+        System.out.println("Classificação :  " + getClassificacao());
+        System.out.println("Gênero        :  " + getGenero());
+    }
+
+
     // Getters e setters
     public float getDuracao() {
         return this.duracao;

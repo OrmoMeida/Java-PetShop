@@ -7,10 +7,6 @@ public class CPF {
     private static Pattern checkCPF = Pattern.compile("\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}");
 
 
-    public CPF() {
-        CPF = "";
-    }
-
     public void set(String cpf) {
         cpf = formatCPF(cpf);
 
@@ -47,7 +43,7 @@ public class CPF {
         String cpfFormatted;
         cpfFormatted = cpf.substring(0, 3) + "." + cpf.substring(3, 6) + "." + cpf.substring(6, 9) + "-" + cpf.substring(9, 11);
 
-        if (!isFormatted(cpf))
+        if (!isFormatted(cpfFormatted))
             throw new IllegalArgumentException("O CPF não foi formatado corretamente.");
 
         return cpfFormatted;

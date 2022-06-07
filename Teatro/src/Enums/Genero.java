@@ -29,9 +29,9 @@ public enum Genero {
         return this.descricao;
     }
 
-    public static Genero setTema(String newTema) {
+    public static Genero setTema(String descricao) {
         for (Genero tema : Genero.values()) {
-            if (tema.getDescricao().equals(newTema)) {
+            if (tema.getDescricao().equals(descricao)) {
                 return tema;
             }
         }

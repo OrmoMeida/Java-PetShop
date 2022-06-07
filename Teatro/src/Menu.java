@@ -3,7 +3,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public final class Menu {
-    private Scanner input;
+    private static Scanner input = new Scanner(System.in);;
     private String pathMenu;
     private String lastMenu;
     private String currentMenu;
@@ -11,8 +11,16 @@ public final class Menu {
     private boolean shouldStop;
 
     public Menu() {
-        input = new Scanner(System.in);
         startOver();
+    }
+
+    public static void voider() {for(int i = 0; i < 50; i++);}
+
+    public static void waiter() {
+        try {
+            System.out.print("\t\nPressione enter para continuar... ");
+            System.in.read();
+        } catch (Exception e) {}
     }
 
     // Getters
@@ -98,6 +106,30 @@ public final class Menu {
         nextMenu(3);
     }
 
+    public void menuCadastroCliente() {
+        newMenu();
+
+        System.out.println("Cliente cadastrado com sucesso!\n");
+        System.out.println("[0] Voltar;");
+        System.out.println("[1] Conferir dados do cliente;");
+        System.out.println("[2] Alterar dados do cliente;");
+        System.out.println("[3] Cadastrar outro cliente.");
+
+        nextMenu(3);
+    }
+
+    public void menuCadastroFuncionario() {
+        newMenu();
+
+        System.out.println("Funcionário cadastrado com sucesso!\n");
+        System.out.println("[0] Voltar;");
+        System.out.println("[1] Conferir os dados do funcionário;");
+        System.out.println("[2] Alterar os dados do funcionário;");
+        System.out.println("[3] Cadastrar outro funcionário.");
+
+        nextMenu(3);        
+    }
+
     public void menuConsulta() {
         newMenu();
 
@@ -133,59 +165,77 @@ public final class Menu {
 
     // Para iniciar os menus
     public void startMenu() {
-        setLastMenu();
         pathMenu = nextMenu;
         currentMenu = nextMenu;
+        setLastMenu();
     }
 
     public void newMenu() {
-        // System.out.println("\n\nBefore start:");
-        // System.out.println("Path:  " + pathMenu);
-        // System.out.println("Last:  " + lastMenu);
-        // System.out.println("Curr:  " + currentMenu);
-        // System.out.println("Next:  " + nextMenu);
+        for (int i = 0; i < 50; i++) System.out.println("\n");
+        System.out.println("\n\nBefore start:");
+        System.out.println("Path:  " + pathMenu);
+        System.out.println("Last:  " + lastMenu);
+        System.out.println("Curr:  " + currentMenu);
+        System.out.println("Next:  " + nextMenu);
         startMenu();
         clrscr();
-        for (int i = 0; i < 50; i++) {
-            System.out.println("\n");
-        }
         System.out.println(ConvertToVerbose(pathMenu));
         System.out.println("---------------------------------\n");
-        // System.out.println("\n\nAfter start:");
-        // System.out.println("Path:  " + pathMenu);
-        // System.out.println("Last:  " + lastMenu);
-        // System.out.println("Curr:  " + currentMenu);
-        // System.out.println("Next:  " + nextMenu);
+        System.out.println("\n\nAfter start:");
+        System.out.println("Path:  " + pathMenu);
+        System.out.println("Last:  " + lastMenu);
+        System.out.println("Curr:  " + currentMenu);
+        System.out.println("Next:  " + nextMenu);
     }
 
-    public void back() {
+    public String getBack() {
+        String path;
         String cleanPath = pathMenu.replaceAll("-", "");
 
         if (cleanPath.length() == 1) {
-            pathMenu = "!";
+            path = "!";
         } else if (cleanPath.length() == 2) {
-            pathMenu = "" + pathMenu.charAt(0);
+            path = "" + pathMenu.charAt(0);
         } else if (cleanPath.length() > 2) {
-            pathMenu = pathMenu.substring(0, pathMenu.length() - 3);
+            path = pathMenu.substring(0, pathMenu.length() - 2);
         } else {
-            startOver();
+            path = "1";
         }
 
-        if (cleanPath.length() == 1 || cleanPath.length() == 2) {
-            lastMenu = "!";
-        } else if (cleanPath.length() == 3) {
-            lastMenu = "" + pathMenu.charAt(0);
-        } else if (cleanPath.length() > 3) {
-            lastMenu = pathMenu.substring(0, pathMenu.length() - 5);
-        } else {
-            startOver();
-        }
+        return path;
+    }
+
+    public void back() {
+        // String cleanPath = pathMenu.replaceAll("-", "");
+
+        // if (cleanPath.length() == 1) {
+        //     pathMenu = "!";
+        // } else if (cleanPath.length() == 2) {
+        //     pathMenu = "" + pathMenu.charAt(0);
+        // } else if (cleanPath.length() > 2) {
+        //     pathMenu = pathMenu.substring(0, pathMenu.length() - 3);
+        // } else {
+        //     startOver();
+        // }
+
+        pathMenu = getBack();
+        lastMenu = getBack();
+
+        // if (cleanPath.length() == 1 || cleanPath.length() == 2) {
+        //     lastMenu = "!";
+        // } else if (cleanPath.length() == 3) {
+        //     lastMenu = "" + pathMenu.charAt(0);
+        // } else if (cleanPath.length() > 3) {
+        //     lastMenu = pathMenu.substring(0, pathMenu.length() - 5);
+        // } else {
+        //     startOver();
+        // }
 
         currentMenu = lastMenu;
         nextMenu = pathMenu;
     }
 
-    public int getOption(int firstOption, int lastOption) {
+    public static int getOption(int firstOption, int lastOption) {
         int selectedOption = -1;
         boolean validOption;
 
@@ -195,10 +245,6 @@ public final class Menu {
 
             try {
                 selectedOption = input.nextInt();
-
-                if (selectedOption == -1) {
-                    shouldStop = true;
-                }
 
                 if (!(selectedOption >= firstOption && selectedOption <= lastOption) || selectedOption == -1) {
                     throw new IllegalArgumentException();
@@ -218,8 +264,29 @@ public final class Menu {
         return selectedOption;
     }
 
-    public int getOption(int qntOptions) {
+    public static int getOption(int qntOptions) {
         return getOption(0, qntOptions);
+    }
+
+    public static boolean getOptionBool() {
+        char option = 'y';
+        boolean validOption;
+
+        do {
+            validOption = true;
+            System.out.println("\tOpção [y/n]:  ");
+            try {
+                input.next();
+                option = input.nextLine().charAt(0);
+                if (option != 'y' && option != 'n')
+                    throw new IllegalArgumentException("Opção inválida. Insira apenas 'y' ou 'n'.");
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage() + "\n");
+                validOption = false;
+            }
+        } while (!validOption);
+
+        return option == 'y';
     }
 
     public boolean shouldStop() {
@@ -253,10 +320,11 @@ public final class Menu {
 
     // Getters e setters
     private void setLastMenu() {
-        this.lastMenu = currentMenu;
+        // this.lastMenu = currentMenu;
+        this.lastMenu = getBack();
     }
 
-    private void nextMenu(String nextMenu) {
+    public void nextMenu(String nextMenu) {
         if (!nextMenu.equals("0") && !nextMenu.equals("!"))
             this.nextMenu = this.currentMenu.concat("-" + nextMenu);
         else
