@@ -7,7 +7,7 @@ import Abstract.Produto;
 import Enums.ClassificacaoIndicativa;
 import Enums.Genero;
 
-public class PecaDeTeatro extends Produto {
+public class Apresentacao extends Produto {
     // Atributos da classe
     private float duracao;
     private String data;
@@ -17,7 +17,7 @@ public class PecaDeTeatro extends Produto {
 
 
     // Construtores
-    public PecaDeTeatro(String nome, String desc, float preco, float duracao, String data, String genero, String classificacao) {
+    public Apresentacao(String nome, String desc, float preco, float duracao, String data, String genero, String classificacao) {
         super(nome, desc, preco);
         setDuracao(duracao);
         setData(data);
@@ -25,7 +25,7 @@ public class PecaDeTeatro extends Produto {
         setClassificacao(classificacao);
     }
 
-    public PecaDeTeatro() {
+    public Apresentacao() {
         super();
         setDuracao();
         setData();
@@ -100,7 +100,7 @@ public class PecaDeTeatro extends Produto {
             System.out.print("\tDuração:  ");
 
             try {
-                duracao = getInput().nextFloat();
+                duracao = Main.Menu.input().nextFloat();
                 setDuracao(duracao);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -121,7 +121,7 @@ public class PecaDeTeatro extends Produto {
             System.out.print("\tData:  ");
 
             try {
-                data = getInput().nextLine();
+                data = Main.Menu.input().nextLine();
                 setData(data);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -142,7 +142,7 @@ public class PecaDeTeatro extends Produto {
             System.out.print("\tGênero:  ");
 
             try {
-                descricao = getInput().nextLine();
+                descricao = Main.Menu.input().nextLine();
                 setGenero(descricao);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -163,7 +163,7 @@ public class PecaDeTeatro extends Produto {
             System.out.print("\tGênero:  ");
 
             try {
-                descricao = getInput().nextLine();
+                descricao = Main.Menu.input().nextLine();
                 setClassificacao(descricao);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");

@@ -2,12 +2,10 @@ package Abstract;
 
 import java.util.regex.Pattern;
 import java.util.InputMismatchException;
-import java.util.Scanner;
 
 import Classes.CPF;
 
 public abstract class Pessoa {
-    private static Scanner input = new Scanner(System.in);
     private String nome;
     private int idade;
     private String email;
@@ -47,11 +45,10 @@ public abstract class Pessoa {
     }
 
     public void setIdade(int idade) {
-        if (idade <= 0) {
+        if (idade <= 0)
             throw new IllegalArgumentException("A idade deve ser maior que 0.");
-        } else {
-            this.idade = idade;
-        }
+        
+        this.idade = idade;
     }
 
     public String getNome() {
@@ -59,14 +56,16 @@ public abstract class Pessoa {
     }
 
     public void setNome(String nome) {
+        nome = nome.trim();
+
         if (nome.isEmpty())
             throw new IllegalArgumentException("O nome não deve estar vazio.");
 
-        if (!checkNome.matcher(nome).matches()) {
-            this.nome = nome;
-        } else {
-            throw new IllegalArgumentException("O nome deve conter ao menos 3 letras, e ao menos um sobrenome é obrigatório.");
-        }
+        if (!checkNome.matcher(nome).matches())
+            throw new IllegalArgumentException(
+                    "O nome deve conter ao menos 3 letras, e ao menos um sobrenome é obrigatório.");
+        
+        this.nome = nome;
     }
 
     public String getCpf() {
@@ -81,11 +80,9 @@ public abstract class Pessoa {
         return this.email;
     }
 
-    protected Scanner getInput() {
-        return input;
-    }
-
     public void setEmail(String email) {
+        email = email.trim();
+
         if (email.isEmpty())
             throw new IllegalArgumentException("O email não deve estar vazio.");
 
@@ -106,7 +103,7 @@ public abstract class Pessoa {
             System.out.print("\tNome:  ");
     
             try {
-                nome = input.nextLine();
+                nome = Main.Menu.input().nextLine();
                 setNome(nome);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -127,7 +124,7 @@ public abstract class Pessoa {
             System.out.print("\tCPF:  ");
 
             try {
-                cpf = input.next();
+                cpf = Main.Menu.input().next();
                 setCpf(cpf);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -148,7 +145,7 @@ public abstract class Pessoa {
             System.out.print("\tIdade:  ");
 
             try {
-                idade = input.nextInt();
+                idade = Main.Menu.input().nextInt();
                 setIdade(idade);
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, digite apenas números.\n");
@@ -169,7 +166,7 @@ public abstract class Pessoa {
             System.out.print("\tEmail:  ");
 
             try {
-                email = input.nextLine();
+                email = Main.Menu.input().nextLine();
                 setEmail(email);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");

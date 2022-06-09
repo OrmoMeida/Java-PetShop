@@ -16,12 +16,12 @@
     //     // Menu de cadastro
     //     mapa.put("0-1-1", "MenuCadastroCliente");
     //     mapa.put("0-1-2", "MenuCadastroFuncionario");
-    //     mapa.put("0-1-3", "MenuCadastroPeca");
+    //     mapa.put("0-1-3", "MenuCadastroApresentacao");
 
     //     // Menu de consulta
     //     mapa.put("0-2-1", "MenuRemocaoCliente");
     //     mapa.put("0-2-2", "MenuRemocaoFuncionario");
-    //     mapa.put("0-2-3", "MenuRemocaoPeca");
+    //     mapa.put("0-2-3", "MenuRemocaoApresentacao");
     //     mapa.put("0-2-4", "MenuRemocaoEspecial");
 
     //     // Menu de remoção

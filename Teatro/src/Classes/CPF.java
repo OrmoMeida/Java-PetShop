@@ -25,7 +25,7 @@ public class CPF {
     }
 
     public static String trimCPF(String cpf) {
-        cpf = cpf.replaceAll("\\D", "");
+        cpf = cpf.trim().replaceAll("\\D", "");
 
         if (cpf.length() != 11)
             throw new IllegalArgumentException("O CPF deve possuir exatamente 11 dígitos.");

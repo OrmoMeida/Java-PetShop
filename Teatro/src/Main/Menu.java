@@ -1,3 +1,4 @@
+package Main;
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -14,13 +15,21 @@ public final class Menu {
         startOver();
     }
 
-    public static void voider() {for(int i = 0; i < 50; i++);}
+    public static void voider() {
+        for (int i = 0; i < 50; i++)
+            System.out.println("\n");
+        clrscr();
+    }
 
     public static void waiter() {
         try {
             System.out.print("\t\nPressione enter para continuar... ");
             System.in.read();
         } catch (Exception e) {}
+    }
+
+    public static Scanner input() {
+        return input;
     }
 
     // Getters
@@ -38,6 +47,23 @@ public final class Menu {
 
     public String getNextMenu() {
         return this.nextMenu;
+    }
+
+    public void menuInicial() {
+        newMenu();
+        System.out.println("Menu Inicial\n\n");
+
+        System.out.println("Bem vindo ao sistema de Cadastro.\n");
+
+        // System.out.println("        ___                           ___       _           _    _             \n|   \  ___  _ _   __ _        / __| ___ | | ___  ___| |_ (_) _ _   __ _ \n| |) |/ _ \| ' \ / _` |      | (__ / -_)| |/ -_)(_-/|  _|| || ' \ / _` |\n|___/ \___/|_||_|\__/_|       \___|\___||_|\___|/__/ \__||_||_||_|\__/_|        ");
+        System.out.println(" ▀█▀ ██▀ ▄▀▄ ▀█▀ █▀▄ ▄▀▄\n  █  █▄▄ █▀█  █  █▀▄ ▀▄▀");
+
+        System.out.print("\n\nDeseja iniciar o programa?\n\t[y/n]:  ");
+
+        if (input.next().equals("y"))
+            nextMenu("0");
+        else
+            shouldStop = true;
     }
 
     public void menuErro() {
@@ -65,23 +91,6 @@ public final class Menu {
         }
     }
 
-    public void menuInicial() {
-        newMenu();
-        System.out.println("Menu Inicial\n\n");
-
-        System.out.println("Bem vindo ao sistema de Cadastro.\n");
-
-        // System.out.println("        ___                           ___       _           _    _             \n|   \  ___  _ _   __ _        / __| ___ | | ___  ___| |_ (_) _ _   __ _ \n| |) |/ _ \| ' \ / _` |      | (__ / -_)| |/ -_)(_-/|  _|| || ' \ / _` |\n|___/ \___/|_||_|\__/_|       \___|\___||_|\___|/__/ \__||_||_||_|\__/_|        ");
-        System.out.println(" ▀█▀ ██▀ ▄▀▄ ▀█▀ █▀▄ ▄▀▄\n  █  █▄▄ █▀█  █  █▀▄ ▀▄▀");
-
-        System.out.print("\n\nDeseja iniciar o programa?\n\t[y/n]:  ");
-
-        if (input.next().equals("y"))
-            nextMenu("0");
-        else
-            shouldStop = true;
-    }
-
     public void menuPrincipal() {
         newMenu();
 
@@ -101,7 +110,7 @@ public final class Menu {
         System.out.println("[0] Voltar");
         System.out.println("[1] Cadastrar novo cliente;");
         System.out.println("[2] Cadastrar novo funcionário.");
-        System.out.println("[3] Cadastrar nova peça de teatro.");
+        System.out.println("[3] Cadastrar nova apresentação de teatro.");
 
         nextMenu(3);
     }
@@ -127,28 +136,67 @@ public final class Menu {
         System.out.println("[2] Alterar os dados do funcionário;");
         System.out.println("[3] Cadastrar outro funcionário.");
 
-        nextMenu(3);        
+        nextMenu(3);
+    }
+    
+    public void menuCadastroApresentacao() {
+        newMenu();
+
+        System.out.println("Apresentação cadastrada com sucesso!\n");
+        System.out.println("[0] Voltar;");
+        System.out.println("[1] Conferir os dados da apresentação;");
+        System.out.println("[2] Alterar os dados da apresentação;");
+        System.out.println("[3] Cadastrar outra apresentação.");
+
+        nextMenu(3);
     }
 
     public void menuConsulta() {
         newMenu();
 
         System.out.println("Menu de Consulta\n\n");
-        System.out.println("[0] Voltar");
+        System.out.println("[0] Voltar;");
         System.out.println("[1] Consultar um cliente;");
         System.out.println("[2] Consultar um funcionário;");
-        System.out.println("[3] Consultar uma peça de teatro;");
+        System.out.println("[3] Consultar uma apresentação de teatro;");
         System.out.println("[4] Consultas especiais.");
 
         nextMenu(4);
     }
 
-    public void menuConsultaCliente() {
+    public void menuConsultaEspecial() {
         newMenu();
-        System.out.println("Menu de consulta de clientes\n\n");
 
-        System.out.println("Insira o nome do cliente que você deseja consultar.");
+        System.out.println("Menu de Consultas Especiais!\n\n");
+        System.out.println("[0] Voltar;");
+        System.out.println("[1] Consultas especiais de cliente;");
+        System.out.println("[2] Consultas especiais de produto;");
 
+        nextMenu(2);
+    }
+    
+    public void menuConsultaEspecialCliente() {
+        newMenu();
+
+        System.out.println("Menu de Consultas Especiais de Cliente\n\n");
+        System.out.println("[0] Voltar;");
+        System.out.println("[1] Cliente mais velho do sistema;");
+        System.out.println("[2] Cliente mais novo do sistema;");
+        System.out.println("[3] Média de idade do sistema;");
+
+        nextMenu(3);
+    }
+
+    public void menuConsultaEspecialProduto() {
+        newMenu();
+
+        System.out.println("Menu de Consultas Especiais de Produto\n\n");
+        System.out.println("[0] Voltar;");
+        System.out.println("[1] Apresentação mais cara do sistema;");
+        System.out.println("[2] Média de preços das apresentações;");
+        System.out.println("[3] Quantidade de apresentações do sistema;");
+
+        nextMenu(3);
     }
 
     public void menuRemocao() {
@@ -158,7 +206,7 @@ public final class Menu {
         System.out.println("[0] Voltar;");
         System.out.println("[1] Remover um cliente;");
         System.out.println("[2] Remover um funcionário;");
-        System.out.println("[3] Remover uma peça de teatro;");
+        System.out.println("[3] Remover uma apresentação de teatro;");
 
         nextMenu(3);
     }
@@ -277,7 +325,7 @@ public final class Menu {
             System.out.println("\tOpção [y/n]:  ");
             try {
                 input.next();
-                option = input.nextLine().charAt(0);
+                option = input.nextLine().trim().toLowerCase().charAt(0);
                 if (option != 'y' && option != 'n')
                     throw new IllegalArgumentException("Opção inválida. Insira apenas 'y' ou 'n'.");
             } catch (IllegalArgumentException e) {
@@ -360,7 +408,7 @@ public final class Menu {
                         verbosePath[2] = "Funcionário";
                         break;
                     case "3":
-                        verbosePath[2] = "Peça";
+                        verbosePath[2] = "Apresentação";
                         break;
                     case "4":
                         verbosePath[2] = "Especial";

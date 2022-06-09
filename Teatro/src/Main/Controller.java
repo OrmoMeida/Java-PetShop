@@ -1,21 +1,20 @@
+package Main;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.Scanner;
 
 import Classes.Cliente;
 import Classes.Funcionario;
-import Classes.PecaDeTeatro;
+import Classes.Apresentacao;
 
 public class Controller {
-    private static Scanner input = new Scanner(System.in);
     private ArrayList<Cliente> lstCliente;
     private ArrayList<Funcionario> lstFuncionario;
-    private ArrayList<PecaDeTeatro> lstPeca;
+    private ArrayList<Apresentacao> lstApresentacao;
 
     public Controller() {
         lstCliente = new ArrayList<Cliente>();
         lstFuncionario = new ArrayList<Funcionario>();
-        lstPeca = new ArrayList<PecaDeTeatro>();
+        lstApresentacao = new ArrayList<Apresentacao>();
     }
 
     public Cliente buscaCliente(String nome) {
@@ -36,7 +35,7 @@ public class Controller {
             System.out.print("\tNome do cliente:  ");
 
             try {
-                nome = input.nextLine();
+                nome = Main.Menu.input().nextLine();
                 cliente = buscaCliente(nome);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -96,20 +95,20 @@ public class Controller {
     }
 
 
-    // Adds para peças de teatro
-    public void addPeca(String nome, String desc, float preco, float duracao, String data, String genero,
+    // Adds para apresentaçãos de teatro
+    public void addApresentacao(String nome, String desc, float preco, float duracao, String data, String genero,
             String classificacao) {
-        lstPeca.add(new PecaDeTeatro(nome, desc, preco, duracao, data, genero, classificacao));
+        lstApresentacao.add(new Apresentacao(nome, desc, preco, duracao, data, genero, classificacao));
     }
 
-    public void addPeca(PecaDeTeatro peca) {
-        lstPeca.add(peca);
+    public void addApresentacao(Apresentacao apresentacao) {
+        lstApresentacao.add(apresentacao);
     }
 
-    public void addPeca() {
-        System.out.println("Insira as informações da nova peça de teatro:  \n");
-        lstPeca.add(new PecaDeTeatro());
-        System.out.println("\nPeça de teatro adicionada com sucesso.");
+    public void addApresentacao() {
+        System.out.println("Insira as informações da nova apresentação de teatro:  \n");
+        lstApresentacao.add(new Apresentacao());
+        System.out.println("\nApresentação de teatro adicionada com sucesso.");
     }
  
     // TODO ver o que mais precisa fazer no controller
@@ -122,7 +121,7 @@ public class Controller {
      * TODO Retornar lista com todos os nomes que bateram da pesquisa
      * * [ ] Cliente
      * * [ ] Funcionário
-     * * [ ] Peca
+     * * [ ] Apresentacao
      * 
      * TODO Sistema de pesquisa de produto
      * * [ ] Nome
@@ -164,35 +163,7 @@ public class Controller {
         lstCliente.set(lstCliente.indexOf(lastAddCliente()), cliente);
     }
     
-    public void alterarFuncionario() {
-        Funcionario funcionario = lastAddFuncionario();
 
-        Menu.voider();
-        System.out.println("Menu de alteração de dados do funcionario.");
-        System.out.println("Y para alterar e N para manter.\n");
-        
-        System.out.println("Nome:  " + funcionario.getNome());
-        if (Menu.getOptionBool())
-            funcionario.setNome();
-        
-        System.out.println("Idade:  " + funcionario.getIdade());
-        if (Menu.getOptionBool())
-            funcionario.setIdade();
-        
-        System.out.println("CPF:  " + funcionario.getCpf());
-        if (Menu.getOptionBool())
-            funcionario.setCpf();
-
-        System.out.println("Email:  " + funcionario.getEmail());
-        if (Menu.getOptionBool())
-            funcionario.setEmail();
-
-        System.out.println("Telefone:  " + funcionario.getCargo());
-        if (Menu.getOptionBool())
-            funcionario.setCargo();
-
-        lstFuncionario.set(lstFuncionario.indexOf(lastAddFuncionario()), funcionario);
-    }
 
     // TODO alteraProduto
 
@@ -278,7 +249,7 @@ public class Controller {
             System.out.print("\tNome do funcionário:  ");
 
             try {
-                nome = input.nextLine();
+                nome = Main.Menu.input().nextLine();
                 list = buscaFuncionarioNome(nome);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -306,7 +277,7 @@ public class Controller {
             System.out.print("\tCPF do funcionário:  ");
 
             try {
-                cpf = input.nextLine();
+                cpf = Main.Menu.input().nextLine();
                 func = buscaFuncionarioCPF(cpf);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -322,16 +293,16 @@ public class Controller {
         return func;
     }
 
-    public PecaDeTeatro buscaPeca(String nome) {
-        for (PecaDeTeatro peca : lstPeca) {
-            if (peca.getNome().equals(nome))
-                return peca;
+    public Apresentacao buscaApresentacao(String nome) {
+        for (Apresentacao apresentacao : lstApresentacao) {
+            if (apresentacao.getNome().equals(nome))
+                return apresentacao;
         }
-        throw new IllegalArgumentException("Nome da peça não encontrado.");
+        throw new IllegalArgumentException("Nome da apresentação não encontrado.");
     }
 
-    public PecaDeTeatro buscaPeca() {
-        PecaDeTeatro peca = null;
+    public Apresentacao buscaApresentacao() {
+        Apresentacao apresentacao = null;
         String nome;
         boolean validInput = true;
 
@@ -340,8 +311,8 @@ public class Controller {
             System.out.print("\tNome do cliente:  ");
 
             try {
-                nome = input.nextLine();
-                peca = buscaPeca(nome);
+                nome = Main.Menu.input().nextLine();
+                apresentacao = buscaApresentacao(nome);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
                 validInput = false;
@@ -351,10 +322,10 @@ public class Controller {
             }
         } while (!validInput);
 
-        if (peca.equals(null)) {
-            throw new RuntimeException("Peça de teatro não encontrada. (??)");
+        if (apresentacao.equals(null)) {
+            throw new RuntimeException("Apresentação de teatro não encontrada. (??)");
         }
-        return peca;
+        return apresentacao;
     }
 
     public Cliente lastAddCliente() {
@@ -365,89 +336,58 @@ public class Controller {
         return lstFuncionario.get(lstFuncionario.size() - 1);
     }
 
-    public PecaDeTeatro lastAddPeca() {
-        return lstPeca.get(lstPeca.size() - 1);
+    public Apresentacao lastAddApresentacao() {
+        return lstApresentacao.get(lstApresentacao.size() - 1);
     }
-    
-    public Cliente clienteMaisVelho() {
-        Cliente cli;
 
-        if (qntClientes() > 0)
-            cli = lstCliente.get(0);
-        else
-            throw new RuntimeException("Não há clientes cadastrados no sistema.");
-
-        for (Cliente cliente : lstCliente) {
-            if (cliente.getIdade() > cli.getIdade())
-                cli = cliente;
-        }
-
-        return cli;
-    }
-    
-    public Cliente clienteMaisNovo() {
-        Cliente cli;
+    public Apresentacao produtoMaisCaro() {
+        Apresentacao apresentacao;
         
-        if (qntClientes() > 0)
-            cli = lstCliente.get(0);
-        else
-            throw new RuntimeException("Não há clientes cadastrados no sistema.");        
-
-        for (Cliente cliente : lstCliente) {
-            if (cliente.getIdade() < cli.getIdade())
-                cli = cliente;
-        }
-        return cli;
-    }
-
-    public PecaDeTeatro produtoMaisCaro() {
-        PecaDeTeatro peca;
-        
-        if (qntPecas() > 0)
-            peca = lstPeca.get(0);
+        if (qntApresentacaos() > 0)
+            apresentacao = lstApresentacao.get(0);
         else
             throw new RuntimeException("Não há produtos cadastrados no sistema.");
 
-        for (PecaDeTeatro pecaDeTeatro : lstPeca) {
-            if (pecaDeTeatro.getPreco() > peca.getPreco())
-                peca = pecaDeTeatro;
+        for (Apresentacao apresentacaoDeTeatro : lstApresentacao) {
+            if (apresentacaoDeTeatro.getPreco() > apresentacao.getPreco())
+                apresentacao = apresentacaoDeTeatro;
         }
 
-        return peca;
+        return apresentacao;
     }
 
-    public PecaDeTeatro produtoMaisBarato() {
-        PecaDeTeatro peca;
+    public Apresentacao produtoMaisBarato() {
+        Apresentacao apresentacao;
 
-        if (qntPecas() > 0)
-            peca = lstPeca.get(0);
+        if (qntApresentacaos() > 0)
+            apresentacao = lstApresentacao.get(0);
         else
             throw new RuntimeException("Não há produtos cadastrados no sistema.");
 
-        for (PecaDeTeatro pecaDeTeatro : lstPeca) {
-            if (pecaDeTeatro.getPreco() < peca.getPreco())
-                peca = pecaDeTeatro;
+        for (Apresentacao apresentacaoDeTeatro : lstApresentacao) {
+            if (apresentacaoDeTeatro.getPreco() < apresentacao.getPreco())
+                apresentacao = apresentacaoDeTeatro;
         }
 
-        return peca;
+        return apresentacao;
     }
 
     public float mediaPreco() {
         float preco = 0;
 
-        for (PecaDeTeatro pecaDeTeatro : lstPeca) {
-            preco += pecaDeTeatro.getPreco();
+        for (Apresentacao apresentacaoDeTeatro : lstApresentacao) {
+            preco += apresentacaoDeTeatro.getPreco();
         }
 
-        return preco / lstPeca.size();
+        return preco / lstApresentacao.size();
     }
 
     public int qntPrecosAcima() {
         float media = mediaPreco();
         int qntAcima = 0;
 
-        for (PecaDeTeatro pecaDeTeatro : lstPeca) {
-            if (pecaDeTeatro.getPreco() > media)
+        for (Apresentacao apresentacaoDeTeatro : lstApresentacao) {
+            if (apresentacaoDeTeatro.getPreco() > media)
                 qntAcima++;
         }
 
@@ -462,7 +402,7 @@ public class Controller {
         return lstFuncionario.size();
     }
 
-    public int qntPecas() {
-        return lstPeca.size();
+    public int qntApresentacaos() {
+        return lstApresentacao.size();
     }
 }

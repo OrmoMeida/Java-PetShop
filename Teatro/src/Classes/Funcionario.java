@@ -38,13 +38,23 @@ public class Funcionario extends Pessoa implements IPessoa {
     }
 
     public void setCargo(String cargo) {
-        if (cargo.isEmpty()) {
+        cargo = cargo.trim();
+
+        if (cargo.isEmpty())
             throw new IllegalArgumentException("O valor de cargo não deve ser vazio.");
-        }
-        if (cargo.length() < 3) {
+        
+        if (cargo.length() < 3)
             throw new IllegalArgumentException("O cargo deve possuir ao menos três caracteres.");
-        }
+
         this.cargo = cargo;
+    }
+
+    @Override
+    public void setIdade(int idade) {
+        if (idade < 16)
+            throw new IllegalArgumentException("O funcionário deve ter ao menos 16 anos.");
+
+        super.setIdade(idade);
     }
 
     public void setCargo() {
@@ -56,7 +66,7 @@ public class Funcionario extends Pessoa implements IPessoa {
             System.out.print("\tCargo:  ");
     
             try {
-                cargo = getInput().nextLine();
+                cargo = Main.Menu.input().nextLine();
                 setCargo(cargo);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");

@@ -1,11 +1,9 @@
 package Abstract;
 
 import java.util.InputMismatchException;
-import java.util.Scanner;
 
 public abstract class Produto {
     // Atributos da classe
-    private static Scanner input = new Scanner(System.in);
     private String nome;
     private String desc;
     private float preco;
@@ -20,7 +18,6 @@ public abstract class Produto {
     }
 
     public Produto(String nome, String desc, float preco) {
-        input = new Scanner(System.in);
         setNome(nome);
         setDesc(desc);
         setPreco(preco);
@@ -56,10 +53,6 @@ public abstract class Produto {
         return this.preco;
     }
 
-    public Scanner getInput() {
-        return input;
-    }
-
     public void setPreco(float preco) {
         if (preco <= 0)
             throw new IllegalArgumentException("O preço do produto deve ser maior que 0.");
@@ -76,7 +69,7 @@ public abstract class Produto {
             System.out.print("\tNome:  ");
 
             try {
-                nome = input.nextLine();
+                nome = Main.Menu.input().nextLine();
                 setNome(nome);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -97,7 +90,7 @@ public abstract class Produto {
             System.out.print("\tNome:  ");
 
             try {
-                desc = input.nextLine();
+                desc = Main.Menu.input().nextLine();
                 setDesc(desc);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -118,7 +111,7 @@ public abstract class Produto {
             System.out.print("\tPreço:  ");
 
             try {
-                preco = input.nextFloat();
+                preco = Main.Menu.input().nextFloat();
                 setPreco(preco);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");

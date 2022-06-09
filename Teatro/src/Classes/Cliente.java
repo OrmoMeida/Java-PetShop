@@ -69,7 +69,7 @@ public class Cliente extends Pessoa implements IPessoa {
             System.out.print("\tTelefone:  ");
     
             try {
-                telefone = getInput().nextLine();
+                telefone = Main.Menu.input().nextLine();
                 setTelefone(telefone);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
