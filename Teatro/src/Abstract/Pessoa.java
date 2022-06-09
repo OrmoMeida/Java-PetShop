@@ -103,7 +103,7 @@ public abstract class Pessoa {
             System.out.print("\tNome:  ");
     
             try {
-                nome = Main.Menu.input().nextLine();
+                nome = Main.Menu.input().next();
                 setNome(nome);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -111,6 +111,8 @@ public abstract class Pessoa {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
                 validInput = false;
+            } finally {
+                Main.Menu.input().nextLine();
             }
         } while (!validInput);
     }
@@ -132,6 +134,8 @@ public abstract class Pessoa {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
                 validInput = false;
+            } finally {
+                Main.Menu.input().nextLine();
             }
         } while (!validInput);
     }
@@ -153,6 +157,8 @@ public abstract class Pessoa {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
                 validInput = false;
+            } finally {
+                Main.Menu.input().nextLine();
             }
         } while (!validInput);
     }
@@ -166,7 +172,7 @@ public abstract class Pessoa {
             System.out.print("\tEmail:  ");
 
             try {
-                email = Main.Menu.input().nextLine();
+                email = Main.Menu.input().next();
                 setEmail(email);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -174,6 +180,8 @@ public abstract class Pessoa {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
                 validInput = false;
+            } finally {
+                Main.Menu.input().nextLine();
             }
         } while (!validInput);
     }

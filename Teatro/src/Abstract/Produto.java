@@ -69,7 +69,7 @@ public abstract class Produto {
             System.out.print("\tNome:  ");
 
             try {
-                nome = Main.Menu.input().nextLine();
+                nome = Main.Menu.input().next();
                 setNome(nome);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -77,6 +77,8 @@ public abstract class Produto {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
                 validInput = false;
+            } finally {
+                Main.Menu.input().nextLine();
             }
         } while (!validInput);
     }
@@ -90,7 +92,7 @@ public abstract class Produto {
             System.out.print("\tNome:  ");
 
             try {
-                desc = Main.Menu.input().nextLine();
+                desc = Main.Menu.input().next();
                 setDesc(desc);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -98,6 +100,8 @@ public abstract class Produto {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
                 validInput = false;
+            } finally {
+                Main.Menu.input().nextLine();
             }
         } while (!validInput);
     }
@@ -119,6 +123,8 @@ public abstract class Produto {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
                 validInput = false;
+            } finally {
+                Main.Menu.input().nextLine();
             }
         } while (!validInput);
     }

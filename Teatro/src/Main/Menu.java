@@ -219,14 +219,13 @@ public final class Menu {
     }
 
     public void newMenu() {
-        for (int i = 0; i < 50; i++) System.out.println("\n");
+        voider();
         System.out.println("\n\nBefore start:");
         System.out.println("Path:  " + pathMenu);
         System.out.println("Last:  " + lastMenu);
         System.out.println("Curr:  " + currentMenu);
         System.out.println("Next:  " + nextMenu);
         startMenu();
-        clrscr();
         System.out.println(ConvertToVerbose(pathMenu));
         System.out.println("---------------------------------\n");
         System.out.println("\n\nAfter start:");
@@ -306,6 +305,8 @@ public final class Menu {
                 System.out.println("O valor inserido não é um número.\n");
                 validOption = false;
                 input.next();
+            } finally {
+                Main.Menu.input().nextLine();
             }
         } while (!validOption);
 
@@ -325,12 +326,14 @@ public final class Menu {
             System.out.println("\tOpção [y/n]:  ");
             try {
                 input.next();
-                option = input.nextLine().trim().toLowerCase().charAt(0);
+                option = input.next().trim().toLowerCase().charAt(0);
                 if (option != 'y' && option != 'n')
                     throw new IllegalArgumentException("Opção inválida. Insira apenas 'y' ou 'n'.");
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
                 validOption = false;
+            } finally {
+                Main.Menu.input().nextLine();
             }
         } while (!validOption);
 

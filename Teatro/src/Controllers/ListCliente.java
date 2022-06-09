@@ -118,7 +118,7 @@ public class ListCliente {
             System.out.print("\tNome:  ");
 
             try {
-                nome = Main.Menu.input().nextLine();
+                nome = Main.Menu.input().next();
                 list = buscaNome(nome);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -130,7 +130,7 @@ public class ListCliente {
                     throw new CancellationException("Busca de cliente por nome cancelada pelo usuário.");
                 validInput = false;
             } finally {
-                Menu.input().nextLine();
+                Main.Menu.input().nextLine();
             }
         } while (!validInput);
 
@@ -149,7 +149,7 @@ public class ListCliente {
             System.out.print("\tNome:  ");
 
             try {
-                nome = Main.Menu.input().nextLine().trim();
+                nome = Main.Menu.input().next().trim();
                 return buscaNomeObj(nome);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -160,6 +160,8 @@ public class ListCliente {
                 if (!Menu.getOptionBool())
                     throw new CancellationException("Busca de cliente por nome cancelada pelo usuário.");
                 validInput = false;
+            } finally {
+                Main.Menu.input().nextLine();
             }
         } while (!validInput);
 
@@ -189,7 +191,7 @@ public class ListCliente {
             System.out.print("\tCPF:  ");
 
             try {
-                cpf = Main.Menu.input().nextLine().trim();
+                cpf = Main.Menu.input().next().trim();
                 return buscaCpf(cpf);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -200,6 +202,8 @@ public class ListCliente {
                 if (!Menu.getOptionBool())
                     throw new CancellationException("Busca de cliente por nome cancelada pelo usuário.");
                 validInput = false;
+            } finally {
+                Main.Menu.input().nextLine();
             }
         } while (!validInput);
 

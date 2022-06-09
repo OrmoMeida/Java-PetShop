@@ -108,6 +108,8 @@ public class Apresentacao extends Produto {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
                 validInput = false;
+            } finally {
+                Main.Menu.input().nextLine();
             }
         } while (!validInput);
     }
@@ -121,7 +123,7 @@ public class Apresentacao extends Produto {
             System.out.print("\tData:  ");
 
             try {
-                data = Main.Menu.input().nextLine();
+                data = Main.Menu.input().next();
                 setData(data);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -129,6 +131,8 @@ public class Apresentacao extends Produto {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
                 validInput = false;
+            } finally {
+                Main.Menu.input().nextLine();
             }
         } while (!validInput);
     }
@@ -142,7 +146,7 @@ public class Apresentacao extends Produto {
             System.out.print("\tGênero:  ");
 
             try {
-                descricao = Main.Menu.input().nextLine();
+                descricao = Main.Menu.input().next();
                 setGenero(descricao);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -150,6 +154,8 @@ public class Apresentacao extends Produto {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
                 validInput = false;
+            } finally {
+                Main.Menu.input().nextLine();
             }
         } while (!validInput);
     }
@@ -163,7 +169,7 @@ public class Apresentacao extends Produto {
             System.out.print("\tGênero:  ");
 
             try {
-                descricao = Main.Menu.input().nextLine();
+                descricao = Main.Menu.input().next();
                 setClassificacao(descricao);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -171,6 +177,8 @@ public class Apresentacao extends Produto {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
                 validInput = false;
+            } finally {
+                Main.Menu.input().nextLine();
             }
         } while (!validInput);
     }

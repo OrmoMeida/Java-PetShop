@@ -27,10 +27,11 @@ public class Cliente extends Pessoa implements IPessoa {
     @Override
     public void exibir() {
         System.out.println("Cliente nº " + this.getCodCliente());
-        System.out.println("Nome do cliente  :  " + this.getNome());
-        System.out.println("Idade do cliente :  " + this.getIdade());
-        System.out.println("CPF do cliente   :  " + this.getCpf());
-        System.out.println("Email do cliente :  " + this.getEmail());
+        System.out.println("Nome do cliente     :  " + this.getNome());
+        System.out.println("Idade do cliente    :  " + this.getIdade());
+        System.out.println("CPF do cliente      :  " + this.getCpf());
+        System.out.println("Email do cliente    :  " + this.getEmail());
+        System.out.println("Telefone do cliente :  " + this.getTelefone());
     }
 
     // Getters e setters
@@ -69,7 +70,7 @@ public class Cliente extends Pessoa implements IPessoa {
             System.out.print("\tTelefone:  ");
     
             try {
-                telefone = Main.Menu.input().nextLine();
+                telefone = Main.Menu.input().next();
                 setTelefone(telefone);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -77,6 +78,8 @@ public class Cliente extends Pessoa implements IPessoa {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
                 validInput = false;
+            } finally {
+                Main.Menu.input().nextLine();
             }
         } while (!validInput);
     }

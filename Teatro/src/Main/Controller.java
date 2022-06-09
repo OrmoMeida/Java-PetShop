@@ -35,7 +35,7 @@ public class Controller {
             System.out.print("\tNome do cliente:  ");
 
             try {
-                nome = Main.Menu.input().nextLine();
+                nome = Main.Menu.input().next();
                 cliente = buscaCliente(nome);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -43,6 +43,8 @@ public class Controller {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
                 validInput = false;
+            } finally {
+                Main.Menu.input().nextLine();
             }
         } while (!validInput);
 
@@ -249,7 +251,7 @@ public class Controller {
             System.out.print("\tNome do funcionário:  ");
 
             try {
-                nome = Main.Menu.input().nextLine();
+                nome = Main.Menu.input().next();
                 list = buscaFuncionarioNome(nome);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -261,6 +263,8 @@ public class Controller {
                 System.out.println(e.getMessage());
                 System.out.println("Impossível pesquisar.\n");
                 throw new ArrayIndexOutOfBoundsException(e.getMessage());
+            } finally {
+                Main.Menu.input().nextLine();
             }
         } while (!validInput);
 
@@ -277,7 +281,7 @@ public class Controller {
             System.out.print("\tCPF do funcionário:  ");
 
             try {
-                cpf = Main.Menu.input().nextLine();
+                cpf = Main.Menu.input().next();
                 func = buscaFuncionarioCPF(cpf);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -285,6 +289,8 @@ public class Controller {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
                 validInput = false;
+            } finally {
+                Main.Menu.input().nextLine();
             }
         } while (!validInput);
 
@@ -311,7 +317,7 @@ public class Controller {
             System.out.print("\tNome do cliente:  ");
 
             try {
-                nome = Main.Menu.input().nextLine();
+                nome = Main.Menu.input().next();
                 apresentacao = buscaApresentacao(nome);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -319,6 +325,8 @@ public class Controller {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
                 validInput = false;
+            } finally {
+                Main.Menu.input().nextLine();
             }
         } while (!validInput);
 

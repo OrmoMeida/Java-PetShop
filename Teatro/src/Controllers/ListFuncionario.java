@@ -112,7 +112,7 @@ public class ListFuncionario {
             System.out.print("\tNome do funcionário:  ");
 
             try {
-                nome = Main.Menu.input().nextLine();
+                nome = Main.Menu.input().next();
                 list = buscaNome(nome);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -123,6 +123,8 @@ public class ListFuncionario {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
                 validInput = false;
+            } finally {
+                Main.Menu.input().nextLine();
             }
         } while (!validInput);
 
@@ -150,7 +152,7 @@ public class ListFuncionario {
             System.out.print("\tCPF do funcionário:  ");
 
             try {
-                cpf = Main.Menu.input().nextLine();
+                cpf = Main.Menu.input().next();
                 return buscaCpf(cpf);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -161,6 +163,8 @@ public class ListFuncionario {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
                 validInput = false;
+            } finally {
+                Main.Menu.input().nextLine();
             }
         } while (!validInput);
 
