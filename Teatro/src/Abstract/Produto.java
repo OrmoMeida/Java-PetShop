@@ -30,6 +30,7 @@ public abstract class Produto {
     }
 
     public void setNome(String nome) {
+        nome = nome.trim();
         if (nome.isEmpty())
             throw new IllegalArgumentException("O nome do produto não deve estar vazio.");
         if (nome.length() < 3)
@@ -42,6 +43,7 @@ public abstract class Produto {
     }
 
     public void setDesc(String desc) {
+        desc = desc.trim();
         if (desc.isEmpty())
             throw new IllegalArgumentException("A descrição do produto não deve estar vazia.");
         if (desc.length() < 5)

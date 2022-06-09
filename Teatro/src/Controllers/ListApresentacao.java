@@ -24,7 +24,8 @@ public class ListApresentacao {
     public static void exibir(ArrayList<Apresentacao> lstApresentacao) {
         int i = 1;
         for (Apresentacao apresentacao : lstApresentacao) {
-            System.out.println(" | " + Integer.toString(i) + " | " + apresentacao.getNome() + " | " + apresentacao.getDesc() + " | " + apresentacao.getPreco() + " | " + apresentacao.getData());
+            System.out.println(" | " + Integer.toString(i) + " | " + apresentacao.getNome() + " | "
+                    + apresentacao.getDesc() + " | " + apresentacao.getPreco() + " | " + apresentacao.getData());
             i++;
         }
     }
@@ -37,7 +38,7 @@ public class ListApresentacao {
         System.out.println(" | 1 | " + apresentacao.getNome() + " | " + apresentacao.getDesc() + " | "
                 + apresentacao.getPreco() + " | " + apresentacao.getData());
     }
-    
+
     public void add(Apresentacao apresentacao) {
         lstApresentacao.add(apresentacao);
     }
@@ -46,7 +47,7 @@ public class ListApresentacao {
             String classificacao) {
         lstApresentacao.add(new Apresentacao(nome, desc, preco, duracao, data, genero, classificacao));
     }
-    
+
     public void add() {
         lstApresentacao.add(new Apresentacao());
     }
@@ -73,9 +74,73 @@ public class ListApresentacao {
         Menu.waiter();
     }
 
+    public ArrayList<Apresentacao> buscaNome(String nome) {
+        checkEmpty();
+        nome = nome.trim().toLowerCase();
+        ArrayList<Apresentacao> list = new ArrayList<Apresentacao>();
 
-    
+        for (Apresentacao apresentacao : lstApresentacao) {
+            if (apresentacao.getNome().toLowerCase().startsWith(nome))
+                list.add(apresentacao);
+        }
 
+        if (list.size() <= 0)
+            throw new IllegalArgumentException("Nome de produto não encontrado.");
+        return list;
+    }
+
+    public ArrayList<Apresentacao> buscaGenero(String genero) {
+        checkEmpty();
+        genero = genero.trim().toLowerCase();
+        ArrayList<Apresentacao> list = new ArrayList<Apresentacao>();
+
+        for (Apresentacao apresentacao : lstApresentacao) {
+            if (apresentacao.getGenero().toLowerCase().startsWith(genero))
+                list.add(apresentacao);
+        }
+
+        if (list.size() <= 0)
+            throw new IllegalArgumentException("Nenhuma apresentação deste gênero foi encontrada.");
+        return list;
+    }
+
+    public ArrayList<Apresentacao> buscaClassificacao(String classificacao) {
+        checkEmpty();
+        classificacao = classificacao.trim().toLowerCase();
+        ArrayList<Apresentacao> list = new ArrayList<Apresentacao>();
+
+        for (Apresentacao apresentacao : lstApresentacao) {
+            if (apresentacao.getClassificacao().toLowerCase().startsWith(classificacao))
+                list.add(apresentacao);
+        }
+
+        if (list.size() <= 0)
+            throw new IllegalArgumentException("Nenhuma apresentação desta classificação indicativa foi encontrada.");
+        return list;
+    }
+
+    public ArrayList<Apresentacao> buscaPreco(float minPrice, float maxPrice) {
+        checkEmpty();
+        ArrayList<Apresentacao> list = new ArrayList<Apresentacao>();
+
+        for (Apresentacao apresentacao : lstApresentacao) {
+            if (apresentacao.getPreco() >= minPrice && apresentacao.getPreco() <= maxPrice)
+                list.add(apresentacao);
+        }
+
+        if (list.size() <= 0)
+            throw new IllegalArgumentException("Nenhuma apresentação nesta faixa de preços foi encontrada.");
+        return list;
+    }
+
+    // TODO public void buscaMenu() {}
+
+    /* 
+     * Estou pensando em algum jeito de fazer justamente a chave pesquisada aparecer
+     * na mostra dos resultados da pesquisa. 
+     * Por exemplo, uma pesquisa por Gênero mostra os resultados com seus respectivos gêneros.
+     * É chatinho, mas nada demais, também.
+     */
     public void remover(Apresentacao apresentacao) {
         checkEmpty();
         lstApresentacao.remove(apresentacao);
@@ -85,7 +150,10 @@ public class ListApresentacao {
         checkEmpty();
         lstApresentacao.remove(index);
     }
-    
+
+    // TODO public void remover();
+    // O que significa que estou genuinamente perto de terminar.
+
     public void alterar() {
         checkEmpty();
         Apresentacao apresentacao = last();
@@ -127,7 +195,7 @@ public class ListApresentacao {
         System.out.println("\nApresentação alterada com sucesso!");
         Menu.waiter();
     }
-    
+
     public Apresentacao maisCara() {
         checkEmpty();
         float preco = 0;

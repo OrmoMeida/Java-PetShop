@@ -80,7 +80,7 @@ public class Apresentacao extends Produto {
     }
 
     public void setGenero(String descricao) {
-        this.genero = Genero.setTema(descricao);
+        this.genero = Genero.setGenero(descricao);
     }
 
     public String getClassificacao() {

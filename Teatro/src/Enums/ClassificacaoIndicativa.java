@@ -12,8 +12,10 @@ public enum ClassificacaoIndicativa {
     private String descricao;
 
     public static ClassificacaoIndicativa setClassificacao(String descricao) {
+        descricao = descricao.trim().toLowerCase();
+
         for (ClassificacaoIndicativa cIndicativa : ClassificacaoIndicativa.values()) {
-            if (cIndicativa.getDescricao().equals(descricao)) {
+            if (cIndicativa.getDescricao().toLowerCase().equals(descricao)) {
                 return cIndicativa;
             }
         }

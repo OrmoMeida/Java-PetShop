@@ -29,9 +29,11 @@ public enum Genero {
         return this.descricao;
     }
 
-    public static Genero setTema(String descricao) {
+    public static Genero setGenero(String descricao) {
+        descricao = descricao.trim().toLowerCase();
+
         for (Genero tema : Genero.values()) {
-            if (tema.getDescricao().equals(descricao)) {
+            if (tema.getDescricao().toLowerCase().equals(descricao)) {
                 return tema;
             }
         }
