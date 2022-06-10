@@ -29,6 +29,7 @@ public final class Menu {
     }
 
     public static Scanner input() {
+        input.nextLine();
         return input;
     }
 
@@ -98,9 +99,10 @@ public final class Menu {
         System.out.println("Selecione uma opção:  \n");
         System.out.println("[1] Cadastro;");
         System.out.println("[2] Consulta;");
-        System.out.println("[3] Remoção.");
+        System.out.println("[3] Alteração;");
+        System.out.println("[4] Remoção.");        
 
-        nextMenu(1, 3);
+        nextMenu(1, 4);
     }
 
     public void menuCadastro() {
@@ -122,9 +124,11 @@ public final class Menu {
         System.out.println("[0] Voltar;");
         System.out.println("[1] Conferir dados do cliente;");
         System.out.println("[2] Alterar dados do cliente;");
-        System.out.println("[3] Cadastrar outro cliente.");
+        System.out.println("[3] Cadastrar outro cliente;");
+        System.out.println("[4] Remover cliente.");
 
-        nextMenu(3);
+        if (nextMenu(4) == 0)
+            back();
     }
 
     public void menuCadastroFuncionario() {
@@ -134,9 +138,11 @@ public final class Menu {
         System.out.println("[0] Voltar;");
         System.out.println("[1] Conferir os dados do funcionário;");
         System.out.println("[2] Alterar os dados do funcionário;");
-        System.out.println("[3] Cadastrar outro funcionário.");
+        System.out.println("[3] Cadastrar outro funcionário;");
+        System.out.println("[4] Remover funcionário.");
 
-        nextMenu(3);
+        if (nextMenu(4) == 0)
+            back();
     }
     
     public void menuCadastroApresentacao() {
@@ -146,9 +152,11 @@ public final class Menu {
         System.out.println("[0] Voltar;");
         System.out.println("[1] Conferir os dados da apresentação;");
         System.out.println("[2] Alterar os dados da apresentação;");
-        System.out.println("[3] Cadastrar outra apresentação.");
+        System.out.println("[3] Cadastrar outra apresentação;");
+        System.out.println("[4] Remover apresentação.");
 
-        nextMenu(3);
+        if (nextMenu(4) == 0)
+            back();
     }
 
     public void menuConsulta() {
@@ -199,6 +207,20 @@ public final class Menu {
         nextMenu(3);
     }
 
+    public void menuAlteracao() {
+        newMenu();
+
+        System.out.println("Menu de Alteração de Cadastro\n\n");
+        System.out.println("[0] Voltar;");
+        System.out.println("[1] Alterar um cliente;");
+        System.out.println("[2] Alterar um funcionário;");
+        System.out.println("[3] Alterar uma apresentação.");
+
+        nextMenu(3);
+    }
+
+
+
     public void menuRemocao() {
         newMenu();
 
@@ -211,6 +233,45 @@ public final class Menu {
         nextMenu(3);
     }
 
+    public void menuAlteracaoFuncionario() {
+        newMenu();
+
+        System.out.println("Funcionário alterado com sucesso!\n");
+        System.out.println("[0] Voltar;");
+        System.out.println("[1] Conferir os dados do funcionário;");
+        System.out.println("[2] Alterar os dados do funcionário novamente;");
+        System.out.println("[3] Alterar outro funcionário.");
+
+        if (nextMenu(3) == 0)
+            back();
+    }
+
+    public void menuAlteracaoCliente() {
+        newMenu();
+
+        System.out.println("Cliente alterado com sucesso!\n");
+        System.out.println("[0] Voltar;");
+        System.out.println("[1] Conferir os dados do cliente;");
+        System.out.println("[2] Alterar os dados do cliente novamente;");
+        System.out.println("[3] Alterar outro cliente.");
+
+        if (nextMenu(3) == 0)
+            back();
+    }
+
+    public void menuAlteracaoApresentacao() {
+        newMenu();
+
+        System.out.println("Apresentação alterada com sucesso!\n");
+        System.out.println("[0] Voltar;");
+        System.out.println("[1] Conferir os dados da apresentação;");
+        System.out.println("[2] Alterar os dados da apresentação novamente;");
+        System.out.println("[3] Alterar outra apresentação.");
+
+        if (nextMenu(3) == 0)
+            back();
+    }
+
     // Para iniciar os menus
     public void startMenu() {
         pathMenu = nextMenu;
@@ -220,19 +281,19 @@ public final class Menu {
 
     public void newMenu() {
         voider();
-        System.out.println("\n\nBefore start:");
-        System.out.println("Path:  " + pathMenu);
-        System.out.println("Last:  " + lastMenu);
-        System.out.println("Curr:  " + currentMenu);
-        System.out.println("Next:  " + nextMenu);
+        // System.out.println("\n\nBefore start:");
+        // System.out.println("Path:  " + pathMenu);
+        // System.out.println("Last:  " + lastMenu);
+        // System.out.println("Curr:  " + currentMenu);
+        // System.out.println("Next:  " + nextMenu);
         startMenu();
         System.out.println(ConvertToVerbose(pathMenu));
         System.out.println("---------------------------------\n");
-        System.out.println("\n\nAfter start:");
-        System.out.println("Path:  " + pathMenu);
-        System.out.println("Last:  " + lastMenu);
-        System.out.println("Curr:  " + currentMenu);
-        System.out.println("Next:  " + nextMenu);
+        // System.out.println("\n\nAfter start:");
+        // System.out.println("Path:  " + pathMenu);
+        // System.out.println("Last:  " + lastMenu);
+        // System.out.println("Curr:  " + currentMenu);
+        // System.out.println("Next:  " + nextMenu);
     }
 
     public String getBack() {
@@ -305,8 +366,6 @@ public final class Menu {
                 System.out.println("O valor inserido não é um número.\n");
                 validOption = false;
                 input.next();
-            } finally {
-                Main.Menu.input().nextLine();
             }
         } while (!validOption);
 
@@ -331,8 +390,6 @@ public final class Menu {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
                 validOption = false;
-            } finally {
-                Main.Menu.input().nextLine();
             }
         } while (!validOption);
 
@@ -381,17 +438,17 @@ public final class Menu {
             this.nextMenu = nextMenu;
     }
 
-    private void nextMenu(int firstOption, int lastOption) {
+    private int nextMenu(int firstOption, int lastOption) {
         Integer option = getOption(firstOption, lastOption);
-        if (option == 0) {
+        if (option == 0)
             back();
-        } else {
+        else
             nextMenu(option.toString());
-        }
+        return option;
     }
 
-    private void nextMenu(int qntOptions) {
-        nextMenu(0, qntOptions);
+    private int nextMenu(int qntOptions) {
+        return nextMenu(0, qntOptions);
     }
 
     public static String ConvertToVerbose(String spath) {
@@ -428,6 +485,9 @@ public final class Menu {
                         verbosePath[1] = "Consulta";
                         break;
                     case "3":
+                        verbosePath[2] = "Alteração";
+                        break;
+                    case "4":
                         verbosePath[1] = "Remoção";
                         break;
                     default:

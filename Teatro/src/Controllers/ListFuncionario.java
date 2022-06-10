@@ -130,8 +130,6 @@ public class ListFuncionario {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
                 validInput = false;
-            } finally {
-                Main.Menu.input().nextLine();
             }
         } while (!validInput);
 
@@ -170,8 +168,6 @@ public class ListFuncionario {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
                 validInput = false;
-            } finally {
-                Main.Menu.input().nextLine();
             }
         } while (!validInput);
 
@@ -184,18 +180,25 @@ public class ListFuncionario {
 
         System.out.println("Menu de busca de funcionário.\n\n");
         System.out.println("[0] Cancelar;");
-        System.out.println("[1] Nome;");
-        System.out.println("[2] CPF.");
+        System.out.println("[1] Ver todos os funcionários;");
+        System.out.println("[2] Consultar por nome;");
+        System.out.println("[3] Consultar por CPF.");
 
-        switch (Menu.getOption(2)) {
+        switch (Menu.getOption(3)) {
             case 0:
                 throw new CancellationException("Operação de busca de funcionário cancelada pelo usuário.");
             case 1:
+                busca = lstFuncionario;
+                break;
+
+            case 2:
                 busca = buscaNome();
                 break;
-            case 2:
+
+            case 3:
                 busca.add(buscaCpf());
                 break;
+
         }
 
         return busca;
@@ -231,7 +234,7 @@ public class ListFuncionario {
         checkEmpty();
         
         try {
-            exibir(buscaArray(busca()));    
+            buscaArray(busca()).exibir();;    
             Menu.waiter();
         } catch (CancellationException e) {
             return;
@@ -255,45 +258,70 @@ public class ListFuncionario {
 
         try {
             remover(buscaArray(busca()));
+            System.out.println("Tem certeza que deseja remover o último funcionário adicionado?");
             Menu.waiter();
         } catch (CancellationException e) {
             return;
         }
     }
 
-    
-
-    public void alterar() {
+    public void removerLast() {
         checkEmpty();
-        Funcionario funcionario = last();
+
+        System.out.println("Tem certeza que deseja remover o último funcionário adicionado?");
+        if (Menu.getOptionBool()) {
+            remover(last());
+            System.out.println("\nFuncionário removido com sucesso.\n");
+            Menu.waiter();
+        }
+    }    
+
+    public void alterar(Funcionario funcionario) {
+        checkEmpty();
 
         Menu.voider();
-        System.out.println("Menu de alteração de dados do funcionario.");
+        System.out.println("\n\nMenu de alteração de dados do funcionario.");
         System.out.println("Y para alterar e N para manter.\n");
-        
-        System.out.println("Nome:  " + funcionario.getNome());
+
+        System.out.println("\nNome:  " + funcionario.getNome());
         if (Menu.getOptionBool())
             funcionario.setNome();
-        
-        System.out.println("Idade:  " + funcionario.getIdade());
+
+        System.out.println("\nIdade:  " + funcionario.getIdade());
         if (Menu.getOptionBool())
             funcionario.setIdade();
-        
-        System.out.println("CPF:  " + funcionario.getCpf());
+
+        System.out.println("\nCPF:  " + funcionario.getCpf());
         if (Menu.getOptionBool())
             funcionario.setCpf();
 
-        System.out.println("Email:  " + funcionario.getEmail());
+        System.out.println("\nEmail:  " + funcionario.getEmail());
         if (Menu.getOptionBool())
             funcionario.setEmail();
 
-        System.out.println("Telefone:  " + funcionario.getCargo());
+        System.out.println("\nTelefone:  " + funcionario.getCargo());
         if (Menu.getOptionBool())
             funcionario.setCargo();
 
         lstFuncionario.set(lastIndex(), funcionario);
 
-        System.out.println("\nFuncionário alterado com sucesso!");
+        System.out.println("\n\nFuncionário alterado com sucesso!");
         Menu.waiter();
+    }
+    
+    public void alterar() {
+        alterar(last());
+    }
+
+    public void alterarMenu() {
+        checkEmpty();
+
+        System.out.println("\n\nMenu de alteração\n\n");
+
+        try {
+            alterar(buscaArray(busca()));
+        } catch (CancellationException e) {
+            return;
+        }
     }
 }

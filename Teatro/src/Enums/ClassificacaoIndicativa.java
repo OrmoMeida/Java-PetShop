@@ -1,7 +1,7 @@
 package Enums;
 
 public enum ClassificacaoIndicativa {
-    LIVRE(1, "livre"),
+    LIVRE(1, "Livre"),
     MIN10(2, "+10"),
     MIN12(3, "+12"),
     MIN16(4, "+16"),
@@ -25,6 +25,15 @@ public enum ClassificacaoIndicativa {
     ClassificacaoIndicativa(int value, String descricao) {
         this.value = value;
         this.descricao = descricao;
+    }
+
+    public static String getClassificacoes() {
+        String classificacoes = new String(); 
+        for (ClassificacaoIndicativa cIndicativa : ClassificacaoIndicativa.values()) {
+            classificacoes.concat(cIndicativa.descricao + " | ");
+        }
+
+        return " | " + classificacoes;
     }
     
     public int getValue() {return value;}

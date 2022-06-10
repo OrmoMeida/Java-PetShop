@@ -113,8 +113,6 @@ public abstract class Pessoa {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
                 validInput = false;
-            } finally {
-                Main.Menu.input().nextLine();
             }
         } while (!validInput);
     }
@@ -136,8 +134,6 @@ public abstract class Pessoa {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
                 validInput = false;
-            } finally {
-                Main.Menu.input().nextLine();
             }
         } while (!validInput);
     }
@@ -159,8 +155,6 @@ public abstract class Pessoa {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
                 validInput = false;
-            } finally {
-                Main.Menu.input().nextLine();
             }
         } while (!validInput);
     }
@@ -182,8 +176,6 @@ public abstract class Pessoa {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
                 validInput = false;
-            } finally {
-                Main.Menu.input().nextLine();
             }
         } while (!validInput);
     }

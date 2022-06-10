@@ -44,10 +44,13 @@ public abstract class Produto {
 
     public void setDesc(String desc) {
         desc = desc.trim();
+
         if (desc.isEmpty())
             throw new IllegalArgumentException("A descrição do produto não deve estar vazia.");
+        
         if (desc.length() < 5)
             throw new IllegalArgumentException("A descrição do produto deve conter ao menos 5 caracteres.");
+        
         this.desc = desc;
     }
 
@@ -79,8 +82,6 @@ public abstract class Produto {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
                 validInput = false;
-            } finally {
-                Main.Menu.input().nextLine();
             }
         } while (!validInput);
     }
@@ -91,7 +92,7 @@ public abstract class Produto {
 
         do {
             validInput = true;
-            System.out.print("\tNome:  ");
+            System.out.print("\tDescrição:  ");
 
             try {
                 desc = Main.Menu.input().next();
@@ -102,8 +103,6 @@ public abstract class Produto {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
                 validInput = false;
-            } finally {
-                Main.Menu.input().nextLine();
             }
         } while (!validInput);
     }
@@ -125,8 +124,6 @@ public abstract class Produto {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
                 validInput = false;
-            } finally {
-                Main.Menu.input().nextLine();
             }
         } while (!validInput);
     }

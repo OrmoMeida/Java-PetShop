@@ -74,8 +74,6 @@ public class Funcionario extends Pessoa implements IPessoa {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
                 validInput = false;
-            } finally {
-                Main.Menu.input().nextLine();
             }
         } while (!validInput);
     }

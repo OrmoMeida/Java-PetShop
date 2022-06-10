@@ -1,12 +1,12 @@
 package Enums;
 
 public enum Genero {
-    TERROR(1, "terror"),
-    DRAMA(2, "drama"),
-    COMEDIA(3, "comédia"),
-    INFANTIL(4, "infantil"),
-    SUSPENSE(5, "suspense"),
-    ACAO(6, "ação");
+    TERROR(1, "Terror"),
+    DRAMA(2, "Drama"),
+    COMEDIA(3, "Comédia"),
+    INFANTIL(4, "Infantil"),
+    SUSPENSE(5, "Suspense"),
+    ACAO(6, "Ação");
 
     
     // Construtor
@@ -38,5 +38,14 @@ public enum Genero {
             }
         }
         throw new IllegalArgumentException("Gênero não encontrado.");
+    }
+
+    public static String getGenero() {
+        String generos = new String(""); 
+        for (Genero genero : Genero.values()) {
+            generos.concat(genero.descricao + " | ");
+        }
+
+        return " | " + generos;
     }
 }

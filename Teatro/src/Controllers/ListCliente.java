@@ -107,7 +107,6 @@ public class ListCliente {
         String nome;
         boolean validInput = true;
 
-        Menu.voider();
         System.out.println("Menu de busca por clientes via nome.\n\n");
 
         do {
@@ -126,8 +125,6 @@ public class ListCliente {
                 if (!Menu.getOptionBool())
                     throw new CancellationException("Busca de cliente por nome cancelada pelo usuário.");
                 validInput = false;
-            } finally {
-                Main.Menu.input().nextLine();
             }
         } while (!validInput);
 
@@ -149,7 +146,6 @@ public class ListCliente {
         String cpf;
         boolean validInput;
 
-        Menu.voider();
         System.out.println("Menu de busca de clientes via CPF\n\n");
 
         do {
@@ -168,8 +164,6 @@ public class ListCliente {
                 if (!Menu.getOptionBool())
                     throw new CancellationException("Busca de cliente por nome cancelada pelo usuário.");
                 validInput = false;
-            } finally {
-                Main.Menu.input().nextLine();
             }
         } while (!validInput);
 
@@ -180,24 +174,30 @@ public class ListCliente {
         checkEmpty();
         ArrayList<Cliente> busca = new ArrayList<Cliente>();
 
-        System.out.println("Menu de busca de cliente.\n\n");
-
         System.out.println("Deseja procurar o cliente por:  ");
         System.out.println("[0] Cancelar;");
-        System.out.println("[1] Nome;");
-        System.out.println("[2] CPF.");
+        System.out.println("[1] Ver todos os clientes;");
+        System.out.println("[2] Consultar por nome;");
+        System.out.println("[3] Consultar por CPF.");
 
-        switch (Menu.getOption(2)) {
+        switch (Menu.getOption(3)) {
             case 0:
                 throw new CancellationException("Operação de busca cancelada pelo usuário.");
             case 1:
+                busca = lstCliente;
+                break;
+
+            case 2:
                 busca = buscaNome();
                 break;
-            case 2:
+                
+            case 3:
                 busca.add(buscaCpf());
                 break;
+        
         }
 
+        checkEmpty(busca);
         return busca;
     }
 
@@ -229,15 +229,14 @@ public class ListCliente {
 
     public void buscaMenu() {
         checkEmpty();
-        Menu.voider();
+        System.out.println("Menu de busca de cliente\n\n");
 
         try {
-            exibir(buscaArray(busca()));
+            buscaArray(busca()).exibir();
             Menu.waiter();
         } catch (CancellationException e) {
             return;
         }
-
     }
 
 
@@ -255,56 +254,76 @@ public class ListCliente {
 
     public void remover() {
         checkEmpty();
-        ArrayList<Cliente> busca = new ArrayList<Cliente>();
+        System.out.println("Menu de remoção de cliente\n\n");
 
-        Menu.voider();
         try {
-            busca = busca();
+            remover(buscaArray(busca()));
+            System.out.println("\nCliente removido com sucesso.\n");
+            Menu.waiter();
         } catch (CancellationException e) {
             return;
+        }      
+    }
+
+    public void removerLast() {
+        checkEmpty();
+
+        System.out.println("Tem certeza que deseja remover o último cliente adicionado?");
+        if (Menu.getOptionBool()) {
+            remover(last());
+            System.out.println("\nCliente removido com sucesso.\n");
+            Menu.waiter();
         }
-
-        try {
-            remover(buscaArray(busca));
-        } catch (CancellationException e) {
-            return;
-        }        
     }
 
 
 
-    public void alterar() {
+    public void alterar(Cliente cliente) {
         checkEmpty();
-        Cliente cliente = last();
 
-        Menu.voider();
-        System.out.println("Menu de alteração de dados do cliente.");
+        System.out.println("\n\nMenu de alteração de dados do cliente.");
         System.out.println("Y para alterar e N para manter.\n");
 
-        System.out.println("Nome:  " + cliente.getNome());
+        System.out.println("\nNome:  " + cliente.getNome());
         if (Menu.getOptionBool())
             cliente.setNome();
 
-        System.out.println("Idade:  " + cliente.getIdade());
+        System.out.println("\nIdade:  " + cliente.getIdade());
         if (Menu.getOptionBool())
             cliente.setIdade();
 
-        System.out.println("CPF:  " + cliente.getCpf());
+        System.out.println("\nCPF:  " + cliente.getCpf());
         if (Menu.getOptionBool())
             cliente.setCpf();
 
-        System.out.println("Email:  " + cliente.getEmail());
+        System.out.println("\nEmail:  " + cliente.getEmail());
         if (Menu.getOptionBool())
             cliente.setEmail();
 
-        System.out.println("Telefone:  " + cliente.getTelefone());
+        System.out.println("\nTelefone:  " + cliente.getTelefone());
         if (Menu.getOptionBool())
             cliente.setTelefone();
 
         lstCliente.set(lastIndex(), cliente);
 
-        System.out.println("\nCliente alterado com sucesso!");
+        System.out.println("\n\nCliente alterado com sucesso!");
         Menu.waiter();
+    }
+
+    public void alterar() {
+        alterar(last());
+    }
+
+    public void alterarMenu() {
+        checkEmpty();
+
+        System.out.println("\n\nMenu de alteração\n\n");
+
+        try {
+            alterar(buscaArray(busca()));
+        } catch (CancellationException e) {
+            return;
+        }
     }
 
     public Cliente clienteMaisVelho() {

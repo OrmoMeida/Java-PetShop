@@ -14,6 +14,10 @@ public class ListApresentacao {
         lstApresentacao = new ArrayList<Apresentacao>();
     }
 
+    public void geraApresentacoes() {
+        add("O retorno de Mariana", "Mariana retorna.", 20.5f, 40.37f, "20/12/2022", "Suspense", "+12");
+    }
+
     public static boolean isNotEmpty(ArrayList<Apresentacao> list) {
         return list.size() > 0;
     }
@@ -124,8 +128,6 @@ public class ListApresentacao {
                 if (!Menu.getOptionBool())
                     throw new CancellationException("Busca de apresentações via nome cancelada pelo usuário.");
                 validInput = false;
-            } finally {
-                Main.Menu.input().nextLine();
             }
         } while (!validInput);
 
@@ -170,8 +172,6 @@ public class ListApresentacao {
                 if (!Menu.getOptionBool())
                     throw new CancellationException("Busca de apresentações via descrição cancelada pelo usuário.");
                 validInput = false;
-            } finally {
-                Main.Menu.input().nextLine();
             }
         } while (!validInput);
 
@@ -218,8 +218,6 @@ public class ListApresentacao {
                 if (!Menu.getOptionBool())
                     throw new CancellationException("Busca de apresentações via gênero cancelada pelo usuário.");
                 validInput = false;
-            } finally {
-                Main.Menu.input().nextLine();
             }
         } while (!validInput);
 
@@ -266,8 +264,6 @@ public class ListApresentacao {
                 if (!Menu.getOptionBool())
                     throw new CancellationException("Busca de apresentações via classificação indicativa cancelada pelo usuário.");
                 validInput = false;
-            } finally {
-                Main.Menu.input().nextLine();
             }
         } while (!validInput);
 
@@ -373,35 +369,41 @@ public class ListApresentacao {
 
         System.out.println("Deseja procurar a apresentação por:  ");
         System.out.println("[0] Cancelar;");
-        System.out.println("[1] Nome;");
-        System.out.println("[2] Descrição;");
-        System.out.println("[3] Gênero;");
-        System.out.println("[4] Classificação;");
-        System.out.println("[5] Faixa de preço.");
+        System.out.println("[1] Ver todas as apresentações;");
+        System.out.println("[2] Consultar por nome;");
+        System.out.println("[3] Consultar por descrição;");
+        System.out.println("[4] Consultar por gênero;");
+        System.out.println("[5] Consultar por classificação;");
+        System.out.println("[6] Consultar por faixa de preço.");
 
         switch (Menu.getOption(5)) {
             case 0:
                 throw new CancellationException("Operação de busca de apresentação cancelada pelo usuário.");
 
             case 1:
-                busca = buscaNome();
+                busca = lstApresentacao;
                 break;
 
             case 2:
-                busca = buscaDesc();
+                busca = buscaNome();
                 break;
 
             case 3:
-                busca = buscaGenero();
+                busca = buscaDesc();
                 break;
 
             case 4:
-                busca = buscaClassificacao();
+                busca = buscaGenero();
                 break;
 
             case 5:
+                busca = buscaClassificacao();
+                break;
+
+            case 6:
                 busca = buscaPreco();
                 break;
+
         }
 
         checkEmpty(busca);
@@ -412,9 +414,9 @@ public class ListApresentacao {
         checkEmpty(busca);
 
         if (busca.size() > 1)
-            System.out.println("Apresentações encontradas:  \n");
+            System.out.println("\n\nApresentações encontradas:  \n");
         else
-            System.out.println("Apresentação encontrada:  \n");
+            System.out.println("\n\nApresentação encontrada:  \n");
 
         exibir(busca);
 
@@ -439,7 +441,7 @@ public class ListApresentacao {
         Menu.voider();
 
         try {
-            exibir(buscaArray(busca()));
+            buscaArray(busca()).exibir();
             Menu.waiter();
         } catch (CancellationException e) {
             return;
@@ -464,57 +466,84 @@ public class ListApresentacao {
 
     public void remover() {
         checkEmpty();
-        Menu.voider();
 
         try {
             remover(buscaArray(busca()));
+            System.out.println("\nApresentação removida com sucesso.\n");
             Menu.waiter();
         } catch (CancellationException e) {
             return;
         }
     }
+
+    public void removerLast() {
+        checkEmpty();
+
+        System.out.println("Tem certeza que deseja remover a última apresentação adicionada?");
+        if (Menu.getOptionBool()) {
+            remover(last());
+            System.out.println("\nApresentação removida com sucesso.\n");
+            Menu.waiter();
+        }
+    }
+
     // O que significa que estou genuinamente perto de terminar.
 
-    public void alterar() {
+    public void alterar(Apresentacao apresentacao) {
         checkEmpty();
-        Apresentacao apresentacao = last();
 
         Menu.voider();
-        System.out.println("Menu de alteração de dados de apresentação.");
+        System.out.println("\n\nMenu de alteração de dados de apresentação.");
         System.out.println("Y para alterar e N para manter.\n");
 
-        System.out.println("Nome:  " + apresentacao.getNome());
+        System.out.println("\nNome:  " + apresentacao.getNome());
         if (Menu.getOptionBool())
             apresentacao.setNome();
 
-        System.out.println("Descrição:  " + apresentacao.getDesc());
+        System.out.println("\nDescrição:  " + apresentacao.getDesc());
         if (Menu.getOptionBool())
             apresentacao.setDesc();
 
-        System.out.println("Data:  " + apresentacao.getData());
+        System.out.println("\nData:  " + apresentacao.getData());
         if (Menu.getOptionBool())
             apresentacao.setData();
 
-        System.out.println("Preço:  " + apresentacao.getPreco());
+        System.out.println("\nPreço:  " + apresentacao.getPreco());
         if (Menu.getOptionBool())
             apresentacao.setPreco();
 
-        System.out.println("Duração:  " + apresentacao.getDuracao());
+        System.out.println("\nDuração:  " + apresentacao.getDuracao());
         if (Menu.getOptionBool())
             apresentacao.setDuracao();
 
-        System.out.println("Classificação indicativa:  " + apresentacao.getClassificacao());
+        System.out.println("\nClassificação indicativa:  " + apresentacao.getClassificacao());
         if (Menu.getOptionBool())
             apresentacao.setClassificacao();
 
-        System.out.println("Gênero:  " + apresentacao.getGenero());
+        System.out.println("\nGênero:  " + apresentacao.getGenero());
         if (Menu.getOptionBool())
             apresentacao.getGenero();
 
         lstApresentacao.set(lastIndex(), apresentacao);
 
-        System.out.println("\nApresentação alterada com sucesso!");
+        System.out.println("\n\nApresentação alterada com sucesso!");
         Menu.waiter();
+    }
+
+    public void alterar() {
+        alterar(last());
+    }
+    
+    public void alterarMenu() {
+        checkEmpty();
+
+        System.out.println("\n\nMenu de alteração\n\n");
+
+        try {
+            alterar(buscaArray(busca()));
+        } catch (CancellationException e) {
+            return;
+        }
     }
 
     public Apresentacao maisCara() {

@@ -15,9 +15,11 @@ public class App {
             case "!":
                 menu.menuInicial();
                 break;
+
             case "1":
                 menu.menuErro();
                 break;
+
             case "0":
                 menu.menuPrincipal();
                 break;
@@ -25,12 +27,18 @@ public class App {
             case "0-1":
                 menu.menuCadastro();
                 break;
+
             case "0-1-1":
                 menu.newMenu();
                 lstCliente.add();
+                menu.nextMenu("1");
+                break;
+
+            case "0-1-1-1":
                 menu.menuCadastroCliente();
                 break;
-            case "0-1-1-1":
+
+            case "0-1-1-1-1":
                 menu.newMenu();
                 try {
                     lstCliente.lastExibir();
@@ -41,7 +49,8 @@ public class App {
                 }
                 menu.back();
                 break;
-            case "0-1-1-2":
+
+            case "0-1-1-1-2":
                 menu.newMenu();
                 try {
                     lstCliente.alterar();
@@ -52,16 +61,34 @@ public class App {
                 }
                 menu.back();
                 break;
-            case "0-1-1-3":
+
+            case "0-1-1-1-3":
                 menu.back();
                 break;
-        
+
+            case "0-1-1-1-4":
+                menu.newMenu();
+                try {
+                    lstCliente.removerLast();
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Impossível realizar ação.\n\n");
+                    System.out.println("\t" + e.getMessage());
+                    Menu.waiter();
+                }
+                menu.back();
+                break;
+
             case "0-1-2":
                 menu.newMenu();
                 lstFuncionario.add();
+                menu.nextMenu("1");
+                break;
+
+            case "0-1-2-1":
                 menu.menuCadastroFuncionario();
                 break;
-            case "0-1-2-1":
+
+            case "0-1-2-1-1":
                 menu.newMenu();
                 try {
                     lstFuncionario.lastExibir();
@@ -72,7 +99,8 @@ public class App {
                 }
                 menu.back();
                 break;
-            case "0-1-2-2":
+
+            case "0-1-2-1-2":
                 menu.newMenu();
                 try {
                     lstFuncionario.alterar();
@@ -83,16 +111,34 @@ public class App {
                 }
                 menu.back();
                 break;
-            case "0-1-2-3":
+
+            case "0-1-2-1-3":
+                menu.back();
+                break;
+            
+            case "0-1-2-1-4":
+                menu.newMenu();
+                try {
+                    lstFuncionario.removerLast();
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Impossível realizar ação.\n\n");
+                    System.out.println("\t" + e.getMessage());
+                    Menu.waiter();
+                }
                 menu.back();
                 break;
 
             case "0-1-3":
                 menu.newMenu();
                 lstApresentacao.add();
+                menu.nextMenu("1");
+                break;
+
+            case "0-1-3-1":
                 menu.menuCadastroApresentacao();
                 break;
-            case "0-1-3-1":
+
+            case "0-1-3-1-1":
                 menu.newMenu();
                 try {
                     lstApresentacao.lastExibir();
@@ -103,7 +149,8 @@ public class App {
                 }
                 menu.back();
                 break;
-            case "0-1-3-2":
+
+            case "0-1-3-1-2":
                 menu.newMenu();
                 try {
                     lstApresentacao.alterar();
@@ -114,13 +161,27 @@ public class App {
                 }
                 menu.back();
                 break;
-            case "0-1-3-3":
+
+            case "0-1-3-1-3":
+                menu.back();
+                break;
+
+            case "0-1-3-1-4":
+                menu.newMenu();
+                try {
+                    lstApresentacao.removerLast();
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Impossível realizar ação.\n\n");
+                    System.out.println("\t" + e.getMessage());
+                    Menu.waiter();
+                }
                 menu.back();
                 break;
 
             case "0-2":
                 menu.menuConsulta();
                 break;
+
             case "0-2-1":
                 menu.newMenu();
                 try {
@@ -132,6 +193,7 @@ public class App {
                 }
                 menu.back();
                 break;
+
             case "0-2-2":
                 menu.newMenu();
                 try {
@@ -143,10 +205,11 @@ public class App {
                 }
                 menu.back();
                 break;
+
             case "0-2-3":
                 menu.newMenu();
                 try {
-                    // TODO lstApresentacao.buscaMenu();
+                    lstApresentacao.buscaMenu();
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println("Impossível realizar ação.\n\n");
                     System.out.println("\t" + e.getMessage());
@@ -154,12 +217,15 @@ public class App {
                 }
                 menu.back();
                 break;
+
             case "0-2-4":
                 menu.menuConsultaEspecial();
                 break;
+
             case "0-2-4-1":
                 menu.menuConsultaEspecialCliente();
                 break;
+
             case "0-2-4-1-1":
                 menu.newMenu();
                 try {
@@ -171,6 +237,7 @@ public class App {
                 }
                 menu.back();
                 break;
+
             case "0-2-4-1-2":
                 menu.newMenu();
                 try {
@@ -182,6 +249,7 @@ public class App {
                 }
                 menu.back();
                 break;
+
             case "0-2-4-1-3":
                 menu.newMenu();
                 try {
@@ -190,13 +258,14 @@ public class App {
                     System.out.println("Impossível realizar ação.\n\n");
                     System.out.println("\t" + e.getMessage());
                     Menu.waiter();
-                }        
+                }
                 menu.back();
                 break;
 
             case "0-2-4-2":
                 menu.menuConsultaEspecialProduto();
                 break;
+
             case "0-2-4-2-1":
                 menu.newMenu();
                 try {
@@ -208,6 +277,7 @@ public class App {
                 }
                 menu.back();
                 break;
+
             case "0-2-4-2-2":
                 menu.newMenu();
                 try {
@@ -219,6 +289,7 @@ public class App {
                 }
                 menu.back();
                 break;
+
             case "0-2-4-2-3":
                 menu.newMenu();
                 try {
@@ -232,9 +303,50 @@ public class App {
                 break;
 
             case "0-3":
+                menu.menuAlteracao();
+                break;
+
+            case "0-3-1":
+                menu.newMenu();
+                try {
+                    lstCliente.alterarMenu();
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Impossível realizar ação.\n\n");
+                    System.out.println("\t" + e.getMessage());
+                    Menu.waiter();
+                }
+                menu.back();
+                break;
+
+            case "0-3-2":
+                menu.newMenu();
+                try {
+                    lstFuncionario.alterarMenu();
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Impossível realizar ação.\n\n");
+                    System.out.println("\t" + e.getMessage());
+                    Menu.waiter();
+                }
+                menu.back();
+                break;
+
+            case "0-3-3":
+                menu.newMenu();
+                try {
+                    lstApresentacao.alterarMenu();
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Impossível realizar ação.\n\n");
+                    System.out.println("\t" + e.getMessage());
+                    Menu.waiter();
+                }
+                menu.back();
+                break;
+
+            case "0-4":
                 menu.menuRemocao();
                 break;
-            case "0-3-1":
+
+            case "0-4-1":
                 menu.newMenu();
                 try {
                     lstCliente.remover();
@@ -245,7 +357,8 @@ public class App {
                 }
                 menu.back();
                 break;
-            case "0-3-2":
+
+            case "0-4-2":
                 menu.newMenu();
                 try {
                     lstFuncionario.remover();
@@ -256,7 +369,8 @@ public class App {
                 }
                 menu.back();
                 break;
-            case "0-3-3":
+
+            case "0-4-3":
                 menu.newMenu();
                 try {
                     lstApresentacao.remover();
@@ -267,7 +381,6 @@ public class App {
                 }
                 menu.back();
                 break;
-
 
             default:
                 menu.menuErro();
@@ -282,6 +395,5 @@ public class App {
         while (!menu.shouldStop()) {
             next();
         }
-
     }
 }

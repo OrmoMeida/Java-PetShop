@@ -13,7 +13,7 @@ public class Apresentacao extends Produto {
     private String data;
     private Genero genero;
     private ClassificacaoIndicativa classificacao;
-    private static Pattern checkData = Pattern.compile("(\\d){2}(\\)(\\d){2}(\\)(\\d){4}");
+    private static Pattern checkData = Pattern.compile("(\\d){2}\\/(\\d){2}\\/(\\d){4}");
 
 
     // Construtores
@@ -108,8 +108,6 @@ public class Apresentacao extends Produto {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
                 validInput = false;
-            } finally {
-                Main.Menu.input().nextLine();
             }
         } while (!validInput);
     }
@@ -131,8 +129,6 @@ public class Apresentacao extends Produto {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
                 validInput = false;
-            } finally {
-                Main.Menu.input().nextLine();
             }
         } while (!validInput);
     }
@@ -153,9 +149,9 @@ public class Apresentacao extends Produto {
                 validInput = false;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
+                System.out.println("Gêneros disponíveis:");
+                System.out.println(Genero.getGenero() + "\n");
                 validInput = false;
-            } finally {
-                Main.Menu.input().nextLine();
             }
         } while (!validInput);
     }
@@ -166,7 +162,7 @@ public class Apresentacao extends Produto {
 
         do {
             validInput = true;
-            System.out.print("\tGênero:  ");
+            System.out.print("\tClassificação indicativa:  ");
 
             try {
                 descricao = Main.Menu.input().next();
@@ -176,9 +172,9 @@ public class Apresentacao extends Produto {
                 validInput = false;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
+                System.out.println("Classificações indicativas disponíveis:");
+                System.out.println(ClassificacaoIndicativa.getClassificacoes() + "\n");
                 validInput = false;
-            } finally {
-                Main.Menu.input().nextLine();
             }
         } while (!validInput);
     }
