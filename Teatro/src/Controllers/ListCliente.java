@@ -213,12 +213,14 @@ public class ListCliente {
         
         }
 
-        checkEmpty(busca);
+        if (busca.size() <= 0)
+            throw new IllegalArgumentException("Nenhum cliente foi encontrado na busca.");
         return busca;
     }
 
     public Cliente buscaArray(ArrayList<Cliente> busca) {
-        checkEmpty(busca);
+        if (busca.size() <= 0)
+            throw new IllegalArgumentException("Não há clientes para pesquisar.");
 
         if (busca.size() > 1)
             System.out.println("Clientes encontrados:  \n");

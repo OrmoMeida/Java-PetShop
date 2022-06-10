@@ -217,11 +217,14 @@ public class ListFuncionario {
 
         }
 
+        if (busca.size() <= 0)
+            throw new IllegalArgumentException("Nenhum funcionário foi encontrado na busca.");
         return busca;
     }
     
     public Funcionario buscaArray(ArrayList<Funcionario> busca) {
-        checkEmpty(busca);
+        if (busca.size() <= 0)
+            throw new IllegalArgumentException("Não há funcionários para pesquisar.");
 
         if (busca.size() > 1)
             System.out.println("Funcionários encontrados:  \n");

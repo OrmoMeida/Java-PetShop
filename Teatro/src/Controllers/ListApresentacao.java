@@ -113,7 +113,7 @@ public class ListApresentacao {
         }
 
         if (list.size() <= 0)
-            throw new IllegalArgumentException("Nome de produto não encontrado.");
+            throw new IllegalArgumentException("Nome da apresentação não encontrado.");
         return list;
     }
 
@@ -154,10 +154,12 @@ public class ListApresentacao {
         ArrayList<Apresentacao> list = new ArrayList<Apresentacao>();
 
         for (Apresentacao apresentacao : lstApresentacao) {
-            if (apresentacao.getNome().toLowerCase().contains(descricao))
+            if (apresentacao.getDesc().toLowerCase().contains(descricao))
                 list.add(apresentacao);
         }
 
+        if (list.size() <= 0)
+            throw new IllegalArgumentException("Descrição de apresentação não encontrada.");
         return list;
     }
     
@@ -420,12 +422,14 @@ public class ListApresentacao {
 
         }
 
-        
+        if (busca.size() <= 0)
+            throw new IllegalArgumentException("Nenhuma apresentação foi encontrada na busca.");
         return busca;
     }
 
     public Apresentacao buscaArray(ArrayList<Apresentacao> busca) {
-        checkEmpty(busca);
+        if (busca.size() <= 0)
+            throw new IllegalArgumentException("Não há apresentações para pesquisar.");
 
         if (busca.size() > 1)
             System.out.println("\n\nApresentações encontradas:  \n");
