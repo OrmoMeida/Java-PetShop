@@ -263,6 +263,30 @@ public class App {
             case "0-2-4-1-3":
                 menu.newMenu();
                 try {
+                    lstCliente.qntClientesMaioresDe60Menu();
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Impossível realizar ação.\n\n");
+                    System.out.println("\t" + e.getMessage());
+                    Menu.waiter();
+                }
+                menu.back();
+                break;
+
+            case "0-2-4-1-4":
+                menu.newMenu();
+                try {
+                    lstCliente.qntClientesMenoresDeIdadeMenu();
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Impossível realizar ação.\n\n");
+                    System.out.println("\t" + e.getMessage());
+                    Menu.waiter();
+                }
+                menu.back();
+                break;
+
+            case "0-2-4-1-5":
+                menu.newMenu();
+                try {
                     lstCliente.mediaIdadeMenu();
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println("Impossível realizar ação.\n\n");

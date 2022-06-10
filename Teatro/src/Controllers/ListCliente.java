@@ -151,7 +151,7 @@ public class ListCliente {
         cpf = CPF.trimCPF(cpf);
 
         for (Cliente cliente : lstCliente) {
-            if (cliente.getCpf().equals(cpf))
+            if (cliente.getCpf().replaceAll("\\D", "").equals(cpf))
                 return cliente;
         }
 
@@ -417,6 +417,44 @@ public class ListCliente {
             clienteMaisNovo().exibir();
             Menu.waiter();
         }
+    }
+
+    public int qntClientesMaioresDe60() {
+        checkEmpty();
+        int qntIdosos = 0;
+
+        for (Cliente cliente : lstCliente) {
+            if (cliente.getIdade() > 60)
+                qntIdosos++;
+        }
+
+        return qntIdosos;
+    }
+
+    public void qntClientesMaioresDe60Menu() {
+        checkEmpty();
+
+        System.out.println("Quantidade de clientes cadastrados maiores de 60:  " + qntClientesMaioresDe60());
+        Menu.waiter();
+    }
+    
+    public int qntClientesMenoresDeIdade() {
+        checkEmpty();
+        int qntCriancas = 0;
+
+        for (Cliente cliente : lstCliente) {
+            if (cliente.getIdade() < 18)
+                qntCriancas++;
+        }
+
+        return qntCriancas;
+    }
+
+    public void qntClientesMenoresDeIdadeMenu() {
+        checkEmpty();
+
+        System.out.println("Quantidade de clientes cadastrados menores de idade:  " + qntClientesMenoresDeIdade());
+        Menu.waiter();
     }
 
     public float mediaIdade() {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.concurrent.CancellationException;
 
+import Classes.CPF;
 import Classes.Funcionario;
 import Enums.Cargos;
 import Main.Menu;
@@ -143,13 +144,13 @@ public class ListFuncionario {
     }
 
     public Funcionario buscaCpf(String cpf) {
-        cpf = Classes.CPF.trimCPF(cpf);
+        cpf = CPF.trimCPF(cpf);
         
         for (Funcionario funcionario : lstFuncionario) {
-            if (funcionario.getCpf().equals(cpf))
+            if (funcionario.getCpf().replaceAll("\\D", "").equals(cpf))
                 return funcionario;
         }
-     
+
         throw new IllegalArgumentException("CPF de funcionário não encontrado.");
     }
 

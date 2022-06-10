@@ -191,9 +191,11 @@ public final class Menu {
         System.out.println("[0] Voltar;");
         System.out.println("[1] Cliente mais velho do sistema;");
         System.out.println("[2] Cliente mais novo do sistema;");
-        System.out.println("[3] Média de idade do sistema;");
+        System.out.println("[3] Quantidade de clientes maiores de 60 anos;");
+        System.out.println("[4] Quantidade de clientes menores de 18 anos;");
+        System.out.println("[5] Média de idade do sistema.");
 
-        nextMenu(3);
+        nextMenu(5);
     }
 
     public void menuConsultaEspecialProduto() {
@@ -523,7 +525,7 @@ public final class Menu {
 
                     default:
                         verbosePath[0] = "ERROR";
-                        
+
                 }
         }
 
