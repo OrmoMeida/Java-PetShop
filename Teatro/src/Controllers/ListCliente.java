@@ -151,7 +151,7 @@ public class ListCliente {
         cpf = CPF.trimCPF(cpf);
 
         for (Cliente cliente : lstCliente) {
-            if (cliente.getCpf().replaceAll("//D", "").equals(cpf))
+            if (cliente.getCpf().equals(cpf))
                 return cliente;
         }
 

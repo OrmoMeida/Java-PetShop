@@ -273,7 +273,7 @@ public class ListApresentacao {
 
         do {
             validInput = true;
-            System.out.print("\tNome:  ");
+            System.out.print("\tClassificação indicativa:  ");
 
             try {
                 classificacao = Main.Menu.input().next();

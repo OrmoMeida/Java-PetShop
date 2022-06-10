@@ -63,11 +63,11 @@ public class Funcionario extends Pessoa implements IPessoa {
                 setCargo(cargo);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
-                System.out.println("Cargos disponíveis:  ");
-                System.out.println(Cargos.getCargos() + "\n");
                 validInput = false;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
+                System.out.println("Cargos disponíveis:  ");
+                System.out.println(Cargos.getCargos() + "\n");
                 validInput = false;
             }
         } while (!validInput);

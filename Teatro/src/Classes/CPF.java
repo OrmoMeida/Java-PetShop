@@ -29,8 +29,8 @@ public class CPF {
 
         if (cpf.length() != 11)
             throw new IllegalArgumentException("O CPF deve possuir exatamente 11 dígitos.");
-        else
-            return cpf;
+
+        return cpf;
     }
 
     public static boolean isFormatted(String cpf) {

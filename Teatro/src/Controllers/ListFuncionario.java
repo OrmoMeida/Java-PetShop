@@ -146,7 +146,7 @@ public class ListFuncionario {
         cpf = Classes.CPF.trimCPF(cpf);
         
         for (Funcionario funcionario : lstFuncionario) {
-            if (funcionario.getNome().replaceAll("\\D", "").equals(cpf))
+            if (funcionario.getCpf().equals(cpf))
                 return funcionario;
         }
      
