@@ -6,6 +6,7 @@ import java.util.concurrent.CancellationException;
 
 import Classes.Apresentacao;
 import Enums.ClassificacaoIndicativa;
+import Enums.Genero;
 import Main.Menu;
 
 public class ListApresentacao {
@@ -199,6 +200,8 @@ public class ListApresentacao {
         genero = genero.trim().toLowerCase();
         ArrayList<Apresentacao> list = new ArrayList<Apresentacao>();
 
+        Genero.setGenero(genero);
+
         for (Apresentacao apresentacao : lstApresentacao) {
             if (apresentacao.getGenero().toLowerCase().startsWith(genero))
                 list.add(apresentacao);
@@ -220,7 +223,7 @@ public class ListApresentacao {
 
         do {
             validInput = true;
-            System.out.print("\tNome:  ");
+            System.out.print("\tGênero:  ");
 
             try {
                 genero = Main.Menu.input().next();
@@ -230,7 +233,9 @@ public class ListApresentacao {
                 validInput = false;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
-                System.out.println("Deseja tentar novamente?");
+                System.out.println("Gêneros disponíveis:  ");
+                System.out.println(Genero.getGeneros());
+                System.out.println("\nDeseja tentar novamente?");
                 if (!Menu.getOptionBool())
                     throw new CancellationException("Busca de apresentações via gênero cancelada pelo usuário.");
                 validInput = false;
@@ -244,6 +249,8 @@ public class ListApresentacao {
         checkEmpty();
         classificacao = classificacao.trim().toLowerCase();
         ArrayList<Apresentacao> list = new ArrayList<Apresentacao>();
+
+        ClassificacaoIndicativa.setClassificacao(classificacao);
 
         for (Apresentacao apresentacao : lstApresentacao) {
             if (apresentacao.getClassificacao().toLowerCase().startsWith(classificacao))
@@ -276,7 +283,9 @@ public class ListApresentacao {
                 validInput = false;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
-                System.out.println("Deseja tentar novamente?");
+                System.out.println("Classificações indicativas disponíveis: ");
+                System.out.println(ClassificacaoIndicativa.getClassificacoes());
+                System.out.println("\nDeseja tentar novamente?");
                 if (!Menu.getOptionBool())
                     throw new CancellationException("Busca de apresentações via classificação indicativa cancelada pelo usuário.");
                 validInput = false;

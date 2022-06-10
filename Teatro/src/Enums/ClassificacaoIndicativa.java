@@ -19,7 +19,7 @@ public enum ClassificacaoIndicativa {
                 return cIndicativa;
             }
         }
-        throw new IllegalArgumentException("Classificação Indicativa não encontrada.");
+        throw new IllegalArgumentException("Essa classificação indicativa não existe.");
     }
 
     ClassificacaoIndicativa(int value, String descricao) {
@@ -28,12 +28,11 @@ public enum ClassificacaoIndicativa {
     }
 
     public static String getClassificacoes() {
-        String classificacoes = new String(); 
-        for (ClassificacaoIndicativa cIndicativa : ClassificacaoIndicativa.values()) {
-            classificacoes.concat(cIndicativa.descricao + " | ");
-        }
+        String classificacoes = " | "; 
+        for (ClassificacaoIndicativa cIndicativa : ClassificacaoIndicativa.values())
+            classificacoes = classificacoes + " " + cIndicativa.getDescricao() + " | ";
 
-        return " | " + classificacoes;
+        return classificacoes.trim();
     }
     
     public int getValue() {return value;}

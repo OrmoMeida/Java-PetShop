@@ -154,7 +154,7 @@ public class Apresentacao extends Produto {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
                 System.out.println("Gêneros disponíveis:");
-                System.out.println(Genero.getGenero() + "\n");
+                System.out.println(Genero.getGeneros() + "\n");
                 validInput = false;
             }
         } while (!validInput);

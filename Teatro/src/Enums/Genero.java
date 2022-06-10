@@ -37,15 +37,14 @@ public enum Genero {
                 return tema;
             }
         }
-        throw new IllegalArgumentException("Gênero não encontrado.");
+        throw new IllegalArgumentException("Esse gênero não existe.");
     }
 
-    public static String getGenero() {
-        String generos = new String(""); 
-        for (Genero genero : Genero.values()) {
-            generos.concat(genero.descricao + " | ");
-        }
-
-        return " | " + generos;
+    public static String getGeneros() {
+        String generos = " | "; 
+        for (Genero genero : Genero.values())
+            generos = generos + " " + genero.getDescricao() + " | ";
+     
+        return generos.trim();
     }
 }
