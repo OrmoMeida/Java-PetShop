@@ -26,7 +26,7 @@ public class Cliente extends Pessoa implements IPessoa {
 
     @Override
     public void exibir() {
-        System.out.println("Cliente nº " + this.getCodCliente());
+        System.out.println("\nCliente nº " + this.getCodCliente());
         System.out.println("Nome do cliente     :  " + this.getNome());
         System.out.println("Idade do cliente    :  " + this.getIdade());
         System.out.println("CPF do cliente      :  " + this.getCpf());

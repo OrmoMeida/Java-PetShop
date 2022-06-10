@@ -9,6 +9,8 @@ import Enums.Genero;
 
 public class Apresentacao extends Produto {
     // Atributos da classe
+    private static int qntApresentacao = 0;
+    private int codApresentacao;
     private float duracao;
     private String data;
     private Genero genero;
@@ -19,6 +21,7 @@ public class Apresentacao extends Produto {
     // Construtores
     public Apresentacao(String nome, String desc, float preco, float duracao, String data, String genero, String classificacao) {
         super(nome, desc, preco);
+        codApresentacao = ++qntApresentacao;
         setDuracao(duracao);
         setData(data);
         setGenero(genero);
@@ -36,6 +39,7 @@ public class Apresentacao extends Produto {
 
     // Métodos da classe
     public void exibir() {
+        System.out.println("\nApresentação nº " + codApresentacao);
         System.out.println("Nome          :  " + getNome());
         System.out.println("Descrição     :  " + getDesc());
         System.out.println("Preço         :  " + getPreco());

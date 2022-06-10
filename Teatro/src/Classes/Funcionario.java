@@ -80,6 +80,7 @@ public class Funcionario extends Pessoa implements IPessoa {
     
     @Override
     public void exibir() {
+        System.out.println("\nFuncionário nº " + this.codFunc);
         System.out.println("Nome do funcionário  :  " + this.getNome());
         System.out.println("Idade do funcionário :  " + this.getIdade());
         System.out.println("Cargo do funcionário :  " + this.getCargo());

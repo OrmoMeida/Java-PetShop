@@ -1,8 +1,6 @@
 package Abstract;
 
-import java.util.regex.Pattern;
 import java.util.InputMismatchException;
-
 import Classes.CPF;
 
 public abstract class Pessoa {
@@ -11,7 +9,7 @@ public abstract class Pessoa {
     private String email;
     private CPF cpf;
     
-    private static Pattern checkNome = Pattern.compile("\\w{3,50}");
+    // private static Pattern checkNome = Pattern.compile("\\w{3,50}");
     // private static Pattern checkEmail = Pattern.compile("[/w/d//.//-]+@[/w/d//-]+//./w{2,4}");
     // private static Matcher match = checkCPF.matcher("input");
 
