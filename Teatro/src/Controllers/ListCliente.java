@@ -10,9 +10,16 @@ import Main.Menu;
 
 public class ListCliente {
     private ArrayList<Cliente> lstCliente;
+    private int lastAlterado;
 
     public ListCliente() {
         lstCliente = new ArrayList<Cliente>();
+    }
+
+    public void geraCliente() {
+        add(20, "Jeremy", "66821645051", "jeremy@gmail.com", "(12)345678901");
+        add(22, "Michael Afton", "49422281075", "michael@gmail.com", "(09)876543211");
+        add(56, "William Afton","38754193087", "purpleguy@gmail.com", "(12)345678999");
     }
 
     public static boolean isNotEmpty(ArrayList<Cliente> list) {
@@ -80,6 +87,15 @@ public class ListCliente {
 
         System.out.println("Informações do cliente cadastrado:  \n");
         last().exibir();
+        Menu.waiter();
+    }
+
+    public void exibirLastAlterado() {
+        checkEmpty();
+
+        System.out.println("Informações do cliente alterado:  \n");
+        lstCliente.get(lastAlterado).exibir();
+
         Menu.waiter();
     }
 
@@ -280,6 +296,10 @@ public class ListCliente {
 
     public void alterar(Cliente cliente) {
         checkEmpty();
+        lastAlterado = lstCliente.indexOf(cliente);
+
+        if (lastAlterado == -1)
+            throw new IllegalArgumentException("Cliente não encontrado: Impossível alterar.");
 
         System.out.println("\n\nMenu de alteração de dados do cliente.");
         System.out.println("Y para alterar e N para manter.\n");
@@ -304,7 +324,7 @@ public class ListCliente {
         if (Menu.getOptionBool())
             cliente.setTelefone();
 
-        lstCliente.set(lastIndex(), cliente);
+        lstCliente.set(lastAlterado, cliente);
 
         System.out.println("\n\nCliente alterado com sucesso!");
         Menu.waiter();
@@ -321,6 +341,18 @@ public class ListCliente {
 
         try {
             alterar(buscaArray(busca()));
+        } catch (CancellationException e) {
+            return;
+        }
+    }
+
+    public void alterarNovamente() {
+        checkEmpty();
+
+        System.out.println("\nMenu de nova alteração\n\n");
+        
+        try {
+            alterar(lstCliente.get(lastAlterado));
         } catch (CancellationException e) {
             return;
         }

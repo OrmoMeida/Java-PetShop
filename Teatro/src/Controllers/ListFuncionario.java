@@ -9,9 +9,16 @@ import Main.Menu;
 
 public class ListFuncionario {   
     private ArrayList<Funcionario> lstFuncionario;
+    private int lastAlterado;
     
     public ListFuncionario() {
         lstFuncionario = new ArrayList<Funcionario>();
+    }
+
+    public void geraFuncionarios() {
+        add(28, "Diluc", "57191011017", "diluctavern@gmail.com", "Gerente");
+        add(26, "Kaeya", "kjgwssag97534479061", "kaeyamito@gmail.com", "Balconista");
+        add(25, "Rosaria", "80458987042", "notrosaria@hotmail.com", "Faxineira");
     }
 
     public static boolean isNotEmpty(ArrayList<Funcionario> list) {
@@ -78,6 +85,15 @@ public class ListFuncionario {
 
         System.out.println("Informações do funcionário cadastrado:  \n");
         last().exibir();
+        Menu.waiter();
+    }
+
+    public void exibirLastAlterado() {
+        checkEmpty();
+
+        System.out.println("Informações do cliente alterado:  \n");
+        lstFuncionario.get(lastAlterado).exibir();
+
         Menu.waiter();
     }
 
@@ -278,6 +294,10 @@ public class ListFuncionario {
 
     public void alterar(Funcionario funcionario) {
         checkEmpty();
+        lastAlterado = lstFuncionario.indexOf(funcionario);
+
+        if (lastAlterado == -1)
+            throw new IllegalArgumentException("Funcionário não encontrado: Impossível alterar.");
 
         Menu.voider();
         System.out.println("\n\nMenu de alteração de dados do funcionario.");
@@ -299,7 +319,7 @@ public class ListFuncionario {
         if (Menu.getOptionBool())
             funcionario.setEmail();
 
-        System.out.println("\nTelefone:  " + funcionario.getCargo());
+        System.out.println("\nCargo:  " + funcionario.getCargo());
         if (Menu.getOptionBool())
             funcionario.setCargo();
 
@@ -320,6 +340,18 @@ public class ListFuncionario {
 
         try {
             alterar(buscaArray(busca()));
+        } catch (CancellationException e) {
+            return;
+        }
+    }
+
+    public void alterarNovamente() {
+        checkEmpty();
+
+        System.out.println("\nMenu de nova alteração\n\n");
+        
+        try {
+            alterar(lstFuncionario.get(lastAlterado));
         } catch (CancellationException e) {
             return;
         }

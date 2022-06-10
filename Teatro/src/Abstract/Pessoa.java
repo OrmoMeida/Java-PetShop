@@ -63,9 +63,6 @@ public abstract class Pessoa {
 
         if (nome.length() < 3)
             throw new IllegalArgumentException("O nome deve conter ao menos 3 letras.");
-
-        if (!checkNome.matcher(nome).matches())
-            throw new IllegalArgumentException("Ao menos um sobrenome é obrigatório.");
                     
         this.nome = nome;
     }

@@ -485,7 +485,7 @@ public final class Menu {
                         verbosePath[1] = "Consulta";
                         break;
                     case "3":
-                        verbosePath[2] = "Alteração";
+                        verbosePath[1] = "Alteração";
                         break;
                     case "4":
                         verbosePath[1] = "Remoção";

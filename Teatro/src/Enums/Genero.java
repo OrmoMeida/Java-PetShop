@@ -7,7 +7,7 @@ public enum Genero {
     INFANTIL(4, "Infantil"),
     SUSPENSE(5, "Suspense"),
     ACAO(6, "Ação");
-
+    
     
     // Construtor
     private Genero(int valor, String descricao) {

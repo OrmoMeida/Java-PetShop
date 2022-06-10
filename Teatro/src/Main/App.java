@@ -315,8 +315,40 @@ public class App {
                     System.out.println("\t" + e.getMessage());
                     Menu.waiter();
                 }
+                menu.nextMenu("1");
+                break;
+
+            case "0-3-1-1":
+                menu.menuAlteracaoCliente();
+                break;
+
+            case "0-3-1-1-1":
+                menu.newMenu();
+                try {
+                    lstCliente.exibirLastAlterado();
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Impossível realizar ação.\n\n");
+                    System.out.println("\t" + e.getMessage());
+                    Menu.waiter();
+                }
+
+            case "0-3-1-1-2":
+                menu.newMenu();
+                try {
+                    lstCliente.alterarNovamente();
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Impossível realizar ação.\n\n");
+                    System.out.println("\t" + e.getMessage());
+                    Menu.waiter();
+                }
                 menu.back();
                 break;
+
+            case "0-3-1-1-3":
+                menu.back();
+                break;
+                
+            
 
             case "0-3-2":
                 menu.newMenu();
@@ -327,8 +359,41 @@ public class App {
                     System.out.println("\t" + e.getMessage());
                     Menu.waiter();
                 }
+                menu.nextMenu("1");
+                break;
+
+            case "0-3-2-1":
+                menu.menuAlteracaoFuncionario();
+                break;
+
+            case "0-3-2-1-1":
+                menu.newMenu();
+                try {
+                    lstFuncionario.exibirLastAlterado();
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Impossível realizar ação.\n\n");
+                    System.out.println("\t" + e.getMessage());
+                    Menu.waiter();
+                }
                 menu.back();
                 break;
+
+            case "0-3-2-1-2":
+                menu.newMenu();
+                try {
+                    lstFuncionario.alterarNovamente();
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Impossível realizar ação.\n\n");
+                    System.out.println("\t" + e.getMessage());
+                    Menu.waiter();
+                }
+                menu.back();
+                break;
+
+            case "0-3-2-1-3":
+                menu.back();
+                break;
+                
 
             case "0-3-3":
                 menu.newMenu();
@@ -339,6 +404,38 @@ public class App {
                     System.out.println("\t" + e.getMessage());
                     Menu.waiter();
                 }
+                menu.nextMenu("1");
+                break;
+
+            case "0-3-3-1":
+                menu.menuAlteracaoApresentacao();
+                break;
+
+            case "0-3-3-1-1:":
+                menu.newMenu();
+                try {
+                    lstApresentacao.exibirLastAlterado();
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Impossível realizar ação.\n\n");
+                    System.out.println("\t" + e.getMessage());
+                    Menu.waiter();
+                }
+                menu.back();
+                break;
+            
+            case "0-3-3-1-2":
+                menu.newMenu();
+                try {
+                    lstApresentacao.alterarNovamente();
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Impossível realizar ação.\n\n");
+                    System.out.println("\t" + e.getMessage());
+                    Menu.waiter();
+                }
+                menu.back();
+                break;
+
+            case "0-3-3-1-3":
                 menu.back();
                 break;
 
@@ -391,6 +488,10 @@ public class App {
     public static void main(String[] args) throws Exception {
         // TODO integrar o controller e o menu pela main e fazer tudo rodar
         // TODO testar tuuuudo
+
+        lstCliente.geraCliente();
+        lstFuncionario.geraFuncionarios();
+        lstApresentacao.geraApresentacoes();
 
         while (!menu.shouldStop()) {
             next();

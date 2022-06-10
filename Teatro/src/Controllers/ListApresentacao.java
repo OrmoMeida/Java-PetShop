@@ -5,16 +5,21 @@ import java.util.InputMismatchException;
 import java.util.concurrent.CancellationException;
 
 import Classes.Apresentacao;
+import Enums.ClassificacaoIndicativa;
 import Main.Menu;
 
 public class ListApresentacao {
     private ArrayList<Apresentacao> lstApresentacao;
+    private int lastAlterado;
 
     public ListApresentacao() {
         lstApresentacao = new ArrayList<Apresentacao>();
     }
 
     public void geraApresentacoes() {
+        add("Servamp", "Vampiros que fazem contratos com humanos e tem problemas familiares", 35.50f, 120f, "21/07/2020", "drama", "+16");
+        add("Moriarty", "Acompanhe a história de Sherlock pela visão de seu inimigo", 45.99f, 102f, "25/07/2020", "suspense", ClassificacaoIndicativa.MIN16.getDescricao());
+        add("SpyxFamily", "Um espião que adota uma criança telepata para sua missão", 25.99f, 105f, "28/07/2022", "Comédia", "Livre");
         add("O retorno de Mariana", "Mariana retorna.", 20.5f, 40.37f, "20/12/2022", "Suspense", "+12");
     }
 
@@ -28,7 +33,7 @@ public class ListApresentacao {
 
     public static void checkEmpty(ArrayList<Apresentacao> list) {
         if (!isNotEmpty(list))
-        throw new ArrayIndexOutOfBoundsException("Não há apresentações cadastradas no sistema.");
+            throw new ArrayIndexOutOfBoundsException("Não há apresentações cadastradas no sistema.");
     }
     
     public void checkEmpty() {
@@ -85,6 +90,15 @@ public class ListApresentacao {
 
         System.out.println("Informações da apresentação cadastrada:  \n");
         last().exibir();
+        Menu.waiter();
+    }
+
+    public void exibirLastAlterado() {
+        checkEmpty();
+
+        System.out.println("Informações do cliente alterado:  \n");
+        lstApresentacao.get(lastAlterado).exibir();
+
         Menu.waiter();
     }
 
@@ -491,6 +505,10 @@ public class ListApresentacao {
 
     public void alterar(Apresentacao apresentacao) {
         checkEmpty();
+        lastAlterado = lstApresentacao.indexOf(apresentacao);
+
+        if (lastAlterado == -1)
+            throw new IllegalArgumentException("Apresentação não encontrada: Impossível alterar.");
 
         Menu.voider();
         System.out.println("\n\nMenu de alteração de dados de apresentação.");
@@ -524,7 +542,7 @@ public class ListApresentacao {
         if (Menu.getOptionBool())
             apresentacao.getGenero();
 
-        lstApresentacao.set(lastIndex(), apresentacao);
+        lstApresentacao.set(lastAlterado, apresentacao);
 
         System.out.println("\n\nApresentação alterada com sucesso!");
         Menu.waiter();
@@ -546,14 +564,30 @@ public class ListApresentacao {
         }
     }
 
+    public void alterarNovamente() {
+        checkEmpty();
+
+        System.out.println("\nMenu de nova alteração\n\n");
+        
+        try {
+            alterar(lstApresentacao.get(lastAlterado));
+        } catch (CancellationException e) {
+            return;
+        }
+    }
+
+    // public void 
+
     public Apresentacao maisCara() {
         checkEmpty();
         float preco = 0;
         Apresentacao maisCara = lstApresentacao.get(0);
 
         for (Apresentacao apresentacao : lstApresentacao) {
-            if (apresentacao.getPreco() > preco)
+            if (apresentacao.getPreco() > preco) {
+                preco = apresentacao.getPreco();
                 maisCara = apresentacao;
+            }
         }
 
         return maisCara;
