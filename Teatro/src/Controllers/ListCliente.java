@@ -15,13 +15,21 @@ public class ListCliente {
         lstCliente = new ArrayList<Cliente>();
     }
 
-    public boolean isNotEmpty() {
-        return lstCliente.size() > 0;
+    public static boolean isNotEmpty(ArrayList<Cliente> list) {
+        return list.size() > 0;
     }
 
+    public boolean isNotEmpty() {
+        return isNotEmpty(lstCliente);
+    }
+
+    public static void checkEmpty(ArrayList<Cliente> list) {
+        if (!isNotEmpty(list))
+        throw new ArrayIndexOutOfBoundsException("Não há clientes cadastrados no sistema.");
+    }
+    
     public void checkEmpty() {
-        if (!isNotEmpty())
-            throw new ArrayIndexOutOfBoundsException("Não há clientes cadastrados no sistema.");
+        checkEmpty(lstCliente);
     }
 
     public static void exibir(ArrayList<Cliente> lstCliente) {
@@ -93,17 +101,6 @@ public class ListCliente {
         return list;
     }
 
-    public Cliente buscaNomeObj(String nome) {
-        checkEmpty();
-        nome = nome.toLowerCase().trim();
-
-        for (Cliente cliente : lstCliente) {
-            if (cliente.getNome().toLowerCase().startsWith(nome))
-                return cliente;
-        }
-        throw new IllegalArgumentException("Nome de cliente não encontrado.");
-    }
-
     public ArrayList<Cliente> buscaNome() {
         checkEmpty();
         ArrayList<Cliente> list = new ArrayList<Cliente>();
@@ -135,37 +132,6 @@ public class ListCliente {
         } while (!validInput);
 
         return list;
-    }
-
-    public Cliente buscaNomeObj() {
-        String nome;
-        boolean validInput;
-
-        Menu.voider();
-        System.out.println("Menu de busca por clientes via nome.\n\n");
-
-        do {
-            validInput = true;
-            System.out.print("\tNome:  ");
-
-            try {
-                nome = Main.Menu.input().next().trim();
-                return buscaNomeObj(nome);
-            } catch (InputMismatchException e) {
-                System.out.println("Valor inválido.\n");
-                validInput = false;
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage() + "\n");
-                System.out.println("Deseja tentar novamente?");
-                if (!Menu.getOptionBool())
-                    throw new CancellationException("Busca de cliente por nome cancelada pelo usuário.");
-                validInput = false;
-            } finally {
-                Main.Menu.input().nextLine();
-            }
-        } while (!validInput);
-
-        throw new IllegalArgumentException("Nome de cliente não encontrado.");
     }
 
     public Cliente buscaCpf(String cpf) {
@@ -210,7 +176,7 @@ public class ListCliente {
         throw new IllegalArgumentException("Nome de cliente não encontrado.");
     }
 
-    public void buscaMenu() {
+    public ArrayList<Cliente> busca() {
         checkEmpty();
         ArrayList<Cliente> busca = new ArrayList<Cliente>();
 
@@ -223,25 +189,21 @@ public class ListCliente {
 
         switch (Menu.getOption(2)) {
             case 0:
-                return;
+                throw new CancellationException("Operação de busca cancelada pelo usuário.");
             case 1:
-                try {
-                    busca = buscaNome();
-                } catch (CancellationException e) {
-                    return;
-                }
+                busca = buscaNome();
                 break;
             case 2:
-                try {
-                    busca.add(buscaCpf());
-                } catch (CancellationException e) {
-                    return;
-                }
+                busca.add(buscaCpf());
                 break;
         }
 
-        Menu.voider();
-        
+        return busca;
+    }
+
+    public Cliente buscaArray(ArrayList<Cliente> busca) {
+        checkEmpty(busca);
+
         if (busca.size() > 1)
             System.out.println("Clientes encontrados:  \n");
         else
@@ -250,21 +212,32 @@ public class ListCliente {
         exibir(busca);
 
         if (busca.size() == 1) {
-            System.out.println("\nDeseja ver as informações desse cliente?  ");
-            if (Menu.getOptionBool()) {
-                busca.get(0).exibir();
-                Menu.waiter();
-            }
+            System.out.println("\nDeseja selecionar esse cliente?  ");
+            if (Menu.getOptionBool())
+                return busca.get(0);
+            else
+                throw new CancellationException("Operação de seleção de um único cliente cancelada pelo usuário.");
+        }
+
+        System.out.println("\nDeseja selecionar algum desses clientes?");
+        if (!Menu.getOptionBool())
+            throw new CancellationException("Operação de seleção dente múltiplos clientes por nome cancelada pelo usuário.");
+        
+        System.out.println("\nDigite o número do cliente.");
+        return busca.get(Menu.getOption(1, busca.size()) - 1);
+    }
+
+    public void buscaMenu() {
+        checkEmpty();
+        Menu.voider();
+
+        try {
+            exibir(buscaArray(busca()));
+            Menu.waiter();
+        } catch (CancellationException e) {
             return;
         }
 
-        System.out.println("\nDeseja consultar as informações de algum desses clientes?");
-        if (!Menu.getOptionBool())
-            return;
-        
-        System.out.println("\nDigite o número do cliente.");
-        busca.get(Menu.getOption(1, busca.size() - 1)).exibir();
-        Menu.waiter();
     }
 
 
@@ -284,61 +257,18 @@ public class ListCliente {
         checkEmpty();
         ArrayList<Cliente> busca = new ArrayList<Cliente>();
 
-        System.out.println("Menu de remoção de cliente.\n\n");
-
-        System.out.println("Deseja procurar o cliente por:  ");
-        System.out.println("[0] Cancelar");
-        System.out.println("[1] Nome");
-        System.out.println("[2] CPF");
-
-        switch (Menu.getOption(2)) {
-            case 0:
-                return;
-            case 1:
-                try {
-                    busca = buscaNome();
-                } catch (Exception e) {
-                    return;
-                }
-                break;
-            case 2:
-                try {
-                    busca.add(buscaCpf());
-                } catch (Exception e) {
-                    return;
-                }
-                break;
-        }
-
         Menu.voider();
-        
-        if (busca.size() > 1)
-            System.out.println("Clientes encontrados:  \n");
-        else
-            System.out.println("Cliente encontrado:  \n");
-
-        int i = 0;
-        
-        for (Cliente cliente : busca) {
-            System.out.println(" | " + i + " | " + cliente.getNome() + " | " + cliente.getCpf());
-            i++;
-        }
-
-        if (busca.size() == 1) {
-            System.out.println("\nDeseja remover esse cliente?  ");
-            if (Menu.getOptionBool()) {
-                remover(busca.get(0));
-                Menu.waiter();
-            }
+        try {
+            busca = busca();
+        } catch (CancellationException e) {
             return;
         }
 
-        System.out.println("\nDeseja remover algum desses clientes?");
-        if (!Menu.getOptionBool())
+        try {
+            remover(buscaArray(busca));
+        } catch (CancellationException e) {
             return;
-        
-        remover(busca.get(Menu.getOption(1, busca.size() - 1)));
-        Menu.waiter();
+        }        
     }
 
 

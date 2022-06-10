@@ -11,7 +11,7 @@ public abstract class Pessoa {
     private String email;
     private CPF cpf;
     
-    private static Pattern checkNome = Pattern.compile("^[a-záàâãéèêíïóôõöúçñ]{3,}(//s[a-záàâãéèêíïóôõöúçñ]{2,})+$");
+    private static Pattern checkNome = Pattern.compile("\\w{3,50}");
     // private static Pattern checkEmail = Pattern.compile("[/w/d//.//-]+@[/w/d//-]+//./w{2,4}");
     // private static Matcher match = checkCPF.matcher("input");
 
@@ -61,10 +61,12 @@ public abstract class Pessoa {
         if (nome.isEmpty())
             throw new IllegalArgumentException("O nome não deve estar vazio.");
 
+        if (nome.length() < 3)
+            throw new IllegalArgumentException("O nome deve conter ao menos 3 letras.");
+
         if (!checkNome.matcher(nome).matches())
-            throw new IllegalArgumentException(
-                    "O nome deve conter ao menos 3 letras, e ao menos um sobrenome é obrigatório.");
-        
+            throw new IllegalArgumentException("Ao menos um sobrenome é obrigatório.");
+                    
         this.nome = nome;
     }
 

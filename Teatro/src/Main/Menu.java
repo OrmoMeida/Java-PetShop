@@ -323,9 +323,8 @@ public final class Menu {
 
         do {
             validOption = true;
-            System.out.println("\tOpção [y/n]:  ");
+            System.out.print("\tOpção [y/n]:  ");
             try {
-                input.next();
                 option = input.next().trim().toLowerCase().charAt(0);
                 if (option != 'y' && option != 'n')
                     throw new IllegalArgumentException("Opção inválida. Insira apenas 'y' ou 'n'.");

@@ -14,13 +14,21 @@ public class ListFuncionario {
         lstFuncionario = new ArrayList<Funcionario>();
     }
 
-    public boolean isNotEmpty() {
-        return lstFuncionario.size() > 0;
+    public static boolean isNotEmpty(ArrayList<Funcionario> list) {
+        return list.size() > 0;
     }
 
+    public boolean isNotEmpty() {
+        return isNotEmpty(lstFuncionario);
+    }
+
+    public static void checkEmpty(ArrayList<Funcionario> list) {
+        if (!isNotEmpty(list))
+        throw new ArrayIndexOutOfBoundsException("Não há funcionários cadastrados no sistema.");
+    }
+    
     public void checkEmpty() {
-        if (!isNotEmpty())
-            throw new ArrayIndexOutOfBoundsException("Não há funcionários cadastrados no sistema.");
+        checkEmpty(lstFuncionario);
     }
 
     public static void exibir(ArrayList<Funcionario> lstFuncionario) {
@@ -68,7 +76,7 @@ public class ListFuncionario {
     public void lastExibir() {
         checkEmpty();
 
-        System.out.println("Informações do cliente cadastrado:  \n");
+        System.out.println("Informações do funcionário cadastrado:  \n");
         last().exibir();
         Menu.waiter();
     }
@@ -84,8 +92,7 @@ public class ListFuncionario {
                 list.add(funcionario);
         }
 
-        if (list.size() <= 0)
-            throw new IllegalArgumentException("Nome de funcionário não encontrado.");
+        checkEmpty(list);
         return list;
     }
 
@@ -171,7 +178,7 @@ public class ListFuncionario {
         throw new IllegalArgumentException("CPF de funcionário não encontrado.");
     }
 
-    public void buscaMenu() {
+    public ArrayList<Funcionario> busca() {
         checkEmpty();
         ArrayList<Funcionario> busca = new ArrayList<Funcionario>();
 
@@ -182,24 +189,20 @@ public class ListFuncionario {
 
         switch (Menu.getOption(2)) {
             case 0:
-                return;
+                throw new CancellationException("Operação de busca de funcionário cancelada pelo usuário.");
             case 1:
-                try {
-                    busca = buscaNome();
-                } catch (CancellationException e) {
-                    return;
-                }
+                busca = buscaNome();
                 break;
             case 2:
-                try {
-                    busca.add(buscaCpf());
-                } catch (CancellationException e) {
-                    return;
-                }
+                busca.add(buscaCpf());
                 break;
         }
 
-        Menu.voider();
+        return busca;
+    }
+    
+    public Funcionario buscaArray(ArrayList<Funcionario> busca) {
+        checkEmpty(busca);
 
         if (busca.size() > 1)
             System.out.println("Funcionários encontrados:  \n");
@@ -209,21 +212,30 @@ public class ListFuncionario {
         exibir(busca);
 
         if (busca.size() == 1) {
-            System.out.println("\nDeseja consultar as informações desse funcionário?");
-            if (Menu.getOptionBool()) {
-                busca.get(0).exibir();
-                Menu.waiter();
-            }
-            return;
+            System.out.println("\nDeseja selecionar esse funcionário?");
+            if (Menu.getOptionBool())
+                return busca.get(0);
+            else
+                throw new CancellationException("Operação de seleção de um único funcionário cancelada pelo usuário.");
         }
 
-        System.out.println("\nDeseja consultar as informações de algum desses funcionários?");
+        System.out.println("\nDeseja selecionar algum desses funcionários?");
         if (!Menu.getOptionBool())
-            return;
+            throw new CancellationException("Operação de seleção dentre múltiplos funcionários cancelada.");
 
         System.out.println("\nDigite o número do funcionário.");
-        busca.get(Menu.getOption(1, busca.size() - 1)).exibir();
-        Menu.waiter();
+        return busca.get(Menu.getOption(1, busca.size()) - 1);
+    } 
+
+    public void buscaMenu() {
+        checkEmpty();
+        
+        try {
+            exibir(buscaArray(busca()));    
+            Menu.waiter();
+        } catch (CancellationException e) {
+            return;
+        }
     }
     
 
@@ -240,57 +252,13 @@ public class ListFuncionario {
 
     public void remover() {
         checkEmpty();
-        ArrayList<Funcionario> busca = new ArrayList<Funcionario>();
 
-        System.out.println("Menu de busca de funcionário.\n\n");
-        System.out.println("[0] Cancelar;");
-        System.out.println("[1] Nome;");
-        System.out.println("[2] CPF.");
-
-        switch (Menu.getOption(2)) {
-            case 0:
-                return;
-            case 1:
-                try {
-                    busca = buscaNome();
-                } catch (CancellationException e) {
-                    return;
-                }
-                break;
-            case 2:
-                try {
-                    busca.add(buscaCpf());
-                } catch (CancellationException e) {
-                    return;
-                }
-                break;
-        }
-
-        Menu.voider();
-
-        if (busca.size() > 1)
-            System.out.println("Funcionários encontrados:  \n");
-        else
-            System.out.println("Funcionário encontrado:  \n");
-
-        exibir(busca);
-
-        if (busca.size() == 1) {
-            System.out.println("\nDeseja remover esse funcionário?");
-            if (Menu.getOptionBool()) {
-                remover(busca.get(0));;
-                Menu.waiter();
-            }
+        try {
+            remover(buscaArray(busca()));
+            Menu.waiter();
+        } catch (CancellationException e) {
             return;
         }
-
-        System.out.println("\nDeseja remover algum desses funcionários?");
-        if (!Menu.getOptionBool())
-            return;
-
-        System.out.println("\nDigite o número do funcionário.");
-        remover(busca.get(Menu.getOption(1, busca.size() - 1)));
-        Menu.waiter();
     }
 
     
