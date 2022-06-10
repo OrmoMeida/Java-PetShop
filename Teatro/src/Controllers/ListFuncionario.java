@@ -108,20 +108,9 @@ public class ListFuncionario {
                 list.add(funcionario);
         }
 
-        checkEmpty(list);
+        if (list.size() <= 0)
+            throw new IllegalArgumentException("Nenhum funcionário com este nome foi encontrado.");
         return list;
-    }
-
-    public Funcionario buscaNomeObj(String nome) {
-        checkEmpty();
-        nome = nome.toLowerCase().trim();
-
-        for (Funcionario funcionario : lstFuncionario) {
-            if (funcionario.getNome().toLowerCase().startsWith(nome))
-                return funcionario;
-
-        }
-        throw new IllegalArgumentException("Nome de funcionário não encontrado.");
     }
 
     public ArrayList<Funcionario> buscaNome() {
@@ -188,6 +177,48 @@ public class ListFuncionario {
         } while (!validInput);
 
         throw new IllegalArgumentException("CPF de funcionário não encontrado.");
+    }
+
+    public ArrayList<Funcionario> buscaCargo(String cargo) {
+        cargo = cargo.trim().toLowerCase();
+        ArrayList<Funcionario> busca = new ArrayList<Funcionario>();
+        
+        for (Funcionario funcionario : lstFuncionario) {
+            if (funcionario.getCargo().trim().toLowerCase().startsWith(cargo))
+                busca.add(funcionario);
+        }
+     
+        if (busca.size() <= 0)
+            throw new IllegalArgumentException("Nenhum funcionário com este cargo foi encontrado.");
+        return busca;
+    }
+
+    public ArrayList<Funcionario> buscaCargo() {
+        checkEmpty();
+        ArrayList<Funcionario> list = new ArrayList<Funcionario>();
+        String cargo;
+        boolean validInput = true;
+
+        do {
+            validInput = true;
+            System.out.print("\tCargo do funcionário:  ");
+
+            try {
+                cargo = Main.Menu.input().next();
+                list = buscaCargo(cargo);
+            } catch (InputMismatchException e) {
+                System.out.println("Valor inválido.\n");
+                System.out.println("Deseja pesquisar novamente?");
+                if (!Menu.getOptionBool())
+                    throw new CancellationException("Busca de funcionários cancelada.");
+                validInput = false;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage() + "\n");
+                validInput = false;
+            }
+        } while (!validInput);
+
+        return list;
     }
 
     public ArrayList<Funcionario> busca() {

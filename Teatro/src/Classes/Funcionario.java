@@ -3,12 +3,13 @@ package Classes;
 import java.util.InputMismatchException;
 
 import Abstract.Pessoa;
+import Enums.Cargos;
 import Interfaces.IPessoa;
 
 public class Funcionario extends Pessoa implements IPessoa {
     private static int qntFunc = 0;
     private int codFunc;
-    private String cargo;
+    private Cargos cargo;
 
 
     // Construtores
@@ -34,19 +35,11 @@ public class Funcionario extends Pessoa implements IPessoa {
     }
 
     public String getCargo() {
-        return this.cargo;
+        return this.cargo.getDescricao();
     }
 
     public void setCargo(String cargo) {
-        cargo = cargo.trim();
-
-        if (cargo.isEmpty())
-            throw new IllegalArgumentException("O valor de cargo não deve ser vazio.");
-        
-        if (cargo.length() < 3)
-            throw new IllegalArgumentException("O cargo deve possuir ao menos três caracteres.");
-
-        this.cargo = cargo;
+        this.cargo = Cargos.setCargo(cargo);
     }
 
     @Override
@@ -70,6 +63,8 @@ public class Funcionario extends Pessoa implements IPessoa {
                 setCargo(cargo);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
+                System.out.println("Cargos disponíveis:  ");
+                System.out.println(Cargos.getCargos() + "\n");
                 validInput = false;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
