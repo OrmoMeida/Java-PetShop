@@ -5,6 +5,7 @@ import java.util.InputMismatchException;
 import java.util.concurrent.CancellationException;
 
 import Classes.Funcionario;
+import Enums.Cargos;
 import Main.Menu;
 
 public class ListFuncionario {   
@@ -16,9 +17,9 @@ public class ListFuncionario {
     }
 
     public void geraFuncionarios() {
-        add(28, "Diluc", "57191011017", "diluctavern@gmail.com", "Gerente");
+        add(28, "Diluc", "57191011017", "diluctavern@gmail.com", "Reitor");
         add(26, "Kaeya", "kjgwssag97534479061", "kaeyamito@gmail.com", "Balconista");
-        add(25, "Rosaria", "80458987042", "notrosaria@hotmail.com", "Faxineira");
+        add(25, "Rosaria", "80458987042", "notrosaria@hotmail.com", "Faxineiro");
     }
 
     public static boolean isNotEmpty(ArrayList<Funcionario> list) {
@@ -128,12 +129,12 @@ public class ListFuncionario {
                 list = buscaNome(nome);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
-                System.out.println("Deseja pesquisar novamente?");
-                if (!Menu.getOptionBool())
-                    throw new CancellationException("Busca de funcionários cancelada.");
                 validInput = false;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
+                System.out.println("\nDeseja pesquisar novamente?");
+                if (!Menu.getOptionBool())
+                    throw new CancellationException("Busca de funcionários por nome cancelada.");
                 validInput = false;
             }
         } while (!validInput);
@@ -208,12 +209,14 @@ public class ListFuncionario {
                 list = buscaCargo(cargo);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
-                System.out.println("Deseja pesquisar novamente?");
-                if (!Menu.getOptionBool())
-                    throw new CancellationException("Busca de funcionários cancelada.");
                 validInput = false;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
+                System.out.println("Cargos disponíveis:");
+                System.out.println(Cargos.getCargos() + "\n");
+                System.out.println("\nDeseja pesquisar novamente?");
+                if (!Menu.getOptionBool())
+                    throw new CancellationException("Busca de funcionários por cargo cancelada.");
                 validInput = false;
             }
         } while (!validInput);

@@ -20,6 +20,7 @@ public enum Cargos {
     }
 
     public static Cargos setCargo(String descricao) {
+        descricao = descricao.trim().toLowerCase();
         for (Cargos cargo : Cargos.values()) {
             if (cargo.getDescricao().toLowerCase().equals(descricao)) {
                 return cargo;
