@@ -43,7 +43,7 @@ public enum Genero {
     public static String getGeneros() {
         String generos = " | "; 
         for (Genero genero : Genero.values())
-            generos = generos + " " + genero.getDescricao() + " | ";
+            generos = generos + " " + genero.getDescricao() + " |";
      
         return generos.trim();
     }

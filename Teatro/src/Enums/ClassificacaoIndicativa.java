@@ -30,7 +30,7 @@ public enum ClassificacaoIndicativa {
     public static String getClassificacoes() {
         String classificacoes = " | "; 
         for (ClassificacaoIndicativa cIndicativa : ClassificacaoIndicativa.values())
-            classificacoes = classificacoes + " " + cIndicativa.getDescricao() + " | ";
+            classificacoes = classificacoes + " " + cIndicativa.getDescricao() + " |";
 
         return classificacoes.trim();
     }
