@@ -229,9 +229,10 @@ public class ListFuncionario {
         System.out.println("[0] Cancelar;");
         System.out.println("[1] Ver todos os funcionários;");
         System.out.println("[2] Consultar por nome;");
-        System.out.println("[3] Consultar por CPF.");
+        System.out.println("[3] Consultar por CPF;");
+        System.out.println("[4] Consultar por cargo.");
 
-        switch (Menu.getOption(3)) {
+        switch (Menu.getOption(4)) {
             case 0:
                 throw new CancellationException("Operação de busca de funcionário cancelada pelo usuário.");
             case 1:
@@ -244,6 +245,10 @@ public class ListFuncionario {
 
             case 3:
                 busca.add(buscaCpf());
+                break;
+
+            case 4:
+                busca = buscaCargo();
                 break;
 
         }
