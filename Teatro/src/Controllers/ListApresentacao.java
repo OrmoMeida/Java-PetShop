@@ -480,11 +480,18 @@ public class ListApresentacao {
 
     public void remover() {
         checkEmpty();
+        Apresentacao apresentacao;
 
         try {
-            remover(buscaArray(busca()));
-            System.out.println("\nApresentação removida com sucesso.\n");
-            Menu.waiter();
+            apresentacao = buscaArray(busca());
+            System.out.println("Tem certeza que deseja remover a apresentação selecionada?");
+            if (Menu.getOptionBool()) {
+                remover(apresentacao);
+                System.out.println("\nApresentação removida com sucesso.\n");
+                Menu.waiter();
+            } else {
+                throw new CancellationException("Operação de remoção de apresentação via busca cancelada pelo usuário.");
+            }
         } catch (CancellationException e) {
             return;
         }

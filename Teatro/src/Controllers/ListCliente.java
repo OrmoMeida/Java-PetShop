@@ -270,17 +270,22 @@ public class ListCliente {
 
     public void remover() {
         checkEmpty();
-        System.out.println("Menu de remoção de cliente\n\n");
+        Cliente cliente;
 
         try {
-            remover(buscaArray(busca()));
-            System.out.println("\nCliente removido com sucesso.\n");
-            Menu.waiter();
+            cliente = buscaArray(busca());
+            System.out.println("Tem certeza que deseja remover o cliente selecionado?");
+            if (Menu.getOptionBool()) {
+                remover(cliente);
+                System.out.println("\nCliente removido com sucesso.\n");
+                Menu.waiter();
+            } else {
+                throw new CancellationException("Operação de remoção de cliente via busca cancelada pelo usuário.");
+            }
         } catch (CancellationException e) {
             return;
-        }      
+        }
     }
-
     public void removerLast() {
         checkEmpty();
 

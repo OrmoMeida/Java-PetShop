@@ -271,11 +271,18 @@ public class ListFuncionario {
 
     public void remover() {
         checkEmpty();
+        Funcionario funcionario;
 
         try {
-            remover(buscaArray(busca()));
-            System.out.println("Tem certeza que deseja remover o último funcionário adicionado?");
-            Menu.waiter();
+            funcionario = buscaArray(busca());
+            System.out.println("Tem certeza que deseja remover o funcionário selecionado?");
+            if (Menu.getOptionBool()) {
+                remover(funcionario);
+                System.out.println("\nFuncionário removido com sucesso.\n");
+                Menu.waiter();
+            } else {
+                throw new CancellationException("Operação de remoção de funcionário via busca cancelada pelo usuário.");
+            }
         } catch (CancellationException e) {
             return;
         }
