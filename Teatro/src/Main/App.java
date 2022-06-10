@@ -10,6 +10,16 @@ public class App {
     private static ListFuncionario lstFuncionario = new ListFuncionario();
     private static ListApresentacao lstApresentacao = new ListApresentacao();
 
+    public static void cadastros() {
+        System.out.println("Quantidade de cadastros do sistema:\n\n");
+
+        System.out.println("Clientes        :  " + lstCliente.size());
+        System.out.println("Funcionários    :  " + lstFuncionario.size());
+        System.out.println("Peças de teatro :  " + lstApresentacao.size());
+
+        Menu.waiter();
+    }
+    
     public static void next() {
         switch (menu.getNextMenu()) {
             case "!":
@@ -299,6 +309,12 @@ public class App {
                     System.out.println("\t" + e.getMessage());
                     Menu.waiter();
                 }
+                menu.back();
+                break;
+
+            case "0-2-5":
+                menu.newMenu();
+                cadastros();
                 menu.back();
                 break;
 

@@ -164,12 +164,13 @@ public final class Menu {
 
         System.out.println("Menu de Consulta\n\n");
         System.out.println("[0] Voltar;");
-        System.out.println("[1] Consultar um cliente;");
-        System.out.println("[2] Consultar um funcionário;");
-        System.out.println("[3] Consultar uma apresentação de teatro;");
+        System.out.println("[1] Consultar clientes;");
+        System.out.println("[2] Consultar funcionários;");
+        System.out.println("[3] Consultar apresentações de teatro;");
         System.out.println("[4] Consultas especiais.");
+        System.out.println("[5] Consultar quantidade de cadastros;");
 
-        nextMenu(4);
+        nextMenu(5);
     }
 
     public void menuConsultaEspecial() {
@@ -463,52 +464,72 @@ public final class Menu {
                     case "1":
                         verbosePath[2] = "Cliente";
                         break;
+
                     case "2":
                         verbosePath[2] = "Funcionário";
                         break;
+
                     case "3":
                         verbosePath[2] = "Apresentação";
                         break;
+
                     case "4":
                         verbosePath[2] = "Especial";
                         break;
+
+                    case "5":
+                        verbosePath[2] = "Cadastros";
+                        break;
+
                     default:
                         verbosePath[2] = "ERROR";
                 }
+                
 
             case 2:
                 switch (path[1]) {
                     case "1":
                         verbosePath[1] = "Cadastro";
                         break;
+
                     case "2":
                         verbosePath[1] = "Consulta";
                         break;
+
                     case "3":
                         verbosePath[1] = "Alteração";
                         break;
+                    
                     case "4":
                         verbosePath[1] = "Remoção";
                         break;
+     
+                    case "5":
+                        verbosePath[1] = "Cadastros";
+     
                     default:
                         verbosePath[1] = "ERROR";
                 }
 
+                
             case 1:
                 switch (path[0]) {
                     case "!":
                         return "Início";
+
                     case "0":
                         verbosePath[0] = "Menu";
                         break;
+
                     default:
                         verbosePath[0] = "ERROR";
+                        
                 }
         }
 
         for (String string : verbosePath) {
             if (string.equals("ERROR")) {
-                throw new RuntimeException("De alguma forma, um token inválido foi parar no path.");
+                throw new RuntimeException("Token inválido no path." );
             }
 
             if (verboseSpath.isEmpty()) {

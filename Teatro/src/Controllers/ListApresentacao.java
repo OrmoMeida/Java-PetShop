@@ -390,7 +390,7 @@ public class ListApresentacao {
         System.out.println("[5] Consultar por classificação;");
         System.out.println("[6] Consultar por faixa de preço.");
 
-        switch (Menu.getOption(5)) {
+        switch (Menu.getOption(6)) {
             case 0:
                 throw new CancellationException("Operação de busca de apresentação cancelada pelo usuário.");
 
@@ -420,7 +420,7 @@ public class ListApresentacao {
 
         }
 
-        checkEmpty(busca);
+        
         return busca;
     }
 
