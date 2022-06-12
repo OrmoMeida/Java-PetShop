@@ -29,7 +29,8 @@ public final class Menu {
     }
 
     public static Scanner input() {
-        input.nextLine();
+        if (input.hasNext())
+            input.nextLine();
         return input;
     }
 
@@ -61,7 +62,7 @@ public final class Menu {
 
         System.out.print("\n\nDeseja iniciar o programa?\n\t[y/n]:  ");
 
-        if (input.next().equals("y"))
+        if (getOptionBool())
             nextMenu("0");
         else
             shouldStop = true;
@@ -355,7 +356,7 @@ public final class Menu {
             System.out.print("\t\tOpção:  ");
 
             try {
-                selectedOption = input.nextInt();
+                selectedOption = input().nextInt();
 
                 if (!(selectedOption >= firstOption && selectedOption <= lastOption) || selectedOption == -1) {
                     throw new IllegalArgumentException();
@@ -368,7 +369,6 @@ public final class Menu {
             } catch (InputMismatchException e) {
                 System.out.println("O valor inserido não é um número.\n");
                 validOption = false;
-                input.next();
             }
         } while (!validOption);
 
@@ -387,7 +387,7 @@ public final class Menu {
             validOption = true;
             System.out.print("\tOpção [y/n]:  ");
             try {
-                option = input.next().trim().toLowerCase().charAt(0);
+                option = input().next().trim().toLowerCase().charAt(0);
                 if (option != 'y' && option != 'n')
                     throw new IllegalArgumentException("Opção inválida. Insira apenas 'y' ou 'n'.");
             } catch (IllegalArgumentException e) {

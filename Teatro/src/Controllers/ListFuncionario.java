@@ -168,12 +168,12 @@ public class ListFuncionario {
                 return buscaCpf(cpf);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
-                System.out.println("Deseja pesquisar novamente?");
-                if (!Menu.getOptionBool())
-                    throw new CancellationException("Busca de funcionários cancelada.");
                 validInput = false;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage() + "\n");
+                System.out.println("Deseja pesquisar novamente?");
+                if (!Menu.getOptionBool())
+                    throw new CancellationException("Busca de funcionários cancelada.");
                 validInput = false;
             }
         } while (!validInput);

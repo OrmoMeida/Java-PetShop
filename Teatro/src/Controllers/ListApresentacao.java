@@ -313,20 +313,21 @@ public class ListApresentacao {
         checkEmpty();
         ArrayList<Apresentacao> list = new ArrayList<Apresentacao>();
         float minPrice = 0;
-        float maxPrice = 0;
-        boolean validInput = true;
+        float maxPrice = 0; 
+        boolean validInput;
+        boolean validInputPrices;
 
-        Menu.voider();
         System.out.println("Menu de busca por apresentações via nome.\n\n");
         
         // list = buscaNome(nome);
 
         do {
+            validInput = true;
             System.out.println("Limite de preços:  \n");
             
             try {
                 do {
-                    validInput = true;
+                    validInputPrices = true;
                     System.out.print("\tPreço mínimo:  ");
     
                     try {
@@ -335,39 +336,37 @@ public class ListApresentacao {
                             throw new IllegalArgumentException("O preço mínimo da busca não deve ser zero nem negativo");
                     } catch (InputMismatchException e) {
                         System.out.println("Valor inválido.\n");
-                        validInput = false;
+                        validInputPrices = false;
                     } catch (IllegalArgumentException e) {
                         System.out.println(e.getMessage() + "\n");
                         System.out.println("Deseja tentar novamente?");
                         if (!Menu.getOptionBool())
                             throw new CancellationException("Busca de apresentações por preço cancelada pelo usuário.");
-                        validInput = false;
-                    } finally {
-                        Main.Menu.input().nextLine();
+                        validInputPrices = false;
                     }
-                } while (!validInput);
+                } while (!validInputPrices);
     
                 do {
-                    validInput = true;
+                    validInputPrices = true;
                     System.out.print("\tPreço máximo:  ");
     
                     try {
                         maxPrice = Main.Menu.input().nextFloat();
-                        if (maxPrice <= 0 || maxPrice < minPrice)
-                            throw new IllegalArgumentException("O preço máximo da busca não deve ser zero, negativo ou menor que o valor mínimo.");
+                        if (maxPrice <= 0)
+                            throw new IllegalArgumentException("O preço máximo da busca deve ser maior que 0.");
+                        if (maxPrice < minPrice)
+                            throw new IllegalArgumentException("O preço máximo da busca não deve ser maior que o preço mínimo.");
                     } catch (InputMismatchException e) {
                         System.out.println("Valor inválido.\n");
-                        validInput = false;
+                        validInputPrices = false;
                     } catch (IllegalArgumentException e) {
                         System.out.println(e.getMessage() + "\n");
                         System.out.println("Deseja tentar novamente?");
                         if (!Menu.getOptionBool())
                             throw new CancellationException("Busca de apresentações por preço cancelada pelo usuário.");
-                        validInput = false;
-                    } finally {
-                        Main.Menu.input().nextLine();
+                        validInputPrices = false;
                     }
-                } while (!validInput);
+                } while (!validInputPrices);
 
                 buscaPreco(minPrice, maxPrice);
 
