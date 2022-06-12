@@ -3,6 +3,7 @@ package Classes;
 import java.util.InputMismatchException;
 
 import Abstract.Pessoa;
+import Controllers.Scanner2;
 import Enums.Cargos;
 import Interfaces.IPessoa;
 
@@ -59,7 +60,7 @@ public class Funcionario extends Pessoa implements IPessoa {
             System.out.print("\tCargo:  ");
     
             try {
-                cargo = Main.Menu.input().next();
+                cargo = Scanner2.scanner.next();
                 setCargo(cargo);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");

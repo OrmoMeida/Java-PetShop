@@ -2,6 +2,7 @@ package Abstract;
 
 import java.util.InputMismatchException;
 import Classes.CPF;
+import Controllers.Scanner2;
 
 public abstract class Pessoa {
     private String nome;
@@ -100,7 +101,7 @@ public abstract class Pessoa {
             System.out.print("\tNome:  ");
     
             try {
-                nome = Main.Menu.input().next();
+                nome = Scanner2.scanner.nextLine();
                 setNome(nome);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -121,7 +122,7 @@ public abstract class Pessoa {
             System.out.print("\tCPF:  ");
 
             try {
-                cpf = Main.Menu.input().next();
+                cpf = Scanner2.scanner.next();
                 setCpf(cpf);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -142,7 +143,7 @@ public abstract class Pessoa {
             System.out.print("\tIdade:  ");
 
             try {
-                idade = Main.Menu.input().nextInt();
+                idade = Scanner2.scanner.nextInt(1, 150);
                 setIdade(idade);
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, digite apenas números.\n");
@@ -163,7 +164,7 @@ public abstract class Pessoa {
             System.out.print("\tEmail:  ");
 
             try {
-                email = Main.Menu.input().next();
+                email = Scanner2.scanner.next();
                 setEmail(email);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");

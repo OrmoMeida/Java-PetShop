@@ -2,6 +2,8 @@ package Abstract;
 
 import java.util.InputMismatchException;
 
+import Controllers.Scanner2;
+
 public abstract class Produto {
     // Atributos da classe
     private String nome;
@@ -74,7 +76,7 @@ public abstract class Produto {
             System.out.print("\tNome:  ");
 
             try {
-                nome = Main.Menu.input().next();
+                nome = Scanner2.scanner.nextLine();
                 setNome(nome);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -95,7 +97,7 @@ public abstract class Produto {
             System.out.print("\tDescrição:  ");
 
             try {
-                desc = Main.Menu.input().next();
+                desc = Scanner2.scanner.nextLine();
                 setDesc(desc);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -116,7 +118,7 @@ public abstract class Produto {
             System.out.print("\tPreço:  ");
 
             try {
-                preco = Main.Menu.input().nextFloat();
+                preco = Scanner2.scanner.nextUnsignedFloat();
                 setPreco(preco);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");

@@ -130,7 +130,7 @@ public class ListCliente {
             System.out.print("\tNome:  ");
 
             try {
-                nome = Main.Menu.input().next();
+                nome = Scanner2.scanner.nextLine();
                 list = buscaNome(nome);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -169,7 +169,7 @@ public class ListCliente {
             System.out.print("\tCPF:  ");
 
             try {
-                cpf = Main.Menu.input().next().trim();
+                cpf = Scanner2.scanner.next();
                 return buscaCpf(cpf);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");

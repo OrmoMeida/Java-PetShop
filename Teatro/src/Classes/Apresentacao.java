@@ -4,6 +4,7 @@ import java.util.InputMismatchException;
 import java.util.regex.Pattern;
 
 import Abstract.Produto;
+import Controllers.Scanner2;
 import Enums.ClassificacaoIndicativa;
 import Enums.Genero;
 
@@ -104,7 +105,7 @@ public class Apresentacao extends Produto {
             System.out.print("\tDuração:  ");
 
             try {
-                duracao = Main.Menu.input().nextFloat();
+                duracao = Scanner2.scanner.nextUnsignedFloat();
                 setDuracao(duracao);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -125,7 +126,7 @@ public class Apresentacao extends Produto {
             System.out.print("\tData:  ");
 
             try {
-                data = Main.Menu.input().next();
+                data = Scanner2.scanner.nextLine();
                 setData(data);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -138,7 +139,7 @@ public class Apresentacao extends Produto {
     }
 
     public void setGenero() {
-        String descricao;
+        String genero;
         boolean validInput = true;
 
         do {
@@ -146,8 +147,8 @@ public class Apresentacao extends Produto {
             System.out.print("\tGênero:  ");
 
             try {
-                descricao = Main.Menu.input().next();
-                setGenero(descricao);
+                genero = Scanner2.scanner.next();
+                setGenero(genero);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
                 validInput = false;
@@ -161,7 +162,7 @@ public class Apresentacao extends Produto {
     }
 
     public void setClassificacao() {
-        String descricao;
+        String classificacao;
         boolean validInput = true;
 
         do {
@@ -169,8 +170,8 @@ public class Apresentacao extends Produto {
             System.out.print("\tClassificação indicativa:  ");
 
             try {
-                descricao = Main.Menu.input().next();
-                setClassificacao(descricao);
+                classificacao = Scanner2.scanner.next();
+                setClassificacao(classificacao);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
                 validInput = false;

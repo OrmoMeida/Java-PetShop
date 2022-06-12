@@ -1,10 +1,10 @@
 package Main;
 import java.io.IOException;
 import java.util.InputMismatchException;
-import java.util.Scanner;
+
+import Controllers.Scanner2;
 
 public final class Menu {
-    private static Scanner input = new Scanner(System.in);;
     private String pathMenu;
     private String lastMenu;
     private String currentMenu;
@@ -26,12 +26,6 @@ public final class Menu {
             System.out.print("\t\nPressione enter para continuar... ");
             System.in.read();
         } catch (Exception e) {}
-    }
-
-    public static Scanner input() {
-        if (input.hasNext())
-            input.nextLine();
-        return input;
     }
 
     // Getters
@@ -60,7 +54,7 @@ public final class Menu {
         // System.out.println("        ___                           ___       _           _    _             \n|   \  ___  _ _   __ _        / __| ___ | | ___  ___| |_ (_) _ _   __ _ \n| |) |/ _ \| ' \ / _` |      | (__ / -_)| |/ -_)(_-/|  _|| || ' \ / _` |\n|___/ \___/|_||_|\__/_|       \___|\___||_|\___|/__/ \__||_||_||_|\__/_|        ");
         System.out.println(" ▀█▀ ██▀ ▄▀▄ ▀█▀ █▀▄ ▄▀▄\n  █  █▄▄ █▀█  █  █▀▄ ▀▄▀");
 
-        System.out.print("\n\nDeseja iniciar o programa?\n\t[y/n]:  ");
+        System.out.println("\n\nDeseja iniciar o programa?");
 
         if (getOptionBool())
             nextMenu("0");
@@ -356,13 +350,7 @@ public final class Menu {
             System.out.print("\t\tOpção:  ");
 
             try {
-                selectedOption = input().nextInt();
-
-                if (!(selectedOption >= firstOption && selectedOption <= lastOption) || selectedOption == -1) {
-                    throw new IllegalArgumentException();
-                } else {
-                    validOption = true;
-                }
+                selectedOption = Scanner2.scanner.nextInt(firstOption, lastOption);
             } catch (IllegalArgumentException e) {
                 System.out.println("O número inserido é inválido.\n");
                 validOption = false;
@@ -387,7 +375,7 @@ public final class Menu {
             validOption = true;
             System.out.print("\tOpção [y/n]:  ");
             try {
-                option = input().next().trim().toLowerCase().charAt(0);
+                option = Character.toLowerCase(Scanner2.scanner.nextChar());
                 if (option != 'y' && option != 'n')
                     throw new IllegalArgumentException("Opção inválida. Insira apenas 'y' ou 'n'.");
             } catch (IllegalArgumentException e) {

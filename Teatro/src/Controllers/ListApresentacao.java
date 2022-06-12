@@ -132,7 +132,7 @@ public class ListApresentacao {
             System.out.print("\tNome:  ");
 
             try {
-                nome = Main.Menu.input().next();
+                nome = Scanner2.scanner.nextLine();
                 list = buscaNome(nome);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -178,7 +178,7 @@ public class ListApresentacao {
             System.out.print("\tDescrição:  ");
 
             try {
-                desc = Main.Menu.input().next();
+                desc = Scanner2.scanner.nextLine();
                 list = buscaDesc(desc);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -226,7 +226,7 @@ public class ListApresentacao {
             System.out.print("\tGênero:  ");
 
             try {
-                genero = Main.Menu.input().next();
+                genero = Scanner2.scanner.next();
                 list = buscaGenero(genero);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -276,7 +276,7 @@ public class ListApresentacao {
             System.out.print("\tClassificação indicativa:  ");
 
             try {
-                classificacao = Main.Menu.input().next();
+                classificacao = Scanner2.scanner.next();
                 list = buscaClassificacao(classificacao);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -331,7 +331,7 @@ public class ListApresentacao {
                     System.out.print("\tPreço mínimo:  ");
     
                     try {
-                        minPrice = Main.Menu.input().nextFloat();
+                        minPrice = Scanner2.scanner.nextFloat();
                         if (minPrice <= 0)
                             throw new IllegalArgumentException("O preço mínimo da busca não deve ser zero nem negativo");
                     } catch (InputMismatchException e) {
@@ -351,7 +351,7 @@ public class ListApresentacao {
                     System.out.print("\tPreço máximo:  ");
     
                     try {
-                        maxPrice = Main.Menu.input().nextFloat();
+                        maxPrice = Scanner2.scanner.nextFloat(minPrice);
                         if (maxPrice <= 0)
                             throw new IllegalArgumentException("O preço máximo da busca deve ser maior que 0.");
                         if (maxPrice < minPrice)

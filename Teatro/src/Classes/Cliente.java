@@ -3,6 +3,7 @@ import java.util.InputMismatchException;
 import java.util.regex.Pattern;
 
 import Abstract.Pessoa;
+import Controllers.Scanner2;
 import Interfaces.IPessoa;
 
 public class Cliente extends Pessoa implements IPessoa {
@@ -70,7 +71,7 @@ public class Cliente extends Pessoa implements IPessoa {
             System.out.print("\tTelefone:  ");
     
             try {
-                telefone = Main.Menu.input().next();
+                telefone = Scanner2.scanner.nextLine();
                 setTelefone(telefone);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
