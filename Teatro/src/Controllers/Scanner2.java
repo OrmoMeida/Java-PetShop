@@ -1,4 +1,5 @@
 package Controllers;
+import java.io.InputStream;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -10,7 +11,11 @@ public class Scanner2 {
     private static String falsy[] = { "0", "falso", "false", "falsy", "não", "nao", "no", "stop", "n", "nn" };
 
     public Scanner2() {
-        inputLocal = new Scanner(System.in); 
+        inputLocal = new Scanner(System.in);
+    }
+    
+    public Scanner2(InputStream source) {
+        inputLocal = new Scanner(source);
     }
 
     public static boolean isTruthy(String value) {
@@ -55,10 +60,12 @@ public class Scanner2 {
 
     public String nextStringDecimal() {
         String value = nextLine();
-        value = value.replace(',', '.').replaceAll("[^\\d\\.-]", "").replaceAll("^-\\.", "-0.".replaceAll("^\\.", "0."));
+        value = value.replace(',', '.').replaceAll("[^\\d\\.-]", "").replaceAll("^\\.-", "-.");
 
         boolean isPositive = !value.startsWith("-");
         value = value.replace("-", "");
+
+        value = value.replaceAll("^\\.", "0.");
 
         if (value.endsWith("."))
             value = value.substring(0, value.length() - 1);
