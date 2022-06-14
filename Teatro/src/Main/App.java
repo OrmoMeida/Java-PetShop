@@ -86,6 +86,8 @@ public class App {
                     Menu.waiter();
                 }
                 menu.back();
+                menu.back();
+                menu.back();
                 break;
 
             case "0-1-2":
@@ -136,6 +138,8 @@ public class App {
                     Menu.waiter();
                 }
                 menu.back();
+                menu.back();
+                menu.back();
                 break;
 
             case "0-1-3":
@@ -185,6 +189,8 @@ public class App {
                     System.out.println("\t" + e.getMessage());
                     Menu.waiter();
                 }
+                menu.back();
+                menu.back();
                 menu.back();
                 break;
 
@@ -530,8 +536,7 @@ public class App {
         lstFuncionario.geraFuncionarios();
         lstApresentacao.geraApresentacoes();
 
-        while (!menu.shouldStop()) {
+        while (!menu.shouldStop())
             next();
-        }
     }
 }
