@@ -315,7 +315,6 @@ public class ListApresentacao {
         float minPrice = 0;
         float maxPrice = 0; 
         boolean validInput;
-        boolean validInputPrices;
 
         System.out.println("Menu de busca por apresentações via nome.\n\n");
         
@@ -327,7 +326,7 @@ public class ListApresentacao {
             
             try {
                 do {
-                    validInputPrices = true;
+                    validInput = true;
                     System.out.print("\tPreço mínimo:  ");
     
                     try {
@@ -336,18 +335,18 @@ public class ListApresentacao {
                             throw new IllegalArgumentException("O preço mínimo da busca não deve ser zero nem negativo");
                     } catch (InputMismatchException e) {
                         System.out.println("Valor inválido.\n");
-                        validInputPrices = false;
+                        validInput = false;
                     } catch (IllegalArgumentException e) {
                         System.out.println(e.getMessage() + "\n");
                         System.out.println("Deseja tentar novamente?");
                         if (!Menu.getOptionBool())
                             throw new CancellationException("Busca de apresentações por preço cancelada pelo usuário.");
-                        validInputPrices = false;
+                        validInput = false;
                     }
-                } while (!validInputPrices);
+                } while (!validInput);
     
                 do {
-                    validInputPrices = true;
+                    validInput = true;
                     System.out.print("\tPreço máximo:  ");
     
                     try {
@@ -358,15 +357,15 @@ public class ListApresentacao {
                             throw new IllegalArgumentException("O preço máximo da busca não deve ser maior que o preço mínimo.");
                     } catch (InputMismatchException e) {
                         System.out.println("Valor inválido.\n");
-                        validInputPrices = false;
+                        validInput = false;
                     } catch (IllegalArgumentException e) {
                         System.out.println(e.getMessage() + "\n");
                         System.out.println("Deseja tentar novamente?");
                         if (!Menu.getOptionBool())
                             throw new CancellationException("Busca de apresentações por preço cancelada pelo usuário.");
-                        validInputPrices = false;
+                        validInput = false;
                     }
-                } while (!validInputPrices);
+                } while (!validInput);
 
                 list = buscaPreco(minPrice, maxPrice);
 
