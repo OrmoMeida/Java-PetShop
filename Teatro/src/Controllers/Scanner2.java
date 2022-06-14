@@ -93,7 +93,17 @@ public class Scanner2 {
     }
 
     public String nextLine() {
-        return inputLocal.nextLine().trim();
+        boolean validInput;
+        String value;
+
+        do {
+            validInput = true;
+            value = inputLocal.nextLine().trim();
+            if (value.isEmpty())
+                validInput = false;
+        } while (!validInput);
+
+        return value;
     }
 
     public String nextLine(String regex) {
@@ -106,7 +116,17 @@ public class Scanner2 {
     }
 
     public String next() {
-        return nextLine().split(" ")[0];
+        boolean validInput;
+        String value;
+
+        do {
+            validInput = true;
+            value = nextLine();
+            if (value.isEmpty())
+                validInput = false;
+        } while (!validInput);
+
+        return value.split(" ")[0];
     }
 
     public String next(String regex) {
