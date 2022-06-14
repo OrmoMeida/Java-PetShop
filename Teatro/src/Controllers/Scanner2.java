@@ -119,7 +119,11 @@ public class Scanner2 {
     }
 
     public char nextChar() {
-        return nextLine().charAt(0);
+        String value = nextLine();
+        if (!value.isEmpty())
+            return nextLine().charAt(0);
+        else
+            return ' ';
     }
 
     public char nextChar(String regex) {
