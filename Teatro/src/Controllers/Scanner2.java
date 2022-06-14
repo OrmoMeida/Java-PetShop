@@ -118,12 +118,18 @@ public class Scanner2 {
         return value;
     }
 
-    public char nextChar() {
-        String value = nextLine();
-        if (!value.isEmpty())
-            return nextLine().charAt(0);
-        else
-            return ' ';
+    public Character nextChar() {
+        boolean validInput;
+        String value;
+
+        do {
+            validInput = true;
+            value = next();
+            if (value.isEmpty())
+                validInput = false;
+        } while (!validInput);
+
+        return value.charAt(0);
     }
 
     public char nextChar(String regex) {
