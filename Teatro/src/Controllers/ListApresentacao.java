@@ -351,7 +351,7 @@ public class ListApresentacao {
                     System.out.print("\tPreço máximo:  ");
     
                     try {
-                        maxPrice = Scanner2.scanner.nextFloat(minPrice);
+                        maxPrice = Scanner2.scanner.nextFloat();
                         if (maxPrice <= 0)
                             throw new IllegalArgumentException("O preço máximo da busca deve ser maior que 0.");
                         if (maxPrice < minPrice)
@@ -368,7 +368,7 @@ public class ListApresentacao {
                     }
                 } while (!validInputPrices);
 
-                buscaPreco(minPrice, maxPrice);
+                list = buscaPreco(minPrice, maxPrice);
 
             } catch (InputMismatchException e) {
                 System.out.println("Valores inválidos.\n");
