@@ -238,9 +238,10 @@ public final class Menu {
         System.out.println("[0] Voltar;");
         System.out.println("[1] Conferir os dados do funcionário;");
         System.out.println("[2] Alterar os dados do funcionário novamente;");
-        System.out.println("[3] Alterar outro funcionário.");
+        System.out.println("[3] Remover o funcionário;");
+        System.out.println("[4] Alterar outro funcionário.");
 
-        if (nextMenu(3) == 0)
+        if (nextMenu(4) == 0)
             back();
     }
 
@@ -251,9 +252,10 @@ public final class Menu {
         System.out.println("[0] Voltar;");
         System.out.println("[1] Conferir os dados do cliente;");
         System.out.println("[2] Alterar os dados do cliente novamente;");
-        System.out.println("[3] Alterar outro cliente.");
+        System.out.println("[3] Remover o cliente");
+        System.out.println("[4] Alterar outro cliente.");
 
-        if (nextMenu(3) == 0)
+        if (nextMenu(4) == 0)
             back();
     }
 
@@ -264,9 +266,10 @@ public final class Menu {
         System.out.println("[0] Voltar;");
         System.out.println("[1] Conferir os dados da apresentação;");
         System.out.println("[2] Alterar os dados da apresentação novamente;");
-        System.out.println("[3] Alterar outra apresentação.");
+        System.out.println("[3] Remover a apresentação;");
+        System.out.println("[4] Alterar outra apresentação.");
 
-        if (nextMenu(3) == 0)
+        if (nextMenu(4) == 0)
             back();
     }
 

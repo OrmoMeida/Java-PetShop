@@ -10,7 +10,7 @@ import Main.Menu;
 
 public class ListCliente {
     private ArrayList<Cliente> lstCliente;
-    private int lastAlterado;
+    private int iLastAlterado;
 
     public ListCliente() {
         lstCliente = new ArrayList<Cliente>();
@@ -82,7 +82,12 @@ public class ListCliente {
         return lstCliente.get(lastIndex());
     }
 
-    public void lastExibir() {
+    public Cliente lastAlterado() {
+        checkEmpty();
+        return lstCliente.get(iLastAlterado);
+    }
+
+    public void exibirLast() {
         checkEmpty();
 
         System.out.println("Informações do cliente cadastrado:  \n");
@@ -94,8 +99,7 @@ public class ListCliente {
         checkEmpty();
 
         System.out.println("Informações do cliente alterado:  \n");
-        lstCliente.get(lastAlterado).exibir();
-
+        lastAlterado().exibir();
         Menu.waiter();
     }
 
@@ -288,24 +292,42 @@ public class ListCliente {
             return;
         }
     }
-    public void removerLast() {
+
+    public boolean removerLast() {
         checkEmpty();
 
         System.out.println("Tem certeza que deseja remover o último cliente adicionado?");
-        if (Menu.getOptionBool()) {
+        boolean option = Menu.getOptionBool();
+        if (option) {
             remover(last());
             System.out.println("\nCliente removido com sucesso.\n");
             Menu.waiter();
         }
+
+        return option;
+    }
+    
+    public boolean removerLastAlterado() {
+        checkEmpty();
+
+        System.out.println("Tem certeza que deseja remover o último cliente alterado?");
+        boolean option = Menu.getOptionBool();
+        if (option) {
+            remover(lastAlterado());
+            System.out.println("\nCliente removido com sucesso.\n");
+            Menu.waiter();
+        }
+
+        return option;
     }
 
 
 
     public void alterar(Cliente cliente) {
         checkEmpty();
-        lastAlterado = lstCliente.indexOf(cliente);
+        iLastAlterado = lstCliente.indexOf(cliente);
 
-        if (lastAlterado == -1)
+        if (iLastAlterado == -1)
             throw new IllegalArgumentException("Cliente não encontrado: Impossível alterar.");
 
         System.out.println("\n\nMenu de alteração de dados do cliente.");
@@ -331,7 +353,7 @@ public class ListCliente {
         if (Menu.getOptionBool())
             cliente.setTelefone();
 
-        lstCliente.set(lastAlterado, cliente);
+        lstCliente.set(iLastAlterado, cliente);
 
         System.out.println("\n\nCliente alterado com sucesso!");
         Menu.waiter();
@@ -345,12 +367,7 @@ public class ListCliente {
         checkEmpty();
 
         System.out.println("\n\nMenu de alteração\n\n");
-
-        try {
-            alterar(buscaArray(busca()));
-        } catch (CancellationException e) {
-            return;
-        }
+        alterar(buscaArray(busca()));
     }
 
     public void alterarNovamente() {
@@ -359,7 +376,7 @@ public class ListCliente {
         System.out.println("\nMenu de nova alteração\n\n");
         
         try {
-            alterar(lstCliente.get(lastAlterado));
+            alterar(lstCliente.get(iLastAlterado));
         } catch (CancellationException e) {
             return;
         }

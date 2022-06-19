@@ -86,6 +86,11 @@ public class ListApresentacao {
         return lstApresentacao.get(lastIndex());
     }
 
+    public Apresentacao lastAlterado() {
+        checkEmpty();
+        return lstApresentacao.get(lastAlterado);
+    }
+    
     public void lastExibir() {
         checkEmpty();
 
@@ -98,8 +103,7 @@ public class ListApresentacao {
         checkEmpty();
 
         System.out.println("Informações do cliente alterado:  \n");
-        lstApresentacao.get(lastAlterado).exibir();
-
+        lastAlterado().exibir();
         Menu.waiter();
     }
 
@@ -508,15 +512,32 @@ public class ListApresentacao {
         }
     }
 
-    public void removerLast() {
+    public boolean removerLast() {
         checkEmpty();
 
         System.out.println("Tem certeza que deseja remover a última apresentação adicionada?");
-        if (Menu.getOptionBool()) {
+        boolean option = Menu.getOptionBool();
+        if (option) {
             remover(last());
             System.out.println("\nApresentação removida com sucesso.\n");
             Menu.waiter();
         }
+
+        return option;
+    }
+
+    public boolean removerLastAlterado() {
+        checkEmpty();
+
+        System.out.println("Tem certeza que deseja remover a última apresentação alterada?");
+        boolean option = Menu.getOptionBool();
+        if (option) {
+            remover(lastAlterado());
+            System.out.println("\nApresentação removida com sucesso.\n");
+            Menu.waiter();
+        }
+
+        return option;
     }
 
     // O que significa que estou genuinamente perto de terminar.
@@ -574,12 +595,7 @@ public class ListApresentacao {
         checkEmpty();
 
         System.out.println("\n\nMenu de alteração\n\n");
-
-        try {
-            alterar(buscaArray(busca()));
-        } catch (CancellationException e) {
-            return;
-        }
+        alterar(buscaArray(busca()));
     }
 
     public void alterarNovamente() {

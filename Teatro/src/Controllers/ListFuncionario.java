@@ -77,12 +77,17 @@ public class ListFuncionario {
         return lstFuncionario.get(lstFuncionario.size() - 1);
     }
 
+    public Funcionario lastAlterado() {
+        checkEmpty();
+        return lstFuncionario.get(lastAlterado);
+    }
+
     public int lastIndex() {
         checkEmpty();
         return lstFuncionario.size() - 1;
     }
 
-    public void lastExibir() {
+    public void exibirLast() {
         checkEmpty();
 
         System.out.println("Informações do funcionário cadastrado:  \n");
@@ -94,8 +99,7 @@ public class ListFuncionario {
         checkEmpty();
 
         System.out.println("Informações do cliente alterado:  \n");
-        lstFuncionario.get(lastAlterado).exibir();
-
+        lastAlterado().exibir();
         Menu.waiter();
     }
 
@@ -331,16 +335,33 @@ public class ListFuncionario {
         }
     }
 
-    public void removerLast() {
+    public boolean removerLast() {
         checkEmpty();
 
         System.out.println("Tem certeza que deseja remover o último funcionário adicionado?");
-        if (Menu.getOptionBool()) {
+        boolean option = Menu.getOptionBool();
+        if (option) {
             remover(last());
             System.out.println("\nFuncionário removido com sucesso.\n");
             Menu.waiter();
         }
-    }    
+
+        return option;
+    }
+    
+    public boolean removerLastAlterado() {
+        checkEmpty();
+
+        System.out.println("Tem certeza que deseja remover o último funcionário alterado?");
+        boolean option = Menu.getOptionBool();
+        if (option) {
+            remover(lastAlterado());
+            System.out.println("\nFuncionário removido com sucesso.\n");
+            Menu.waiter();
+        }
+
+        return option;
+    }
 
     public void alterar(Funcionario funcionario) {
         checkEmpty();
@@ -387,12 +408,7 @@ public class ListFuncionario {
         checkEmpty();
 
         System.out.println("\n\nMenu de alteração\n\n");
-
-        try {
-            alterar(buscaArray(busca()));
-        } catch (CancellationException e) {
-            return;
-        }
+        alterar(buscaArray(busca()));
     }
 
     public void alterarNovamente() {
