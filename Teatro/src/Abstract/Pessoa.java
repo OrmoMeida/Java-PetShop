@@ -1,6 +1,8 @@
 package Abstract;
 
 import java.util.InputMismatchException;
+import java.util.regex.Pattern;
+
 import Classes.CPF;
 import Controllers.Scanner2;
 
@@ -9,13 +11,15 @@ public abstract class Pessoa {
     private int idade;
     private String email;
     private CPF cpf;
+
+    /*
+     * Regex roubado de:
+     * https://howtodoinjava.com/java/regex/java-regex-validate-email-address/
+     * Acesso em:  19/06/2022, 15h03
+     */
+    private static Pattern checkEmail = Pattern.compile("^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$");
     
     // private static Pattern checkNome = Pattern.compile("\\w{3,50}");
-    // private static Pattern checkEmail = Pattern.compile("[/w/d//.//-]+@[/w/d//-]+//./w{2,4}");
-    // private static Matcher match = checkCPF.matcher("input");
-
-    // TODO regex para o Email
-    // TODO setEmail usando o regex
 
     protected Pessoa() {
         this.cpf = new CPF();
@@ -84,11 +88,10 @@ public abstract class Pessoa {
         if (email.isEmpty())
             throw new IllegalArgumentException("O email não deve estar vazio.");
 
-        if (!email.startsWith("@") && email.contains("@") && email.endsWith(".com")) {
+        if (checkEmail.matcher(email).matches())
             this.email = email;
-        } else {
+        else
             throw new IllegalArgumentException("O email inserido é inválido.");
-        }
     }
 
     // Sets personalizados
