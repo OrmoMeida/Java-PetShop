@@ -37,6 +37,18 @@ public class CPF {
         return checkCPF.matcher(cpf).matches();
     }
 
+    public static boolean areAllEqual(String cpf) {
+        cpf = trimCPF(cpf);
+        char firstNum = cpf.charAt(0);
+
+        for (char num : cpf.toCharArray()) {
+            if (firstNum != num)
+                return false;
+        }
+
+        return true;
+    }
+
     public static String formatCPF(String cpf) {
         cpf = trimCPF(cpf);
 
@@ -50,13 +62,15 @@ public class CPF {
     }
     
     public static boolean verificaCPF(String cpf) {
-        
-        
         cpf = trimCPF(cpf);
-        int verificador = Integer.parseInt(cpf.charAt(9)+ "" + cpf.charAt(10));
+
+        if (areAllEqual(cpf))
+            return false;
+
+        Character[] verificador = { cpf.charAt(9), cpf.charAt(10) };
 
         int SomaDig = 0;
-        int digito;
+        int digito = 0;
 
         int peso = 10;
         for (int i = 0; i < 9; i++) {
@@ -64,26 +78,27 @@ public class CPF {
             peso--;
         }
 
-        if (SomaDig % 11 >= 2) {
+        if (SomaDig % 11 >= 2)
             digito = 11 - SomaDig % 11;
-        } else {
-            digito = 0;
-        }
+
+        if (digito != Integer.parseInt(verificador[0].toString()))
+            return false;
 
         SomaDig = 0;
         peso = 11;
+        digito = 0;
 
         for (int i = 0; i < 10; i++) {
             SomaDig += Integer.parseInt("" + cpf.charAt(i)) * peso;
             peso--;
         }
 
-        if (SomaDig % 11 >= 2) {
-            digito = Integer.parseInt(Integer.toString(digito) + Integer.toString(11 - SomaDig % 11));
-        } else {
-            digito *= 10;
-        }
+        if (SomaDig % 11 >= 2)
+            digito = 11 - SomaDig % 11;
 
-        return digito == verificador;
+        if (digito != Integer.parseInt(verificador[1].toString()))
+            return false;
+
+        return true;
     }
 }
