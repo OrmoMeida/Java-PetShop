@@ -488,7 +488,7 @@ public class ListCliente {
     public void mediaIdadeMenu() {
         checkEmpty();
 
-        System.out.println("Média de idades do sistema:  " + mediaIdade());
+        System.out.printf("Média de idades do sistema:  %.2f", mediaIdade());
         Menu.waiter();
     }
 }

@@ -579,7 +579,7 @@ public class ListApresentacao {
 
         System.out.println("\nGênero:  " + apresentacao.getGenero());
         if (Menu.getOptionBool())
-            apresentacao.getGenero();
+            apresentacao.setGenero();
 
         lstApresentacao.set(lastAlterado, apresentacao);
 

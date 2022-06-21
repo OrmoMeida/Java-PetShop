@@ -10,6 +10,7 @@ public enum Cargos {
     BILHETEIRO(7, "Bilheteiro"),
     ASSISTENTE(8, "Assistente"),
     FIGURINISTA(9, "Figurinista");
+    // MASOQUISTA(10, "Masoquista");
 
     private int valor;
     private String descricao;

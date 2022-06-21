@@ -504,7 +504,7 @@ public class App {
                 menu.menuAlteracaoApresentacao();
                 break;
 
-            case "0-3-3-1-1:":
+            case "0-3-3-1-1":
                 menu.newMenu();
                 try {
                     lstApresentacao.exibirLastAlterado();
