@@ -22,7 +22,7 @@ public class Scanner2 {
      * A common instance of Scanner2;
      */
     public static Scanner2 getInstanceOf() {
-        if (scanner.equals(null))
+        if (scanner == null);
             scanner = new Scanner2();
 
         return scanner;
