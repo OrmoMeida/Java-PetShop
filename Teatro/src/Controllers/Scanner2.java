@@ -1,21 +1,31 @@
 package Controllers;
-import java.io.InputStream;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Scanner2 {
-    public static Scanner2 scanner = new Scanner2();
+    private static Scanner2 scanner;
     private Scanner inputLocal;
 
     private static String truthy[] = { "1", "verdadeiro", "true", "truthy", "sim", "yes", "please", "y", "s", "ss" };
     private static String falsy[] = { "0", "falso", "false", "falsy", "não", "nao", "no", "stop", "n", "nn" };
 
-    public Scanner2() {
+    private Scanner2() {
         inputLocal = new Scanner(System.in);
     }
-    
-    public Scanner2(InputStream source) {
-        inputLocal = new Scanner(source);
+
+    /**
+     * Retorna uma instância comum e única do Scanner2, que deve ser atribuida e usada no programa.
+     * Utiliza o pattern Singleton. 
+     * Se não houver uma instância, ela será criada.
+     * 
+     * @return
+     * A common instance of Scanner2;
+     */
+    public static Scanner2 getInstanceOf() {
+        if (scanner.equals(null))
+            scanner = new Scanner2();
+
+        return scanner;
     }
 
     public static boolean isTruthy(String value) {
