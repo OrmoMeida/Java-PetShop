@@ -9,6 +9,8 @@ import Classes.Cliente;
 import Main.Menu;
 
 public class ListCliente {
+    private static final Controllers.Scanner2 input = Controllers.Scanner2.getInstanceOf();
+
     private ArrayList<Cliente> lstCliente;
     private int iLastAlterado;
 
@@ -134,7 +136,7 @@ public class ListCliente {
             System.out.print("\tNome:  ");
 
             try {
-                nome = Scanner2.scanner.nextLine();
+                nome = input.nextLine();
                 list = buscaNome(nome);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -173,7 +175,7 @@ public class ListCliente {
             System.out.print("\tCPF:  ");
 
             try {
-                cpf = Scanner2.scanner.next();
+                cpf = input.next();
                 return buscaCpf(cpf);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");

@@ -4,20 +4,19 @@ import java.util.InputMismatchException;
 import java.util.regex.Pattern;
 
 import Classes.CPF;
-import Controllers.Scanner2;
 
 public abstract class Pessoa {
+    private static final Controllers.Scanner2 input = Controllers.Scanner2.getInstanceOf();
     private String nome;
     private int idade;
     private String email;
     private CPF cpf;
 
-    /*
-     * Regex roubado de:
+    /**Regex roubado de:
      * https://howtodoinjava.com/java/regex/java-regex-validate-email-address/
      * Acesso em:  19/06/2022, 15h03
      */
-    private static Pattern checkEmail = Pattern.compile("^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$");
+    private static final Pattern checkEmail = Pattern.compile("^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$");
     
     // private static Pattern checkNome = Pattern.compile("\\w{3,50}");
 
@@ -104,7 +103,7 @@ public abstract class Pessoa {
             System.out.print("\tNome:  ");
     
             try {
-                nome = Scanner2.scanner.nextLine();
+                nome = input.nextLine();
                 setNome(nome);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -125,7 +124,7 @@ public abstract class Pessoa {
             System.out.print("\tCPF:  ");
 
             try {
-                cpf = Scanner2.scanner.next();
+                cpf = input.next();
                 setCpf(cpf);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -146,7 +145,7 @@ public abstract class Pessoa {
             System.out.print("\tIdade:  ");
 
             try {
-                idade = Scanner2.scanner.nextInt(1, 150);
+                idade = input.nextInt(1, 150);
                 setIdade(idade);
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, digite apenas números.\n");
@@ -167,7 +166,7 @@ public abstract class Pessoa {
             System.out.print("\tEmail:  ");
 
             try {
-                email = Scanner2.scanner.next();
+                email = input.next();
                 setEmail(email);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");

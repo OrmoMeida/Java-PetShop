@@ -2,9 +2,9 @@ package Main;
 import java.io.IOException;
 import java.util.InputMismatchException;
 
-import Controllers.Scanner2;
-
 public final class Menu {
+    private static final Controllers.Scanner2 input = Controllers.Scanner2.getInstanceOf();
+
     private String pathMenu;
     private String lastMenu;
     private String currentMenu;
@@ -353,7 +353,7 @@ public final class Menu {
             System.out.print("\t\tOpção:  ");
 
             try {
-                selectedOption = Scanner2.scanner.nextInt(firstOption, lastOption);
+                selectedOption = input.nextInt(firstOption, lastOption);
             } catch (IllegalArgumentException e) {
                 System.out.println("O número inserido é inválido.\n");
                 validOption = false;
@@ -378,7 +378,7 @@ public final class Menu {
             validOption = true;
             System.out.print("\tOpção [y/n]:  ");
             try {
-                option = Character.toLowerCase(Scanner2.scanner.nextChar());
+                option = Character.toLowerCase(input.nextChar());
                 if (option != 'y' && option != 'n')
                     throw new IllegalArgumentException("Opção inválida. Insira apenas 'y' ou 'n'.");
             } catch (IllegalArgumentException e) {

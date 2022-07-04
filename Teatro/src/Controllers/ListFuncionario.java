@@ -9,7 +9,9 @@ import Classes.Funcionario;
 import Enums.Cargos;
 import Main.Menu;
 
-public class ListFuncionario {   
+public class ListFuncionario {
+    private static final Controllers.Scanner2 input = Controllers.Scanner2.getInstanceOf();
+    
     private ArrayList<Funcionario> lstFuncionario;
     private int lastAlterado;
     
@@ -130,7 +132,7 @@ public class ListFuncionario {
             System.out.print("\tNome do funcionário:  ");
 
             try {
-                nome = Scanner2.scanner.nextLine();
+                nome = input.nextLine();
                 list = buscaNome(nome);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -168,7 +170,7 @@ public class ListFuncionario {
             System.out.print("\tCPF do funcionário:  ");
 
             try {
-                cpf = Scanner2.scanner.next();
+                cpf = input.next();
                 return buscaCpf(cpf);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -210,7 +212,7 @@ public class ListFuncionario {
             System.out.print("\tCargo do funcionário:  ");
 
             try {
-                cargo = Scanner2.scanner.next();
+                cargo = input.next();
                 list = buscaCargo(cargo);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");

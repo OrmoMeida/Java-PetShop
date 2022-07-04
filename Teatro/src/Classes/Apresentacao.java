@@ -4,11 +4,12 @@ import java.util.InputMismatchException;
 import java.util.regex.Pattern;
 
 import Abstract.Produto;
-import Controllers.Scanner2;
 import Enums.ClassificacaoIndicativa;
 import Enums.Genero;
 
 public class Apresentacao extends Produto {
+    private static final Controllers.Scanner2 input = Controllers.Scanner2.getInstanceOf();
+
     // Atributos da classe
     private static int qntApresentacao = 0;
     private int codApresentacao;
@@ -105,7 +106,7 @@ public class Apresentacao extends Produto {
             System.out.print("\tDuração:  ");
 
             try {
-                duracao = Scanner2.scanner.nextUnsignedFloat();
+                duracao = input.nextUnsignedFloat();
                 setDuracao(duracao);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -126,7 +127,7 @@ public class Apresentacao extends Produto {
             System.out.print("\tData:  ");
 
             try {
-                data = Scanner2.scanner.nextLine();
+                data = input.nextLine();
                 setData(data);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -147,7 +148,7 @@ public class Apresentacao extends Produto {
             System.out.print("\tGênero:  ");
 
             try {
-                genero = Scanner2.scanner.next();
+                genero = input.next();
                 setGenero(genero);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -170,7 +171,7 @@ public class Apresentacao extends Produto {
             System.out.print("\tClassificação indicativa:  ");
 
             try {
-                classificacao = Scanner2.scanner.next();
+                classificacao = input.next();
                 setClassificacao(classificacao);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");

@@ -3,15 +3,15 @@ package Classes;
 import java.util.InputMismatchException;
 
 import Abstract.Pessoa;
-import Controllers.Scanner2;
 import Enums.Cargos;
 import Interfaces.IPessoa;
 
 public class Funcionario extends Pessoa implements IPessoa {
+    private static final Controllers.Scanner2 input = Controllers.Scanner2.getInstanceOf();
+
     private static int qntFunc = 0;
     private int codFunc;
     private Cargos cargo;
-
 
     // Construtores
     public Funcionario() {
@@ -60,7 +60,7 @@ public class Funcionario extends Pessoa implements IPessoa {
             System.out.print("\tCargo:  ");
     
             try {
-                cargo = Scanner2.scanner.next();
+                cargo = input.next();
                 setCargo(cargo);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");

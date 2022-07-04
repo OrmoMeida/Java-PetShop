@@ -10,6 +10,8 @@ import Enums.Genero;
 import Main.Menu;
 
 public class ListApresentacao {
+    private static final Controllers.Scanner2 input = Controllers.Scanner2.getInstanceOf();
+
     private ArrayList<Apresentacao> lstApresentacao;
     private int lastAlterado;
 
@@ -136,7 +138,7 @@ public class ListApresentacao {
             System.out.print("\tNome:  ");
 
             try {
-                nome = Scanner2.scanner.nextLine();
+                nome = input.nextLine();
                 list = buscaNome(nome);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -182,7 +184,7 @@ public class ListApresentacao {
             System.out.print("\tDescrição:  ");
 
             try {
-                desc = Scanner2.scanner.nextLine();
+                desc = input.nextLine();
                 list = buscaDesc(desc);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -230,7 +232,7 @@ public class ListApresentacao {
             System.out.print("\tGênero:  ");
 
             try {
-                genero = Scanner2.scanner.next();
+                genero = input.next();
                 list = buscaGenero(genero);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -280,7 +282,7 @@ public class ListApresentacao {
             System.out.print("\tClassificação indicativa:  ");
 
             try {
-                classificacao = Scanner2.scanner.next();
+                classificacao = input.next();
                 list = buscaClassificacao(classificacao);
             } catch (InputMismatchException e) {
                 System.out.println("Valor inválido.\n");
@@ -334,7 +336,7 @@ public class ListApresentacao {
                     System.out.print("\tPreço mínimo:  ");
     
                     try {
-                        minPrice = Scanner2.scanner.nextFloat();
+                        minPrice = input.nextFloat();
                         if (minPrice <= 0)
                             throw new IllegalArgumentException("O preço mínimo da busca não deve ser zero nem negativo");
                     } catch (InputMismatchException e) {
@@ -354,7 +356,7 @@ public class ListApresentacao {
                     System.out.print("\tPreço máximo:  ");
     
                     try {
-                        maxPrice = Scanner2.scanner.nextFloat();
+                        maxPrice = input.nextFloat();
                         if (maxPrice <= 0)
                             throw new IllegalArgumentException("O preço máximo da busca deve ser maior que 0.");
                         if (maxPrice < minPrice)
