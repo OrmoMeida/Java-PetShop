@@ -19,7 +19,7 @@ public class Scanner2 {
      * Se não houver uma instância, ela será criada.
      * 
      * @return
-     * A common instance of Scanner2;
+     * A singleton instance of Scanner2;
      */
     public static Scanner2 getInstanceOf() {
         if (scanner == null);
