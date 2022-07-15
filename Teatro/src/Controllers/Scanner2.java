@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Scanner2 {
+    // singleton removida
     public static Scanner2 scanner = new Scanner2();
     private Scanner inputLocal;
 
